@@ -24,6 +24,12 @@ Screenshots preview:
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/05-Select1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/05-Select2.png?raw=true)
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/05-Select3.png?raw=true)
 
+## Stepper
+![](https://github.com/rilyu/teaset/blob/master/screenshots/05a-Stepper.png?raw=true)
+
+## SearchInput
+![](https://github.com/rilyu/teaset/blob/master/screenshots/05b-SearchInput.png?raw=true)
+
 ## Badge
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/06-Badge.png?raw=true)
 
