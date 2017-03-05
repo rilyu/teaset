@@ -1,9 +1,30 @@
 # Teaset
 A UI library for react native.
 
-The code is under development.
+# Installation
+```
+npm install --save teaset
+```
 
-Screenshots preview:
+# Example
+In the Teaset package directory:
+```
+cd example
+npm install
+```
+To run example on iOS:
+```
+react-native run-ios
+```
+To run example on Android:
+```
+react-native run-android
+```
+
+# Documentation
+The document is being written, please refer to the example source code.
+
+# Screenshots
 
 ## Components
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/00-Teaset1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/00-Teaset2.png?raw=true)
@@ -83,3 +104,6 @@ Screenshots preview:
 
 ## ModalIndicator
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/21-ModalIndicator.png?raw=true)
+
+# License
+MIT
