@@ -5,14 +5,14 @@ ActionPopover 为操作气泡静态类, 一般用于触发一个多项子操作�
 | Method | Params | Returns | Notes |
 |---|---|---|---|
 | [Overlay methods](./Overlay.md) |  |  | ActionPopover 继承 Overlay 的全部静态方法。
-| show | fromBounds, items, options | key | 显示一个操作气泡, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 fromBounds 为弹出气泡源组件 bounds, items 为操作项列表, options(可空)为 ActionPopover.ActionPopoverView 其它属性, 参数类型参见 [ActionPopoverView](#ActionPopoverView)。<br/>返回唯一的浮层 key 值。
+| show | fromBounds, items, options | key | 显示一个操作气泡, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 fromBounds 为弹出气泡源组件 bounds, items 为操作项列表, options(可空)为 ActionPopover.ActionPopoverView 其它属性, 参数类型参见 [ActionPopoverView](actionpopoveractionpopoverview--props)。<br/>返回唯一的浮层 key 值。
 
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [ActionPopoverView](#ActionPopoverView) | class |  | ActionPopover 内容显示组件。
+| [ActionPopoverView](actionpopoveractionpopoverview--props) | class |  | ActionPopover 内容显示组件。
 
-## `<ActionPopover.ActionPopoverView />` Props<span id="ActionPopoverView" />
+## `<ActionPopover.ActionPopoverView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [Overlay.PopoverView props...](./Overlay.md#PopoverView) |  |  | ActionPopover.ActionPopoverView 组件继承 Overlay.PopoverView 组件的全部属性。
@@ -24,9 +24,9 @@ ActionPopover 为操作气泡静态类, 一般用于触发一个多项子操作�
 ## `<ActionPopover.ActionPopoverView />` Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Item](#Item) | class |  | ActionPopover 操作项显示组件。
+| [Item](actionpopoveractionpopoverviewitem--props) | class |  | ActionPopover 操作项显示组件。
 
-## `<ActionPopover.ActionPopoverView.Item />` Props<span id="Item" />
+## `<ActionPopover.ActionPopoverView.Item />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [TouchableOpacity props...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  |  | ActionPopover.ActionPopoverView.Item 组件继承 TouchableOpacity 组件的全部属性。
