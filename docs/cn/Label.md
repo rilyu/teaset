@@ -40,6 +40,5 @@ None.
 <Label style={{color: '#8a6d3b', fontSize: 16}} text='Hello world' />
 ```
 
-<span id="Screenshots" />
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/01-Label.png?raw=true)
