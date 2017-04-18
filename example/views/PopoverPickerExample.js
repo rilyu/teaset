@@ -36,7 +36,6 @@ export default class PopoverPickerExample extends NavigationPage {
 
   show(view) {
     view.measureInWindow((x, y, width, height) => {
-console.log(x, y, width, height);
       PopoverPicker.show(
         {x, y, width, height},
         this.items,

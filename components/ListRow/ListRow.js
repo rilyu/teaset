@@ -54,7 +54,7 @@ export default class ListRow extends Component {
     }].concat(style);
 
     //activeOpacity
-    if (!activeOpacity) activeOpacity = onPress ? 0.2 : 1;
+    if (!activeOpacity && activeOpacity !== 0) activeOpacity = onPress ? 0.2 : 1;
 
     //contentStyle
     let contentStyle = {
