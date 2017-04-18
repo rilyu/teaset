@@ -7,22 +7,20 @@ Overlay 使得 React Native 开发从二维变成三维的, 你可以在页面�
 
 另外, Overlay 支持多种动画效果, 如淡入淡出、弹出、抽屉效果等, 让你的交互生动起来。
 
-
 ## Static Methods
 | Method | Params | Returns | Notes |
 |---|---|---|---|
-| show | overlayView | key | 显示一个浮层视图, 输入参数 overlayView 为浮层视图, 推荐使用 [Overlay.View](#View) 组件, 返回唯一的浮层 key 值。
+| show | overlayView | key | 显示一个浮层视图, 输入参数 overlayView 为浮层视图, 推荐使用 [Overlay.View](#overlayview--props) 组件, 返回唯一的浮层 key 值。
 | hide | key |  | 隐藏一个浮层视图, 输入参数 key 为浮层的 key 值。
 
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [View](#View) | class |  | 浮层组件, 传入 Overlay.show 函数的组件都应是 Overlay.View 组件或继承自 Overlay.View 的组件。 Overlay.View 是浮层的根组件, 你可以在上面显示任何内容。
-| [PullView](#PullView) | class |  | 拖拉效果浮层组件, 继承自 Overlay.View, 具有类似抽屉一样的拖拉效果。
-| [PopView](#PopView) | class |  | 弹出效果浮层组件, 继承自 Overlay.View。
-| [PopoverView](#PopoverView) | class |  | 气泡效果浮层组件, 继承自 Overlay.View。
+| [View](#overlayview--props) | class |  | 浮层组件, 传入 Overlay.show 函数的组件都应是 Overlay.View 组件或继承自 Overlay.View 的组件。 Overlay.View 是浮层的根组件, 你可以在上面显示任何内容。
+| [PullView](#overlaypullview--props) | class |  | 拖拉效果浮层组件, 继承自 Overlay.View, 具有类似抽屉一样的拖拉效果。
+| [PopView](#overlaypopview--props) | class |  | 弹出效果浮层组件, 继承自 Overlay.View。
+| [PopoverView](#overlaypopoverview--props) | class |  | 气泡效果浮层组件, 继承自 Overlay.View。
 
-<span id="View" />
 ## `<Overlay.View />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -33,7 +31,6 @@ Overlay 使得 React Native 开发从二维变成三维的, 你可以在页面�
 | overlayPointerEvents | 同View.pointerEvents | 'auto' | 与 View.pointerEvents 一致。
 | autoKeyboardInsets | bool | false | 在弹出键盘时是否自动缩减键盘高度空间。
 
-<span id="View.Events" />
 ## `<Overlay.View />` Events
 | Event Name | Returns | Notes |
 |---|---|---|
@@ -41,11 +38,10 @@ Overlay 使得 React Native 开发从二维变成三维的, 你可以在页面�
 | onDisappearCompleted |  | 在浮层隐藏完毕后调用。
 | onCloseRequest | overlayView | 在点击内容之外的半透明区域或按返回键(Android only)时调用, 如设置此值 modal 将无效。
 
-<span id="PullView" />
 ## `<Overlay.PullView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Overlay.View props...](#View) |  |  | Overlay.PullView 组件继承 Overlay.View 组件的全部属性。
+| [Overlay.View props...](#overlayview--props) |  |  | Overlay.PullView 组件继承 Overlay.View 组件的全部属性。
 | side | string | 'bottom' | 抽屉从屏幕哪条边弹出。<br/>- top: 上边<br/>- bottom: 下边<br/>- left: 左边<br/>- right: 右边
 | containerStyle | 同View.style |  | 抽屉容器样式。
 | animated | bool | true | 继承自 Overlay.View 并修改默认属性。
@@ -53,13 +49,12 @@ Overlay 使得 React Native 开发从二维变成三维的, 你可以在页面�
 ## `<Overlay.PullView />` Events
 | Event Name | Returns | Notes |
 |---|---|---|
-| [Overlay.View events...](#View.Events) |  | Overlay.PullView 组件继承 Overlay.View 组件的全部事件。
+| [Overlay.View events...](#overlayview--events) |  | Overlay.PullView 组件继承 Overlay.View 组件的全部事件。
 
-<span id="PopView" />
 ## `<Overlay.PopView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Overlay.View props...](#View) |  |  | Overlay.PopView 组件继承 Overlay.View 组件的全部属性。
+| [Overlay.View props...](#overlayview--props) |  |  | Overlay.PopView 组件继承 Overlay.View 组件的全部属性。
 | type | string | 'zoomOut' | 弹出效果。<br/>- zoomOut: 缩小, 弹出框放大后动画过度到原大<br/>- zoomIn: 放大, 弹出框缩小后动画过度到原大<br/>- custom: 自定义, 弹出框从 customBounds 位置和大小动画过度到原大
 | containerStyle | 同View.style |  | 弹出框容器样式。
 | customBounds | Rect |  | 弹出框动画过度起始位置和大小, type = 'custom' 时有效。<br/>type Rect {<br/>&ensp;&ensp;x: number,<br/>&ensp;&ensp;y: number,<br/>&ensp;&ensp;width: number,<br/>&ensp;&ensp;height: number,<br/>}
@@ -68,13 +63,12 @@ Overlay 使得 React Native 开发从二维变成三维的, 你可以在页面�
 ## `<Overlay.PopView />` Events
 | Event Name | Returns | Notes |
 |---|---|---|
-| [Overlay.View events...](#View.Events) |  | Overlay.PopView 组件继承 Overlay.View 组件的全部事件。
+| [Overlay.View events...](#overlayview--events) |  | Overlay.PopView 组件继承 Overlay.View 组件的全部事件。
 
-<span id="PopoverView" />
 ## `<Overlay.PopoverView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Overlay.View props...](#View) |  |  | Overlay.PopoverView 组件继承 Overlay.View 组件的全部属性。
+| [Overlay.View props...](#overlayview--props) |  |  | Overlay.PopoverView 组件继承 Overlay.View 组件的全部属性。
 | popoverStyle | 同View.style |  | 气泡样式。
 | fromBounds | Rect |  | 弹出气泡源组件 bounds, 气泡箭头将指向这个组件。<br/>type Rect {<br/>&ensp;&ensp;x: number,<br/>&ensp;&ensp;y: number,<br/>&ensp;&ensp;width: number,<br/>&ensp;&ensp;height: number,<br/>}
 | direction | string | 'down' | 弹出方向。<br/>- down: 向下弹出<br/>- up: 向上弹出<br/>- right: 向右弹出<br/>- left: 向左弹出
@@ -89,7 +83,7 @@ Overlay 使得 React Native 开发从二维变成三维的, 你可以在页面�
 ## `<Overlay.PopoverView />` Events
 | Event Name | Returns | Notes |
 |---|---|---|
-| [Overlay.View events...](#View.Events) |  | Overlay.PopoverView 组件继承 Overlay.View 组件的全部事件。
+| [Overlay.View events...](#overlayview--events) |  | Overlay.PopoverView 组件继承 Overlay.View 组件的全部事件。
 
 ## Example
 全透明模态浮层框
@@ -200,7 +194,7 @@ fromView.measureInWindow((x, y, width, height) => {
 });
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay2.png?raw=true)
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay3.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay4.png?raw=true)

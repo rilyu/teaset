@@ -19,8 +19,8 @@ SegmentedView 组件定义一个分段器组件, 一般用于同一页面中多�
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Sheet](#Sheet) | class |  | 分段器 Sheet 组件。
-| [Button](#Button) | class |  | 分段器按钮组件。<br/>此组件由 Sheet 组件自动渲染, 无须代码显式声明, 但可以修改 SegmentedView.Button 为自定义类以更改分段器按钮组件。
+| [Sheet](#segmentedviewsheet--props) | class |  | 分段器 Sheet 组件。
+| [Button](#segmentedviewbutton--props) | class |  | 分段器按钮组件。<br/>此组件由 Sheet 组件自动渲染, 无须代码显式声明, 但可以修改 SegmentedView.Button 为自定义类以更改分段器按钮组件。
 
 <!--
 ## Methods
@@ -30,7 +30,6 @@ None.
 None.
 -->
 
-<span id="Sheet" />
 ## `<SegmentedView.Sheet />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -38,7 +37,6 @@ None.
 | title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
 | badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 `<Badge />`组件渲染。
 
-<span id="Button" />
 ## `<SegmentedView.Button />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -69,6 +67,6 @@ None.
 </SegmentedView>
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/12-SegmentedView.png?raw=true)

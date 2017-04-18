@@ -5,7 +5,7 @@ Input 组件定义一个输入编辑框。
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [TextInput props...](https://facebook.github.io/react-native/docs/textinput.html) |  |  | Input 组件继承 TextInput 组件的全部属性。
-| size | string | 'md' | 显示尺寸大小。<br/>- lg: 大<br/>- md: 中<br/>- sm: 小<br/>显示效果参见[Screenshots](#Screenshots)。
+| size | string | 'md' | 显示尺寸大小。<br/>- lg: 大<br/>- md: 中<br/>- sm: 小<br/>显示效果参见[Screenshots](#screenshots)。
 | disabled | bool | false | 组件是否禁用, 为 true 时组件显示为半透明且不可聚焦。 |
 | underlineColorAndroid | string | 'rgba(0, 0, 0, 0)' | 继承自 TextInput 并修改默认值。
 
@@ -59,6 +59,6 @@ None.
   />
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/04-Input.png?raw=true)

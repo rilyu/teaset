@@ -56,6 +56,6 @@ None.
   />
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/05b-SearchInput.png?raw=true)

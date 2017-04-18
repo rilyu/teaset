@@ -5,7 +5,7 @@ Select 组件定义一个选择框。
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [TouchableOpacity props...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  |  | Select 组件继承 TouchableOpacity 组件的全部属性。
-| size | string | 'md' | 显示尺寸大小。<br/>- lg: 大<br/>- md: 中<br/>- sm: 小<br/>显示效果参见[Screenshots](#Screenshots)。
+| size | string | 'md' | 显示尺寸大小。<br/>- lg: 大<br/>- md: 中<br/>- sm: 小<br/>显示效果参见[Screenshots](#screenshots)。
 | value | any |  | 当前选择的值, 可以是任何类型。
 | valueStyle | 同Text.style |  | 值显示样式。
 | items | array |  | 可选择列表数组, 数组元素可以是任何类型。
@@ -91,7 +91,7 @@ this.customItems = [
   />
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/05-Select1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/05-Select2.png?raw=true)
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/05-Select3.png?raw=true)

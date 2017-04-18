@@ -5,27 +5,25 @@ ActionSheet 为操作选单静态类, 一般用于触发一个多项子操作供
 | Method | Params | Returns | Notes |
 |---|---|---|---|
 | [Overlay methods](./Overlay.md) |  |  | ActionSheet 继承 Overlay 的全部静态方法。
-| show | items, cancelItem, options | key | 显示一个操作选单, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 items 为操作选单项列表, cancelItem(可空)为取消操作项, options(可空)为 ActionSheet.ActionSheetView 其它属性, 参数类型参见 [ActionSheetView](#ActionSheetView)。<br/>返回唯一的浮层 key 值。
+| show | items, cancelItem, options | key | 显示一个操作选单, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 items 为操作选单项列表, cancelItem(可空)为取消操作项, options(可空)为 ActionSheet.ActionSheetView 其它属性, 参数类型参见 [ActionSheetView](#actionsheetactionsheetview--props)。<br/>返回唯一的浮层 key 值。
 
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [ActionSheetView](#ActionSheetView) | class |  | ActionSheet 内容显示组件。
+| [ActionSheetView](#actionsheetactionsheetview--props) | class |  | ActionSheet 内容显示组件。
 
-<span id="ActionSheetView" />
 ## `<ActionSheet.ActionSheetView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Overlay.PullView props...](./Overlay.md#PullView) |  |  | ActionSheet.ActionSheetView 组件继承 Overlay.PullView 组件的全部属性。
+| [Overlay.PullView props...](./Overlay.md#overlaypullview--props) |  |  | ActionSheet.ActionSheetView 组件继承 Overlay.PullView 组件的全部属性。
 | items | array |  | 操作选单项列表, 数组元素类型为:<br/>type ActionSheetItem {<br/>&ensp;&ensp;title: string,<br/>&ensp;&ensp;onPress: func,<br/>&ensp;&ensp;disabled: bool,<br/>}
 | cancelItem | ActionSheetItem |  | 取消操作项。<br/>type ActionSheetItem {<br/>&ensp;&ensp;title: string,<br/>&ensp;&ensp;onPress: func,<br/>&ensp;&ensp;disabled: bool,<br/>}
 
 ## `<ActionSheet.ActionSheetView />` Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Item](#Item) | class |  | ActionSheet 操作选单项显示组件。
+| [Item](#actionsheetactionsheetviewitem--props) | class |  | ActionSheet 操作选单项显示组件。
 
-<span id="Item" />
 ## `<ActionSheet.ActionSheetView.Item />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -48,6 +46,6 @@ let cancelItem = {title: 'Cancel'};
 ActionSheet.show(items, cancelItem);
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/17-ActionSheet.png?raw=true)

@@ -11,10 +11,10 @@ ListRow 组件用于显示一个列表行, 定义了一系列易于使用的元�
 | detailStyle | 同Text.style |  | 详细内容样式, 当 detail 类型为 element 时无效。
 | detailMultiLine | bool |  | 详细内容是否支持多行，默认为 titlePlace = 'top' 时为 true, 否则为 false。
 | icon | 同Image.source<br/>element |  | 图标, 可以是 Image.source 或 React Native 组件, 如设置则显示在列表行左侧。
-| accessory | string<br/>同Image.source<br/>element | 'auto' | 指示图标, 可以是 字符串、Image.source 或 React Native 组件, 如设置则显示在列表行右侧。<br/>- none: 无<br/>- auto: 自动, 当设置了 onPress 属性时为'indicator', 否则为'none'<br/>- empty: 空, 不显示指示图标, 但占用'check'或'indicator'大小的位置<br/>- check: 小勾图标, 一般用于表示该行已被选中<br/>- indicator: 大于号图标, 一般用于表示点击此行打开新页面<br>显示效果参见[Screenshots](#Screenshots)。
+| accessory | string<br/>同Image.source<br/>element | 'auto' | 指示图标, 可以是 字符串、Image.source 或 React Native 组件, 如设置则显示在列表行右侧。<br/>- none: 无<br/>- auto: 自动, 当设置了 onPress 属性时为'indicator', 否则为'none'<br/>- empty: 空, 不显示指示图标, 但占用'check'或'indicator'大小的位置<br/>- check: 小勾图标, 一般用于表示该行已被选中<br/>- indicator: 大于号图标, 一般用于表示点击此行打开新页面<br>显示效果参见[Screenshots](#screenshots)。
 | topSeparator | string<br/>element | 'none' | 上分隔线, 可以是字符串或 React Native 组件。<br/>- none: 无<br/>- full: 满行分隔线<br/>- indent: 缩进分隔线
 | bottomSeparator | string<br/>element | 'indent' | 下分隔线, 可以是字符串或 React Native 组件。<br/>- none: 无<br/>- full: 满行分隔线<br/>- indent: 缩进分隔线
-| titlePlace | string | 'left' | 标题位置。<br/>- none: 不显示标题<br/>- left: 标题显示在左侧<br/>- top: 标题显示在上侧<br>显示效果参见[Screenshots](#Screenshots)。
+| titlePlace | string | 'left' | 标题位置。<br/>- none: 不显示标题<br/>- left: 标题显示在左侧<br/>- top: 标题显示在上侧<br>显示效果参见[Screenshots](#screenshots)。
 | activeOpacity | number | null | 继承自 TouchableOpacity 并修改默认值, 传入 onPress 时默认为 0.2, 否则为 1。
 
 ## Events
@@ -80,6 +80,6 @@ detail 长文本、标题显示在上侧
 ```
 
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/09-ListRow.png?raw=true)

@@ -5,18 +5,17 @@ PullPicker 为上拉选择器静态类, 一般用于触发显示一个数据列�
 | Method | Params | Returns | Notes |
 |---|---|---|---|
 | [Overlay methods](./Overlay.md) |  |  | PullPicker 继承 Overlay 的全部静态方法。
-| show | title, items, selectedIndex, onSelected, options | key | 显示一个上拉选择器, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 title 为列表标题, items 为可选项列表, selectedIndex 为已选项编号, onSelected 为选择某项时的回调函数, options(可空)为 PullPicker.PullPickerView 其它属性, 参数类型参见 [PullPickerView](#PullPickerView)。<br/>返回唯一的浮层 key 值。
+| show | title, items, selectedIndex, onSelected, options | key | 显示一个上拉选择器, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 title 为列表标题, items 为可选项列表, selectedIndex 为已选项编号, onSelected 为选择某项时的回调函数, options(可空)为 PullPicker.PullPickerView 其它属性, 参数类型参见 [PullPickerView](#pullpickerpullpickerview--props)。<br/>返回唯一的浮层 key 值。
 
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [PullPickerView](#PullPickerView) | class |  | PullPicker 内容显示组件。
+| [PullPickerView](#pullpickerpullpickerview--props) | class |  | PullPicker 内容显示组件。
 
-<span id="PullPickerView" />
 ## `<PullPicker.PullPickerView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Overlay.PullView props...](./Overlay.md#PullView) |  |  | PullPicker.PullPickerView 组件继承 Overlay.PullView 组件的全部属性。
+| [Overlay.PullView props...](./Overlay.md#overlaypullview--props) |  |  | PullPicker.PullPickerView 组件继承 Overlay.PullView 组件的全部属性。
 | title | string |  | 列表标题。
 | items | array |  | 可选项列表, 数组元素可以是任何类型。
 | selectedIndex | number |  | 当前已选择项编号。
@@ -25,15 +24,14 @@ PullPicker 为上拉选择器静态类, 一般用于触发显示一个数据列�
 ## `<PullPicker.PullPickerView />` Events
 | Event Name | Returns | Notes |
 |---|---|---|
-| [Overlay.PullView events...](./Overlay.md#PullView) |  | PullPicker.PullPickerView 组件继承 Overlay.PullView 组件的全部事件。
+| [Overlay.PullView events...](./Overlay.md#overlaypullview--props) |  | PullPicker.PullPickerView 组件继承 Overlay.PullView 组件的全部事件。
 | onSelected | item, index | 当选择器选择 items 数组某项时调用, item = items[index]。
 
 ## `<PullPicker.PullPickerView />` Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Item](#Item) | class |  | PullPicker 可选项显示组件。
+| [Item](#pullpickerpullpickerviewitem--props) | class |  | PullPicker 可选项显示组件。
 
-<span id="Item" />
 ## `<PullPicker.PullPickerView.Item />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -62,6 +60,6 @@ PullPicker.show(
 );
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/19-PullPicker.png?raw=true)

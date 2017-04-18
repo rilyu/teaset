@@ -5,18 +5,17 @@ PopoverPicker 为气泡选择器静态类, 一般用于触发显示一个数据�
 | Method | Params | Returns | Notes |
 |---|---|---|---|
 | [Overlay methods](./Overlay.md) |  |  | PopoverPicker 继承 Overlay 的全部静态方法。
-| show | fromBounds, items, selectedIndex, onSelected, options | key | 显示一个气泡选择器, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 fromBounds 为弹出气泡源组件 bounds, items 为可选项列表, selectedIndex 为已选项编号, onSelected 为选择某项时的回调函数, options(可空)为 PopoverPicker.PopoverPickerView 其它属性, 参数类型参见 [PopoverPickerView](#PopoverPickerView)。<br/>返回唯一的浮层 key 值。
+| show | fromBounds, items, selectedIndex, onSelected, options | key | 显示一个气泡选择器, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 fromBounds 为弹出气泡源组件 bounds, items 为可选项列表, selectedIndex 为已选项编号, onSelected 为选择某项时的回调函数, options(可空)为 PopoverPicker.PopoverPickerView 其它属性, 参数类型参见 [PopoverPickerView](#popoverpickerpopoverpickerview--props)。<br/>返回唯一的浮层 key 值。
 
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [PopoverPickerView](#PopoverPickerView) | class |  | PopoverPicker 内容显示组件。
+| [PopoverPickerView](#popoverpickerpopoverpickerview--props) | class |  | PopoverPicker 内容显示组件。
 
-<span id="PopoverPickerView" />
 ## `<PopoverPicker.PopoverPickerView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Overlay.PopoverView props...](./Overlay.md#PopoverView) |  |  | PopoverPicker.PopoverPickerView 组件继承 Overlay.PopoverView 组件的全部属性。
+| [Overlay.PopoverView props...](./Overlay.md#overlaypopoverview--props) |  |  | PopoverPicker.PopoverPickerView 组件继承 Overlay.PopoverView 组件的全部属性。
 | items | array |  | 可选项列表, 数组元素可以是任何类型。
 | selectedIndex | number |  | 当前已选择项编号。
 | getItemText | func |  | 取 items 数组元素的显示文本, 传入参数为(item, index), item = items[index], 默认直接使用 item
@@ -28,15 +27,14 @@ PopoverPicker 为气泡选择器静态类, 一般用于触发显示一个数据�
 ## `<PopoverPicker.PopoverPickerView />` Events
 | Event Name | Returns | Notes |
 |---|---|---|
-| [Overlay.PopoverView events...](./Overlay.md#PopoverView) |  | PopoverPicker.PopoverPickerView 组件继承 Overlay.PopoverView 组件的全部事件。
+| [Overlay.PopoverView events...](./Overlay.md#overlaypopoverview--props) |  | PopoverPicker.PopoverPickerView 组件继承 Overlay.PopoverView 组件的全部事件。
 | onSelected | item, index | 当选择器选择 items 数组某项时调用, item = items[index]。
 
 ## `<PopoverPicker.PopoverPickerView />` Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Item](#Item) | class |  | PopoverPicker 可选项显示组件。
+| [Item](#popoverpickerpopoverpickerviewitem--props) | class |  | PopoverPicker 可选项显示组件。
 
-<span id="Item" />
 ## `<PopoverPicker.PopoverPickerView.Item />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -68,6 +66,6 @@ fromView.measureInWindow((x, y, width, height) => {
 });
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/20-PopoverPicker.png?raw=true)

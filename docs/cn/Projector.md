@@ -33,6 +33,6 @@ None.
 </Projector>
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/11-Projector.png?raw=true)

@@ -36,14 +36,13 @@ Carousel 组件定义一个跑马灯组件, 一般用于图片、信息页面轮
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Control](#Control) | class |  | 页面控制器组件。
+| [Control](#carouselcontrol--props) | class |  | 页面控制器组件。
 
 <!--
 ## Static Methods
 None.
 -->
 
-<span id="Control" />
 ## `<Carousel.Control />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -84,6 +83,6 @@ None.
 </Carousel>
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/10-Carousel.png?raw=true)

@@ -10,9 +10,8 @@ ModalIndicator 为模态指示器静态类, 一般在需要阻止用户操作时
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [IndicatorView](#IndicatorView) | class |  | ModalIndicator 内容显示组件。
+| [IndicatorView](#modalindicatorindicatorview--props) | class |  | ModalIndicator 内容显示组件。
 
-<span id="IndicatorView" />
 ## `<ModalIndicator.IndicatorView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -28,6 +27,6 @@ ModalIndicator 为模态指示器静态类, 一般在需要阻止用户操作时
 ModalIndicator.show(`Modal indicator`);
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/21-ModalIndicator.png?raw=true)

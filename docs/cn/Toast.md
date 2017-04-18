@@ -5,7 +5,7 @@ Toast 为轻提示静态类, 与 Android 的 Toast 作用类似, 使用纯 JS �
 | Method | Params | Returns | Notes |
 |---|---|---|---|
 | [Overlay methods](./Overlay.md) |  |  | Toast 继承 Overlay 的全部静态方法。
-| show | options | key | 显示一个轻提示, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 options 为 duration 与 [ToastView](#ToastView) 的属性合集, 返回唯一的浮层 key 值。<br/>**一般不直接调用此函数**
+| show | options | key | 显示一个轻提示, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 options 为 duration 与 [ToastView](#toasttoastview--props) 的属性合集, 返回唯一的浮层 key 值。<br/>**一般不直接调用此函数**
 | message | text, duration, position | key | 显示一个纯文本轻提示框。<br/>duration 默认为 'short', position 默认为 'bottom' 。<br/>默认值可通过 Toast.messageDefaultDuration 、 Toast.messageDefaultPosition 修改。
 | success | text, duration, position | key | 显示一个成功轻提示框, 提示框中有一个打勾图标。<br/>duration 默认为 'short', position 默认为 'center' 。<br/>默认值可通过 Toast.defaultDuration 、 Toast.defaultPosition 修改。<br/>**下同**
 | fail | text, duration, position | key | 显示一个失败轻提示框, 提示框中有一个打叉图标。
@@ -17,13 +17,12 @@ Toast 为轻提示静态类, 与 Android 的 Toast 作用类似, 使用纯 JS �
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [ToastView](#ToastView) | class |  | Toast 内容显示组件。
+| [ToastView](#toasttoastview--props) | class |  | Toast 内容显示组件。
 | defaultDuration | string | 'short' | success, fail, smile, sad, info, stop 函数的 duration 参数默认值, 轻提示框显示时长。<br/>- short: 2000 毫秒<br/>- long: 3500毫秒
-| defaultPosition | string | 'center' | success, fail, smile, sad, info, stop 函数的 position 参数默认值, 轻提示框显示位置。参见 [Toast.ToastView](#ToastView)。
+| defaultPosition | string | 'center' | success, fail, smile, sad, info, stop 函数的 position 参数默认值, 轻提示框显示位置。参见 [Toast.ToastView](#toasttoastview--props)。
 | messageDefaultDuration | string | 'short' | message 函数的 duration 参数默认值。
 | messageDefaultPosition | string | 'bottom' | message 函数的 position 参数默认值。
 
-<span id="ToastView" />
 ## `<Toast.ToastView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -65,7 +64,7 @@ hideCustom() {
 }
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/16-Toast1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/16-Toast2.png?raw=true)
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/16-Toast3.png?raw=true)

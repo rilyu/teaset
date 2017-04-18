@@ -15,7 +15,7 @@ ActionPopover 为操作气泡静态类, 一般用于触发一个多项子操作�
 ## `<ActionPopover.ActionPopoverView />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Overlay.PopoverView props...](./Overlay.md#PopoverView) |  |  | ActionPopover.ActionPopoverView 组件继承 Overlay.PopoverView 组件的全部属性。
+| [Overlay.PopoverView props...](./Overlay.md#overlaypopoverview--props) |  |  | ActionPopover.ActionPopoverView 组件继承 Overlay.PopoverView 组件的全部属性。
 | items | array |  | 操作项列表, 数组元素类型为:<br/>type ActionPopoverItem {<br/>&ensp;&ensp;title: string,<br/>&ensp;&ensp;onPress: func,<br/>}
 | direction | string | 'up' | 继承自 Overlay.PopoverView 并修改默认值。
 | align | string | 'center' | 继承自 Overlay.PopoverView 并修改默认值。

@@ -18,8 +18,8 @@ TabView 组件定义一个标签页组件, 用于在一个页面上显示多个�
 ## Static Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [Sheet](#Sheet) | class |  | 标签页 Sheet 组件。
-| [Button](#Button) | class |  | 标签页按钮组件。<br/>此组件由 Sheet 组件自动渲染, 无须代码显式声明, 但可以修改 TabView.Button 为自定义类以更改标签页按钮组件。
+| [Sheet](#tabviewsheet--props) | class |  | 标签页 Sheet 组件。
+| [Button](#tabviewbutton--props) | class |  | 标签页按钮组件。<br/>此组件由 Sheet 组件自动渲染, 无须代码显式声明, 但可以修改 TabView.Button 为自定义类以更改标签页按钮组件。
 
 <!--
 ## Methods
@@ -29,7 +29,6 @@ None.
 None.
 -->
 
-<span id="Sheet" />
 ## `<TabView.Sheet />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -39,7 +38,6 @@ None.
 | activeIcon | 同Image.source<br/>element |  | 激活状态按钮图标, 可以是 Image.source 或 React Native 组件。
 | badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 `<Badge />`组件渲染。
 
-<span id="Button" />
 ## `<TabView.Button />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
@@ -72,6 +70,6 @@ None.
 </TabView>
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/13-TabView.png?raw=true)
