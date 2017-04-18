@@ -1,5 +1,5 @@
 # Teaset
-[English version](/README.md)
+[🇬🇧English version](/README.md)
 
 React Native UI 组件库, 超过 20 个纯 JS(ES6) 组件, 专注于内容展示和操作控制。
 
