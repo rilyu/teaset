@@ -37,7 +37,7 @@ Menu 为菜单静态类, 用于触发显示一个弹出菜单供用户选择, �
 | icon | string<br/>同Image.source<br/>element | 'none' | 图标, 可以是 string 枚举、 Image.source 或 React Native 组件。<br/>- none: 无图标<br/>- empty: 空图标, 显示为空白并占用图标显示大小的空间
 
 ## Example
-简单用法, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](../components/Select/Select.js)
+简单用法, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](/components/Select/Select.js)
 ```
 fromView.measureInWindow((x, y, width, height) => {
   let items = [

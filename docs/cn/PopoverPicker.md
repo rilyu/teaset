@@ -45,7 +45,7 @@ PopoverPicker 为气泡选择器静态类, 一般用于触发显示一个数据�
 | selected | bool |  | 是否已选中。
 
 ## Example
-简单用法, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](../components/Select/Select.js)
+简单用法, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](/components/Select/Select.js)
 ```
 let items = [
   'Apple',

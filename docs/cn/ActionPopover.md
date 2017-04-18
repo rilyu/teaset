@@ -37,7 +37,7 @@ ActionPopover 为操作气泡静态类, 一般用于触发一个多项子操作�
 | rightSeparator | bool | false | 是否显示右分隔线。
 
 ## Example
-简单用法, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](../components/Select/Select.js)
+简单用法, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](/components/Select/Select.js)
 ```
 fromView.measureInWindow((x, y, width, height) => {
   let items = [

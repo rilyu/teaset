@@ -153,7 +153,7 @@ let overlayView = (
 Overlay.show(overlayView);
 ```
 
-从源组件放大弹出浮层框, 常用于图片全屏放大, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](../components/Select/Select.js)
+从源组件放大弹出浮层框, 常用于图片全屏放大, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](/components/Select/Select.js)
 ```
 fromView.measureInWindow((x, y, width, height) => {
   let overlayView = (
@@ -173,7 +173,7 @@ fromView.measureInWindow((x, y, width, height) => {
 });
 ```
 
-弹出气泡浮层框, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](../components/Select/Select.js)
+弹出气泡浮层框, fromView 必须是支持 NativeMethodsMixin 的 React Native 原生组件, 如为复合组件需自行实现 measureInWindow 函数, 可参照[Select.js](/components/Select/Select.js)
 ```
 fromView.measureInWindow((x, y, width, height) => {
   let popoverStyle = {
