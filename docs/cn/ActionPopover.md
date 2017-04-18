@@ -12,8 +12,7 @@ ActionPopover 为操作气泡静态类, 一般用于触发一个多项子操作�
 |---|---|---|---|
 | [ActionPopoverView](#ActionPopoverView) | class |  | ActionPopover 内容显示组件。
 
-<span id="ActionPopoverView" />
-## `<ActionPopover.ActionPopoverView />` Props
+## `<ActionPopover.ActionPopoverView />` Props<span id="ActionPopoverView" />
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [Overlay.PopoverView props...](./Overlay.md#PopoverView) |  |  | ActionPopover.ActionPopoverView 组件继承 Overlay.PopoverView 组件的全部属性。
@@ -27,8 +26,7 @@ ActionPopover 为操作气泡静态类, 一般用于触发一个多项子操作�
 |---|---|---|---|
 | [Item](#Item) | class |  | ActionPopover 操作项显示组件。
 
-<span id="Item" />
-## `<ActionPopover.ActionPopoverView.Item />` Props
+## `<ActionPopover.ActionPopoverView.Item />` Props<span id="Item" />
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [TouchableOpacity props...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  |  | ActionPopover.ActionPopoverView.Item 组件继承 TouchableOpacity 组件的全部属性。
@@ -49,6 +47,6 @@ fromView.measureInWindow((x, y, width, height) => {
 });
 ```
 
-<span id="Screenshots" />
+
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/18-ActionPopover.png?raw=true)
