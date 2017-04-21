@@ -27,4 +27,6 @@ Theme.set({
 });
 
 ```
+
+## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/00a-Theme2.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/00a-Theme3.png?raw=true)
