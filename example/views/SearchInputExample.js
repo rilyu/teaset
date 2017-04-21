@@ -39,7 +39,7 @@ export default class SearchInputExample extends NavigationPage {
         <View style={{height: 20}} />
         <ListRow title='Custom' detail={
           <SearchInput
-            style={{width: 200, height: 40, backgroundColor: '#fcf8e3', borderColor: '#8a6d3b'}}
+            style={{width: 200, height: 40, backgroundColor: '#rgba(238, 169, 91, 0.1)', borderColor: '#8a6d3b'}}
             inputStyle={{color: '#8a6d3b', fontSize: 18}}
             iconSize={15}
             value={this.state.valueCustom}

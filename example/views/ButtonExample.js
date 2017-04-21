@@ -38,7 +38,7 @@ export default class ButtonExample extends NavigationPage {
         <ListRow title='Type link disabled' detail={<Button title='Button' type='link' disabled={true} />} bottomSeparator='full' />
         <View style={{height: 20}} />
         <ListRow title='Custom' detail={
-          <Button style={{backgroundColor: '#fcf8e3', borderColor: '#8a6d3b'}}>
+          <Button style={{backgroundColor: '#rgba(238, 169, 91, 0.1)', borderColor: '#8a6d3b'}}>
             <Image style={{width: 16, height: 16, tintColor: '#8a6d3b'}} source={require('../icons/search.png')} />
             <Label style={{color: '#8a6d3b', fontSize: 16, paddingLeft: 8}} text='Search' />
           </Button>

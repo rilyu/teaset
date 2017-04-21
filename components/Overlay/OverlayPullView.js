@@ -5,6 +5,7 @@
 import React, {Component, PropTypes} from "react";
 import {Animated, View} from 'react-native';
 
+import Theme from '../../themes/Theme';
 import OverlayView from './OverlayView';
 
 export default class OverlayPullView extends OverlayView {
@@ -104,7 +105,7 @@ export default class OverlayPullView extends OverlayView {
     style = [].concat(style).concat(sideStyle);
     contentStyle.opacity = this.state.showed ? 1 : 0;
     containerStyle = [{
-      backgroundColor: '#fff',//rgba(0, 0, 0, 0)',
+      backgroundColor: Theme.defaultColor,//rgba(0, 0, 0, 0)',
     }].concat(containerStyle).concat(contentStyle);
 
     this.props = {side, style, containerStyle, ...others};

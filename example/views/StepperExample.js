@@ -41,12 +41,12 @@ export default class StepperExample extends NavigationPage {
             min={0}
             max={100}
             subButton={
-              <View style={{backgroundColor: '#fcf8e3', borderColor: '#8a6d3b', borderWidth: 1, borderRadius:4, width: 20, height: 20, alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{backgroundColor: '#rgba(238, 169, 91, 0.1)', borderColor: '#8a6d3b', borderWidth: 1, borderRadius:4, width: 20, height: 20, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{color: '#8a6d3b'}}>－</Text>
               </View>
             }
             addButton={
-              <View style={{backgroundColor: '#fcf8e3', borderColor: '#8a6d3b', borderWidth: 1, borderRadius:4, width: 20, height: 20, alignItems: 'center', justifyContent: 'center'}}>
+              <View style={{backgroundColor: '#rgba(238, 169, 91, 0.1)', borderColor: '#8a6d3b', borderWidth: 1, borderRadius:4, width: 20, height: 20, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{color: '#8a6d3b'}}>＋</Text>
               </View>
             }

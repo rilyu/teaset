@@ -1,17 +1,17 @@
-// ThemeDefault.js
+// ThemeBlack.js
 
 'use strict';
 
 import {PixelRatio, Dimensions} from 'react-native';
 
 //primary color
-const primaryColor = '#337ab7';
+const primaryColor = '#f46231';
 //secondary color
-const secondaryColor = '#5bc0de';
+const secondaryColor = '#eea95b';
 //default color
-const defaultColor = '#fff';
+const defaultColor = '#252527';
 //default text color
-const defaultTextColor = '#333';
+const defaultTextColor = '#ccc';
 
 //pixel size
 const pixelSize = (function() {
@@ -30,15 +30,15 @@ export default {
   secondaryColor: secondaryColor,
   defaultColor: defaultColor,
   defaultTextColor: defaultTextColor,
-  pageColor: '#f8f8f8',
+  pageColor: '#212121',
   pixelSize: pixelSize,
   isPad: isPad,
 
   //Label - color
   labelTextColor: defaultTextColor,
-  labelTextTitleColor: '#000',
-  labelTextDetailColor: '#989898',
-  labelTextDangerColor: '#a94442',
+  labelTextTitleColor: '#ddd',
+  labelTextDetailColor: '#949494',
+  labelTextDangerColor: '#e34043',
   //Label - font size
   labelFontSizeXL: 26,
   labelFontSizeLG: 20,
@@ -53,7 +53,7 @@ export default {
   btnColor: defaultColor,
   btnPrimaryColor: primaryColor,
   btnSecondaryColor: secondaryColor,
-  btnDangerColor: '#d9534f',
+  btnDangerColor: '#e34043',
   btnLinkColor: 'rgba(0, 0, 0, 0)',
   //Button - title color
   btnTitleColor: primaryColor,
@@ -65,7 +65,7 @@ export default {
   btnBorderColor: primaryColor,
   btnPrimaryBorderColor: primaryColor,
   btnSecondaryBorderColor: secondaryColor,
-  btnDangerBorderColor: '#d9534f',
+  btnDangerBorderColor: '#e34043',
   btnLinkBorderColor: 'rgba(0, 0, 0, 0)',
   //Button - border width
   btnBorderWidth: 1,
@@ -104,8 +104,8 @@ export default {
   cbTitlePaddingLeftLG: 8,
   cbTitlePaddingLeftMD: 6,
   cbTitlePaddingLeftSM: 4,
-  cbCheckedTintColor: primaryColor,
-  cbUncheckedTintColor: '#ccc',
+  cbCheckedTintColor: '#ccc',
+  cbUncheckedTintColor: '#8f8f8f',
   cbIconSizeLG: 18,
   cbIconSizeMD: 13,
   cbIconSizeSM: 10,
@@ -114,8 +114,8 @@ export default {
   //Input
   inputColor: defaultColor,
   inputTextColor: defaultTextColor,
-  inputPlaceholderTextColor: '#c7c7c7',
-  inputBorderColor: '#ccc',
+  inputPlaceholderTextColor: '#666',
+  inputBorderColor: '#8f8f8f',
   inputBorderWidth: 1,
   //Input - border radius
   inputBorderRadiusLG: 6,
@@ -143,8 +143,8 @@ export default {
   //Select
   selectColor: defaultColor,
   selectTextColor: defaultTextColor,
-  selectPlaceholderTextColor: '#c7c7c7',
-  selectBorderColor: '#ccc',
+  selectPlaceholderTextColor: '#666',
+  selectBorderColor: '#8f8f8f',
   selectBorderWidth: 1,
   //Select - border radius
   selectBorderRadiusLG: 6,
@@ -182,7 +182,7 @@ export default {
 
   //Stepper
   stepperColor: defaultColor,
-  stepperBorderColor: '#ccc',
+  stepperBorderColor: '#8f8f8f',
   stepperBorderWidth: 1,
   stepperBorderRadius: 2,
   stepperTextColor: defaultTextColor,
@@ -198,8 +198,8 @@ export default {
   //SearchInput
   siColor: defaultColor,
   siTextColor: defaultTextColor,
-  siPlaceholderTextColor: '#c7c7c7',
-  siBorderColor: '#ccc',
+  siPlaceholderTextColor: '#666',
+  siBorderColor: '#8f8f8f',
   siBorderWidth: 1,
   siBorderRadius: 3,
   siFontSize: 13,
@@ -229,13 +229,13 @@ export default {
   //NavigationBar
   navType: 'ios', //'auto', 'ios', 'android'
   navStatusBarStyle: 'light-content', //'default', 'light-content'
-  navColor: primaryColor,
-  navTintColor: '#fff',
+  navColor: '#262626',
+  navTintColor: '#ddd',
   navTitleColor: '#fff',
   navTitleFontSize: 18,
   navButtonFontSize: 15,
-  navSeparatorColor: primaryColor,
-  navSeparatorLineWidth: 0,
+  navSeparatorColor: '#000',
+  navSeparatorLineWidth: pixelSize,
 
   //SegmentedView
   svBarColor: defaultColor,
@@ -251,19 +251,19 @@ export default {
   svBarBtnActiveLineWidth: 2,
 
   //TabView
-  tvBarColor: '#f8f8f8',
+  tvBarColor: '#262626',
   tvBarHeight: 49,
   tvBarPaddingTop: 2,
   tvBarPaddingBottom: 2,
   tvBarSeparatorWidth: pixelSize,
-  tvBarSeparatorColor: '#ccc',
+  tvBarSeparatorColor: '#000',
   tvBarBtnWidth: 44,
   tvBarBtnIconSize: 22,
-  tvBarBtnIconTintColor: '#8f8f8f',
-  tvBarBtnIconActiveTintColor: primaryColor,
-  tvBarBtnTitleColor: '#8f8f8f',
+  tvBarBtnIconTintColor: '#989898',
+  tvBarBtnIconActiveTintColor: '#fff',
+  tvBarBtnTitleColor: '#989898',
   tvBarBtnTextFontSize: 10,
-  tvBarBtnActiveTitleColor: primaryColor,
+  tvBarBtnActiveTitleColor: '#fff',
 
   //ListRow
   rowColor: defaultColor,
@@ -280,7 +280,7 @@ export default {
   rowAccessoryPaddingLeft: 8,
   rowAccessoryCheckColor: '#007aff',
   rowAccessoryIndicatorColor: '#bebebe',
-  rowSeparatorColor: '#ccc',
+  rowSeparatorColor: '#000',
   rowSeparatorLineWidth: pixelSize,
   rowPaddingTitleDetail: 4,
   rowDetailLineHeight: 18,
@@ -320,21 +320,21 @@ export default {
   asItemPaddingRight: 12,
   asItemPaddingTop: 8,
   asItemPaddingBottom: 8,
-  asItemColor: 'rgba(255, 255, 255, 0.9)',
-  asItemSeparatorColor: 'rgba(127, 127, 127, 0.3)',
+  asItemColor: 'rgba(64, 64, 64, 0.9)',
+  asItemSeparatorColor: 'rgba(0, 0, 0, 0.3)',
   asItemSeparatorLineWidth: pixelSize,
-  asItemTitleColor: '#000',
+  asItemTitleColor: '#fff',
   asItemTitleAlign: 'center',
   asItemFontSize: 19,
-  asCancelItemColor: 'rgba(255, 255, 255, 0.9)',
-  asCancelItemSeparatorColor: 'rgba(127, 127, 127, 0.3)',
+  asCancelItemColor: 'rgba(64, 64, 64, 0.9)',
+  asCancelItemSeparatorColor: 'rgba(0, 0, 0, 0.3)',
   asCancelItemSeparatorLineWidth: 7,
-  asCancelItemTitleColor: '#a94442',
+  asCancelItemTitleColor: '#e34043',
   asCancelItemTitleAlign: 'center',
   asCancelItemFontSize: 19,
 
   //ActionPopover
-  apColor: 'rgba(0, 0, 0, 0.9)',
+  apColor: 'rgba(64, 64, 64, 0.9)',
   apPaddingVertical: 0,
   apPaddingHorizontal: 4,
   apBorderRadius: 8,
@@ -343,33 +343,33 @@ export default {
   apItemFontSize: 14,
   apItemPaddingVertical: 8,
   apItemPaddingHorizontal: 12,
-  apSeparatorColor: '#ccc',
+  apSeparatorColor: '#000',
   apSeparatorWidth: pixelSize,  
 
   //PullPicker
-  pupColor: '#f8f8f8',
+  pupColor: '#212121',
   pupMaxHeight: 258,
-  pupHeaderColor: defaultColor,
+  pupHeaderColor: 'rgba(64, 64, 64, 0.9)',
   pupHeaderPaddingLeft: 12,
   pupHeaderPaddingRight: 12,
   pupHeaderPaddingTop: 12,
   pupHeaderPaddingBottom: 12,
-  pupHeaderTitleColor: '#000',
+  pupHeaderTitleColor: '#fff',
   pupHeaderFontSize: 16,
   pupHeaderFontWeight: 'bold',
-  pupHeaderSeparatorColor: '#f8f8f8',
+  pupHeaderSeparatorColor: '#212121',
   pupHeaderSeparatorHeight: 8,
-  pupItemColor: defaultColor,
+  pupItemColor: 'rgba(64, 64, 64, 0.9)',
 
   //PopoverPicker
-  poppColor: '#f8f8f8',
+  poppColor: 'rgba(64, 64, 64, 0.9)',
   poppShadowColor: '#333',
   poppMinWidth: 120,
   poppMaxWidth: 260,
   poppMinHeight: 44,
   poppMaxHeight: 246,
   poppDirectionInsets: 4,
-  poppItemColor: defaultColor,
+  poppItemColor: 'rgba(0, 0, 0, 0)',
   poppItemPaddingLeft: 12,
   poppItemPaddingRight: 12,
   poppItemPaddingTop: 8,
@@ -377,28 +377,28 @@ export default {
   poppItemTitleColor: defaultTextColor,
   poppItemFontSize: 14,
   poppItemSeparatorWidth: pixelSize,
-  poppItemSeparatorColor: '#ccc',
+  poppItemSeparatorColor: '#212121',
   poppAccessoryWidth: 10,
   poppAccessoryHeight: 10,
   poppAccessoryPaddingLeft: 8,
   poppAccessoryCheckColor: '#007aff',
 
   //Menu
-  menuColor: 'rgba(0, 0, 0, 0.9)',
-  menuShadowColor: '#777',
+  menuColor: 'rgba(64, 64, 64, 0.9)',
+  menuShadowColor: '#333',
   menuDirectionInsets: 4,
   menuItemColor: 'rgba(0, 0, 0, 0)',
   menuItemPaddingLeft: 16,
   menuItemPaddingRight: 16,
   menuItemPaddingTop: 12,
   menuItemPaddingBottom: 12,
-  menuItemTitleColor: '#ccc',
+  menuItemTitleColor: '#fff',
   menuItemFontSize: 14,
   menuItemSeparatorWidth: pixelSize,
-  menuItemSeparatorColor: '#777',
+  menuItemSeparatorColor: '#212121',
   menuItemIconWidth: 16,
   menuItemIconHeight: 16,
-  menuItemIconColor: '#ccc',
+  menuItemIconColor: '#fff',
   menuItemIconPaddingRight: 12,
 
   //ModalIndicator

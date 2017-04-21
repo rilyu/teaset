@@ -6,10 +6,11 @@ NavigationBar 组件定义一个页面导航条, 用于页面顶部显示页面�
 |---|---|---|---|
 | [View props...](https://facebook.github.io/react-native/docs/view.html) |  |  | NavigationBar 组件继承 View 组件的全部属性。
 | type | string | 'ios' | 风格类型。<br/>- auto: 自动, 根据操作系统自动选择<br/>- ios: iOS风格<br/>- android: Android风格<br/>显示效果参见[Screenshots](#screenshots)。
-| tintColor | string |  | 导航条文字与图像颜色, 默认值在 Theme 中设置。
 | title | string<br/>element |  | 导航条标题, 可传入字符串或 React Native 组件, 传入字符串时使用`<NavigationBar.Title />`组件渲染。
+| titleStyle | 同Text.style |  | 导航条标题样式, 当 title 类型为 element 时无效。
 | leftView | element |  | 导航条左视图。
 | rightView | element |  | 导航条右视图。
+| tintColor | string |  | 导航条左、右视图文字与图像颜色, 默认值在 Theme 中设置。
 | statusBarStyle | string | 'default' | 系统状态栏样式(iOS only)。<br/>- default: 默认, 黑色文字或图标。<br/>- light-content: 亮色调, 白色文字或图标。
 | statusBarColor | string |  | 导航条背景颜色, 默认值在 Theme 中设置。
 | statusBarHidden | bool | false | 是否隐藏系统状态栏, 为 true 时系统状态栏与导航条均不显示。

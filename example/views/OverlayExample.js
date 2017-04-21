@@ -5,7 +5,7 @@
 import React, {Component, PropTypes} from 'react';
 import {View, Image, ScrollView, TouchableWithoutFeedback, Dimensions} from 'react-native';
 
-import {NavigationPage, ListRow, Overlay, Label, Button, Checkbox} from 'teaset';
+import {Theme, NavigationPage, ListRow, Overlay, Label, Button, Checkbox} from 'teaset';
 
 export default class OverlayExample extends NavigationPage {
 
@@ -32,8 +32,8 @@ export default class OverlayExample extends NavigationPage {
         overlayOpacity={transparent ? 0 : null}
         ref={v => this.overlayView = v}
         >
-        <View style={{backgroundColor: transparent ? '#333' :'#fff', padding: 40, borderRadius: 15, alignItems: 'center'}}>
-          <Label style={{color: transparent ? '#eee' : '#000'}} size='xl' text={text} />
+        <View style={{backgroundColor: transparent ? '#333' : Theme.defaultColor, padding: 40, borderRadius: 15, alignItems: 'center'}}>
+          <Label type='danger' size='xl' text={text} />
           {modal ? <View style={{height: 20}} /> : null}
           {modal ? <Button title='Close' onPress={() => this.overlayView && this.overlayView.close()} /> : null}
         </View>
@@ -50,7 +50,7 @@ export default class OverlayExample extends NavigationPage {
         modal={modal}
         ref={v => this.overlayPopView = v}
         >
-        <View style={{backgroundColor: '#fff', minWidth: 260, minHeight: 180, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{backgroundColor: Theme.defaultColor, minWidth: 260, minHeight: 180, borderRadius: 15, justifyContent: 'center', alignItems: 'center'}}>
           <Label type='title' size='xl' text={text} />
           {modal ? <View style={{height: 60}} /> : null}
           {modal ? <Button title='Close' onPress={() => this.overlayPopView && this.overlayPopView.close()} /> : null}
@@ -82,7 +82,7 @@ export default class OverlayExample extends NavigationPage {
   showPull(side, modal, text) {
     let overlayView = (
       <Overlay.PullView side={side} modal={modal} ref={v => this.overlayPullView = v}>
-        <View style={{backgroundColor: '#fff', minWidth: 300, minHeight: 260, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{backgroundColor: Theme.defaultColor, minWidth: 300, minHeight: 260, justifyContent: 'center', alignItems: 'center'}}>
           <Label type='title' size='xl' text={text} />
           {modal ? <View style={{height: 60}} /> : null}
           {modal ? <Button title='Close' onPress={() => this.overlayPullView && this.overlayPullView.close()} /> : null}
@@ -127,7 +127,7 @@ export default class OverlayExample extends NavigationPage {
   showMulti() {
     let overlayView = (
       <Overlay.PullView modal={false}>
-        <View style={{backgroundColor: '#fff', minWidth: 200, minHeight: 260, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{backgroundColor: Theme.defaultColor, minWidth: 200, minHeight: 260, justifyContent: 'center', alignItems: 'center'}}>
           <Label type='title' size='xl' text='Overlay' />
           <View style={{height: 60}} />
           <Button title='New overlay' onPress={() => this.showDefault(false, true, 'New overlay')} />

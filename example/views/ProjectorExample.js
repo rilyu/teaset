@@ -27,7 +27,7 @@ export default class ProjectorExample extends NavigationPage {
       <View style={{backgroundColor: color, padding: 30, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Label text='Enter something' />
         <View style={{height: 12}} />
-        <View><Input style={{width: 200}} /></View>
+        <View><Input style={{backgroundColor: 'rgba(255, 255, 255, 0.3)', width: 200}} /></View>
       </View>
     );
   }
@@ -36,7 +36,7 @@ export default class ProjectorExample extends NavigationPage {
     return (
       <Button
         title={i}
-        type={this.state.index == i ? 'secondary' : 'default'}
+        type={this.state.index == i ? 'primary' : 'default'}
         onPress={() => this.setState({index: i})}
         />
     );
@@ -46,10 +46,10 @@ export default class ProjectorExample extends NavigationPage {
     return (
       <ScrollView style={{flex: 1}}>
         <Projector style={{height: 238}} index={this.state.index}>
-          {this.renderSlide('#dff0d8')}
-          {this.renderSlide('#d9edf7')}
-          {this.renderSlide('#fcf8e3')}
-          {this.renderSlide('#f2dede')}
+          {this.renderSlide('#rgba(170, 240, 141, 0.1)')}
+          {this.renderSlide('#rgba(123, 207, 249, 0.1)')}
+          {this.renderSlide('#rgba(250, 231, 133, 0.1)')}
+          {this.renderSlide('#rgba(244, 131, 131, 0.1)')}
         </Projector>
         <View style={{height: 20}} />
         <ListRow

@@ -31,6 +31,10 @@ The document is being written, please refer to the example source code.
 ## Components
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/00-Teaset1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/00-Teaset2.png?raw=true)
 
+## Theme
+![](https://github.com/rilyu/teaset/blob/master/screenshots/00a-Theme1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/00a-Theme2.png?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/00a-Theme3.png?raw=true)
+
 ## Label
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/01-Label.png?raw=true)
 

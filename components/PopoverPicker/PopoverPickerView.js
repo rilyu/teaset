@@ -48,7 +48,7 @@ export default class PopoverPickerView extends Overlay.PopoverView {
     };
     if (shadow) {
       Object.assign(pickerStyle, {
-        shadowColor: '#777',
+        shadowColor: Theme.poppShadowColor,
         shadowOffset: {width: 1, height: 1},
         shadowOpacity: 0.5,
         shadowRadius: 2,

@@ -165,7 +165,7 @@ export default class SelectExample extends NavigationPage {
           title='Custom'
           detail={
             <Select
-              style={{width: 200, backgroundColor: '#fcf8e3', borderColor: '#8a6d3b'}}
+              style={{width: 200, backgroundColor: '#rgba(238, 169, 91, 0.1)', borderColor: '#8a6d3b'}}
               value={valueCustom}
               valueStyle={{flex: 1, color: '#8a6d3b', textAlign: 'right'}}
               items={this.customItems}

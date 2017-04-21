@@ -5,7 +5,7 @@
 import React, {Component, PropTypes} from 'react';
 import {View, Image} from 'react-native';
 
-import {NavigationPage, TransformView} from 'teaset';
+import {Theme, NavigationPage, TransformView} from 'teaset';
 
 export default class TransformViewExample extends NavigationPage {
 
@@ -18,7 +18,7 @@ export default class TransformViewExample extends NavigationPage {
   renderPage() {
     return (
       <TransformView
-        style={{backgroundColor: '#fff', flex: 1, alignItems: 'center', justifyContent: 'center'}}
+        style={{backgroundColor: Theme.pageColor, flex: 1, alignItems: 'center', justifyContent: 'center'}}
         minScale={0.5}
         maxScale={2}
         magnetic={true}

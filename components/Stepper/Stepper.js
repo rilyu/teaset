@@ -71,17 +71,21 @@ export default class Stepper extends Component {
       alignItems: 'center',
       justifyContent: 'center',
     };
+    let btnTextStyle = {
+      color: Theme.stepperBtnTextColor,
+      fontSize: Theme.stepperBtnFontSize,
+    };
     if (!React.isValidElement(subButton)) {
       subButton = (
         <View style={btnStyle}>
-          <Text>{subButton}</Text>
+          <Text style={btnTextStyle}>{subButton}</Text>
         </View>
       );
     }
     if (!React.isValidElement(addButton)) {
       addButton = (
         <View style={btnStyle}>
-          <Text>{addButton}</Text>
+          <Text style={btnTextStyle}>{addButton}</Text>
         </View>
       );
     }

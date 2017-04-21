@@ -3,7 +3,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {StyleSheet, Platform, StatusBar, View} from 'react-native';
+import {StyleSheet, Platform, StatusBar, View, Text} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import NavigationTitle from './NavigationTitle';
@@ -17,10 +17,11 @@ export default class NavigationBar extends Component {
   static propTypes = {
     ...View.propTypes,
     type: PropTypes.oneOf(['auto', 'ios', 'android']),
-    tintColor: PropTypes.string, //bar tint color, default tint color of title, leftView and rightView
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    titleStyle: Text.propTypes.style,
     leftView: PropTypes.element,
     rightView: PropTypes.element,
+    tintColor: PropTypes.string, //bar tint color, default tint color leftView and rightView
     statusBarStyle: PropTypes.oneOf(['default', 'light-content']), //status bar style (iOS only)
     statusBarColor: PropTypes.string, //status bar color, default: style.backgroundColor
     statusBarHidden: PropTypes.bool, //status bar hidden
@@ -56,7 +57,7 @@ export default class NavigationBar extends Component {
   }
 
   buildProps() {
-    let {style, type, tintColor, title, statusBarColor, statusBarStyle, statusBarInsets, ...others} = this.props;
+    let {style, type, title, titleStyle, tintColor, statusBarColor, statusBarStyle, statusBarInsets, ...others} = this.props;
 
     //build style
     let justifyContent, titleTextAlign;
@@ -80,6 +81,8 @@ export default class NavigationBar extends Component {
       paddingTop: statusBarInsets && Platform.OS === 'ios' ? 20 : 0,
       paddingLeft: 4,
       paddingRight: 4,
+      borderBottomWidth: Theme.navSeparatorLineWidth,
+      borderBottomColor: Theme.navSeparatorColor,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: justifyContent,
@@ -125,10 +128,10 @@ export default class NavigationBar extends Component {
 
     //convert string title to NavigationBar.Title
     if (typeof title === 'string') {
-      title = <this.constructor.Title style={{textAlign: titleTextAlign}} text={title} />;
+      title = <this.constructor.Title style={{textAlign: titleTextAlign, color: Theme.navTitleColor}} text={title} />;
     }
 
-    this.props = {style, type, tintColor, title, titleViewStyle, statusBarColor, statusBarStyle, statusBarInsets, ...others};
+    this.props = {style, type, title, titleStyle, tintColor, titleViewStyle, statusBarColor, statusBarStyle, statusBarInsets, ...others};
   }
 
   onLeftViewLayout(e) {

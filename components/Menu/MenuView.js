@@ -44,7 +44,7 @@ export default class MenuView extends Overlay.PopoverView {
     };
     if (shadow) {
       Object.assign(menuStyle, {
-        shadowColor: '#777',
+        shadowColor: Theme.menuShadowColor,
         shadowOffset: {width: 1, height: 1},
         shadowOpacity: 0.5,
         shadowRadius: 2,

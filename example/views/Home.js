@@ -6,6 +6,7 @@ import React, {Component, PropTypes} from 'react';
 import {View, ScrollView} from 'react-native';
 
 import {Theme, NavigationPage, NavigationBar, ListRow} from 'teaset';
+import ThemeExample from './ThemeExample';
 import LabelExample from './LabelExample';
 import ButtonExample from './ButtonExample';
 import CheckboxExample from './CheckboxExample';
@@ -42,7 +43,8 @@ export default class Home extends NavigationPage {
     return (
       <ScrollView style={{flex: 1}}>
         <View style={{height: 20}} />
-        <ListRow title='Label' detail='标签' onPress={() => this.navigator.push({view: <LabelExample />})} topSeparator='full' />
+        <ListRow title='Theme' detail='主题' onPress={() => this.navigator.push({view: <ThemeExample />})} topSeparator='full' />
+        <ListRow title='Label' detail='标签' onPress={() => this.navigator.push({view: <LabelExample />})} />
         <ListRow title='Button' detail='按钮' onPress={() => this.navigator.push({view: <ButtonExample />})} />
         <ListRow title='Checkbox' detail='复选框' onPress={() => this.navigator.push({view: <CheckboxExample />})} />
         <ListRow title='Input' detail='输入框' onPress={() => this.navigator.push({view: <InputExample />})} />
