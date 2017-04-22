@@ -280,7 +280,7 @@ export default {
   rowAccessoryPaddingLeft: 8,
   rowAccessoryCheckColor: '#007aff',
   rowAccessoryIndicatorColor: '#a7aab7',
-  rowSeparatorColor: '#313656',
+  rowSeparatorColor: '#333858',
   rowSeparatorLineWidth: pixelSize,
   rowPaddingTitleDetail: 4,
   rowDetailLineHeight: 18,
@@ -343,7 +343,7 @@ export default {
   apItemFontSize: 14,
   apItemPaddingVertical: 8,
   apItemPaddingHorizontal: 12,
-  apSeparatorColor: '#313656',
+  apSeparatorColor: '#333858',
   apSeparatorWidth: pixelSize,  
 
   //PullPicker
@@ -360,6 +360,7 @@ export default {
   pupHeaderSeparatorColor: '#292f4f',
   pupHeaderSeparatorHeight: 8,
   pupItemColor: 'rgba(90, 74, 124, 0.9)',
+  pupSeparatorColor: '#333858',
 
   //PopoverPicker
   poppColor: 'rgba(90, 74, 124, 0.9)',

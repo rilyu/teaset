@@ -4,7 +4,6 @@
 
 import React, {Component, PropTypes} from "react";
 
-import Theme from 'teaset/themes/Theme';
 import ListRow from '../ListRow/ListRow';
 
 export default class PullPickerItem extends ListRow {
@@ -15,10 +14,9 @@ export default class PullPickerItem extends ListRow {
   };
 
   buildProps() {
-    let {style, selected, accessory, ...others} = this.props;
-    style = [{backgroundColor: Theme.pupItemColor}].concat(style);
+    let {selected, accessory, ...others} = this.props;
     accessory = selected ? 'check' : 'empty';
-    this.props = {style, selected, accessory, ...others} ;
+    this.props = {selected, accessory, ...others} ;
 
     super.buildProps();
   }

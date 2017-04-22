@@ -234,7 +234,7 @@ export default {
   navTitleColor: '#fff',
   navTitleFontSize: 18,
   navButtonFontSize: 15,
-  navSeparatorColor: '#000',
+  navSeparatorColor: '#282828',
   navSeparatorLineWidth: pixelSize,
 
   //SegmentedView
@@ -256,7 +256,7 @@ export default {
   tvBarPaddingTop: 2,
   tvBarPaddingBottom: 2,
   tvBarSeparatorWidth: pixelSize,
-  tvBarSeparatorColor: '#000',
+  tvBarSeparatorColor: '#282828',
   tvBarBtnWidth: 44,
   tvBarBtnIconSize: 22,
   tvBarBtnIconTintColor: '#989898',
@@ -280,7 +280,7 @@ export default {
   rowAccessoryPaddingLeft: 8,
   rowAccessoryCheckColor: '#007aff',
   rowAccessoryIndicatorColor: '#bebebe',
-  rowSeparatorColor: '#000',
+  rowSeparatorColor: '#383838',
   rowSeparatorLineWidth: pixelSize,
   rowPaddingTitleDetail: 4,
   rowDetailLineHeight: 18,
@@ -343,7 +343,7 @@ export default {
   apItemFontSize: 14,
   apItemPaddingVertical: 8,
   apItemPaddingHorizontal: 12,
-  apSeparatorColor: '#000',
+  apSeparatorColor: '#383838',
   apSeparatorWidth: pixelSize,  
 
   //PullPicker
@@ -360,6 +360,7 @@ export default {
   pupHeaderSeparatorColor: '#212121',
   pupHeaderSeparatorHeight: 8,
   pupItemColor: 'rgba(64, 64, 64, 0.9)',
+  pupSeparatorColor: '#212121',
 
   //PopoverPicker
   poppColor: 'rgba(64, 64, 64, 0.9)',

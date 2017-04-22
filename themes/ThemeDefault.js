@@ -360,6 +360,7 @@ export default {
   pupHeaderSeparatorColor: '#f8f8f8',
   pupHeaderSeparatorHeight: 8,
   pupItemColor: defaultColor,
+  pupSeparatorColor: '#ccc',
 
   //PopoverPicker
   poppColor: '#f8f8f8',

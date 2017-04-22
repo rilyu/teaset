@@ -62,8 +62,10 @@ export default class PullPickerView extends Overlay.PullView {
           {items && items.map((item, index) => (
             <this.constructor.Item
               key={'item' + index}
+              style={{backgroundColor: Theme.pupItemColor}}
               title={getItemText ? getItemText(item, index) : item}
               selected={index === selectedIndex}
+              bottomSeparator={<View style={{backgroundColor: Theme.pupSeparatorColor, height: Theme.rowSeparatorLineWidth}} />}
               onPress={() => this.onItemPress(index)}
               />
           ))}
