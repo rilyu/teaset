@@ -92,21 +92,21 @@ export default class OverlayView extends Component {
     return true;
   }
 
-  appear(animated = this.props.animated) {
+  appear(animated = this.props.animated, additionAnimates = null) {
     if (animated) {
       this.state.overlayOpacity.setValue(0);
-      Animated.parallel(this.appearAnimates).start(e => this.appearCompleted());
+      Animated.parallel(this.appearAnimates.concat(additionAnimates)).start(e => this.appearCompleted());
     } else {
       this.state.overlayOpacity.setValue(this.overlayOpacity);
       this.appearCompleted();
     }
   }
 
-  disappear(animated = this.props.animated) {
+  disappear(animated = this.props.animated, additionAnimates = null) {
     if (animated) {
-      Animated.parallel(this.disappearAnimates).start(e => this.disappearCompleted());
+      Animated.parallel(this.disappearAnimates.concat(additionAnimates)).start(e => this.disappearCompleted());
       this.state.overlayOpacity.addListener(e => {
-        if (e.value < 0.05) {
+        if (e.value < 0.01) {
           this.state.overlayOpacity.stopAnimation();
           this.state.overlayOpacity.removeAllListeners();
         }

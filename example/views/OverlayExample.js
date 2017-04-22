@@ -79,9 +79,9 @@ export default class OverlayExample extends NavigationPage {
     });
   }
 
-  showPull(side, modal, text) {
+  showPull(side, modal, text, rootTransform) {
     let overlayView = (
-      <Overlay.PullView side={side} modal={modal} ref={v => this.overlayPullView = v}>
+      <Overlay.PullView side={side} modal={modal} rootTransform={rootTransform} ref={v => this.overlayPullView = v}>
         <View style={{backgroundColor: Theme.defaultColor, minWidth: 300, minHeight: 260, justifyContent: 'center', alignItems: 'center'}}>
           <Label type='title' size='xl' text={text} />
           {modal ? <View style={{height: 60}} /> : null}
@@ -150,7 +150,9 @@ export default class OverlayExample extends NavigationPage {
         <ListRow title='Pull from top' onPress={() => this.showPull('top', false, 'Pull from top')} />
         <ListRow title='Pull from left' onPress={() => this.showPull('left', false, 'Pull from left')} />
         <ListRow title='Pull from right' onPress={() => this.showPull('right', false, 'Pull from right')} />
-        <ListRow title='Pull modal' onPress={() => this.showPull('bottom', true, 'Pull modal')} bottomSeparator='full' />
+        <ListRow title='Pull modal' onPress={() => this.showPull('bottom', true, 'Pull modal')} />
+        <ListRow title='Pull and scale' onPress={() => this.showPull('bottom', false, 'Pull and scale', 'scale')} />
+        <ListRow title='Pull and translate' onPress={() => this.showPull('left', false, 'Pull and translate', 'translate')} bottomSeparator='full' />
         <View style={{height: 20}} />
         <ListRow title='Pop zoom out' onPress={() => this.showPop('zoomOut', false, 'Pop zoom out')} topSeparator='full' />
         <ListRow title='Pop zoom in' onPress={() => this.showPop('zoomIn', false, 'Pop zoom in')} />

@@ -148,7 +148,7 @@ export default class ListRow extends Component {
             <View style={separatorStyle} />
           </View>
         );
-        break;        
+        break;
     }
     switch (bottomSeparator) {
       case 'none':

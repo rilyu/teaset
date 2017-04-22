@@ -26,6 +26,7 @@ const isPad = Dimensions.get('window').width >= 768 && Dimensions.get('window').
 
 export default {
   //General
+  screenColor: '#444',
   primaryColor: primaryColor,
   secondaryColor: secondaryColor,
   defaultColor: defaultColor,
@@ -293,6 +294,7 @@ export default {
 
   //Overlay
   overlayOpacity: 0.4,
+  overlayRootScale: 0.93,
 
   //Toast
   toastColor: 'rgba(0, 0, 0, 0.8)',

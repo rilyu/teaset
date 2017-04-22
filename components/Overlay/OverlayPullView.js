@@ -6,6 +6,7 @@ import React, {Component, PropTypes} from "react";
 import {Animated, View} from 'react-native';
 
 import Theme from '../../themes/Theme';
+import TopView from './TopView';
 import OverlayView from './OverlayView';
 
 export default class OverlayPullView extends OverlayView {
@@ -14,12 +15,22 @@ export default class OverlayPullView extends OverlayView {
     ...OverlayView.propTypes,
     side: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     containerStyle: View.propTypes.style,
+    rootTransform: PropTypes.oneOfType(
+      PropTypes.oneOf(['none', 'translate', 'scale']),
+      PropTypes.arrayOf(PropTypes.shape({
+        translateX: PropTypes.number,
+        translateY: PropTypes.number,
+        scaleX: PropTypes.number,
+        scaleY: PropTypes.number,
+      })),
+    ),
   };
 
   static defaultProps = {
     ...OverlayView.defaultProps,
     side: 'bottom',
     animated: true,
+    rootTransform: 'none',
   };
 
   constructor(props) {
@@ -63,11 +74,47 @@ export default class OverlayPullView extends OverlayView {
     else return -this.viewLayout.height;
   }
 
+  get rootTransformValue() {
+    let {side, rootTransform} = this.props;
+    if (!rootTransform || rootTransform === 'none') {
+      return [];
+    }
+    let transform;
+    switch (rootTransform) {
+      case 'translate':
+        switch (side) {
+          case 'top': return [{translateY: this.viewLayout.height}];
+          case 'left': return [{translateX: this.viewLayout.width}];
+          case 'right': return [{translateX: -this.viewLayout.width}];
+          default: return [{translateY: -this.viewLayout.height}];
+        }
+        break;
+      case 'scale':
+        return [{scaleX: Theme.overlayRootScale}, {scaleY: Theme.overlayRootScale}];
+      default:
+        return rootTransform;
+    }
+  }
+
   appear(animated = this.props.animated) {
     if (animated) {
       this.state.marginValue.setValue(this.marginSize);
     }
     super.appear(animated);
+
+    let {rootTransform} = this.props;
+    if (rootTransform && rootTransform !== 'none') {
+      TopView.transform(this.rootTransformValue, animated);
+    }
+  }
+
+  disappear(animated = this.props.animated) {
+    let {rootTransform} = this.props;
+    if (rootTransform && rootTransform !== 'none') {
+      TopView.restore(animated);
+    }
+
+    super.disappear(animated);
   }
 
   onLayout(e) {
