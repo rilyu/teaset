@@ -44,6 +44,7 @@ Overlay 使得 React Native 开发从二维变成三维的, 你可以在页面�
 | [Overlay.View props...](#overlayview--props) |  |  | Overlay.PullView 组件继承 Overlay.View 组件的全部属性。
 | side | string | 'bottom' | 抽屉从屏幕哪条边弹出。<br/>- top: 上边<br/>- bottom: 下边<br/>- left: 左边<br/>- right: 右边
 | containerStyle | 同View.style |  | 抽屉容器样式。
+| rootTransform | string<br/>[Transform] | 'none' | 浮层弹出时根组件转换动画, 可以是字符串或 View.style.transform 类似的数组。<br/>- none: 无转换<br/>- translate: 位移转换, 把根组件往浮层弹出方向移动<br/>- scale: 缩小转换, 缩小倍数在 Theme 中定义<br/>Transform 目前支持 translateX 、 translateY 、 scaleX 、 scaleY, 类型定义：<br/>type Transform {<br/>&ensp;&ensp;translateX: number,<br/>&ensp;&ensp;translateY: number,<br/>&ensp;&ensp;scaleX: number,<br/>&ensp;&ensp;scaleY: number,<br/>}<br/>
 | animated | bool | true | 继承自 Overlay.View 并修改默认属性。
 
 ## `<Overlay.PullView />` Events
@@ -197,5 +198,5 @@ fromView.measureInWindow((x, y, width, height) => {
 
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay2.png?raw=true)
-![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay3.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay4.png?raw=true)
-![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay5.png?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay3.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay6.png?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay4.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay5.png?raw=true)
