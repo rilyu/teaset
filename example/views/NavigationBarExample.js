@@ -3,99 +3,260 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {View, ScrollView} from 'react-native';
+import {Platform, View, ScrollView, Switch} from 'react-native';
 
-import {NavigationPage, ListRow, NavigationBar, Label} from 'teaset';
+import {Theme, NavigationPage, ListRow, NavigationBar, Label, Select} from 'teaset';
 
 export default class NavigationBarExample extends NavigationPage {
 
   static defaultProps = {
     ...NavigationPage.defaultProps,
     title: 'NavigationBar',
-    showBackButton: true,
+    navigationBarInsets: false,
   };
 
-  renderHeader(text) {
-    return (
-      <View style={{paddingLeft: 8, paddingTop: 16, paddingBottom: 8}}>
-        <Label style={{fontSize: 15}} type='detail' text={text} />
-      </View>
-    );
+  constructor(props) {
+    super(props);
+
+    this.typeItems = ['Auto', 'iOS', 'Android'];
+    this.titleItems = ['String', 'Custom'];
+    this.leftViewItems = ['None', 'Back button', 'Link button', 'Icon button', 'Two icon button'];
+    this.rightViewItems = ['None', 'Link button', 'Icon button', 'Two icon button'];
+    this.bgColorItems = ['Default', 'Custom'];
+    this.tintColorItems = ['Default', 'Custom'];
+    this.statusBarStyleItems = ['Default', 'Light Content'];
+
+    Object.assign(this.state, {
+      type: 'iOS',
+      title: 'String',
+      leftView: 'Back button',
+      rightView: 'None',
+      bgColor: 'Default',
+      tintColor: 'Default',
+      hidden: false,
+      animated: true,
+      statusBarStyle: 'Light Content',
+      statusBarHidden: false,
+    });
   }
 
-  renderDetail(type, example) {
-    let title = example, leftView, rightView;
-    let style = {
-      //only for this example, do not use in your code
-      flex: 1,
-      position: 'relative',
-    };
-    let tintColor;
-    switch (example) {
-      case 'Default':
-        rightView = (
+  get type() {
+    switch (this.state.type) {
+      case 'Auto': return Platform.OS;
+      default: return this.state.type.toLowerCase();
+    }
+  }
+
+  get style() {
+    switch (this.state.bgColor) {
+      case 'Default': return null;
+      case 'Custom': return {backgroundColor: '#e75f35'};
+    }
+  }
+
+  get tintColor() {
+    switch(this.state.tintColor) {
+      case 'Default': return null;
+      case 'Custom': return '#3af455';
+    }
+  }
+
+  get statusBarStyle() {
+    switch(this.state.statusBarStyle) {
+      case 'Default': return 'default';
+      case 'Light Content': return 'light-content';
+    }
+  }
+
+  renderLeftRightView(item) {
+    switch (item) {
+      case 'None':
+        return null;
+      case 'Back button':
+        return (
+          <NavigationBar.BackButton
+            title={Theme.backButtonTitle}
+            onPress={() => this.navigator.pop()}
+            />
+        );
+      case 'Link button':
+        return (
+          <NavigationBar.LinkButton title='Link' />
+        );
+      case 'Icon button':
+        return (
           <NavigationBar.IconButton icon={require('../icons/search.png')} />
         );
-        break;
-      case 'Custom':
-        let titleStyle = {
-          flex: 1,
-          paddingLeft: 4,
-          paddingRight: 4,
-          alignItems: type === 'ios' ? 'center' : 'flex-start',
-        };
-        style.backgroundColor = '#eff';
-        tintColor = '#333';
-        title = (
-          <View style={titleStyle}>
-            <Label style={{color: '#000', fontSize: 15}} text={title} />
-            <Label style={{color: '#333', fontSize: 11}}  text='Secondary title' />
-          </View>
-        );
-        leftView = (
-          <NavigationBar.IconButton icon={require('../icons/search.png')} />
-        );
-        rightView = (
+      case 'Two icon button':
+        return (
           <View style={{flexDirection: 'row'}}>
             <NavigationBar.IconButton icon={require('../icons/edit.png')} />
             <NavigationBar.IconButton icon={require('../icons/trash.png')} />
           </View>
         );
-        break;
-      case 'Back Button':
-        leftView = <NavigationBar.BackButton title='Back' />;
-        break;
-      case 'Link Button':
-        leftView = <NavigationBar.LinkButton title='Close' />;
-        rightView = <NavigationBar.LinkButton title='OK' />;
-        break;
     }
+  }
+
+  renderNavigationTitle() {
+    let {title} = this.state;
+    switch (title) {
+      case 'String':
+        return this.props.title;
+      case 'Custom':
+        let titleStyle = {
+          flex: 1,
+          paddingLeft: 4,
+          paddingRight: 4,
+          alignItems: this.type === 'ios' ? 'center' : 'flex-start',
+        };
+        return (
+          <View style={titleStyle}>
+            <Label style={{color: Theme.navTitleColor, fontSize: 15}} text='Title' />
+            <Label style={{color: Theme.navTitleColor, fontSize: 11}}  text='Secondary title' />
+          </View>
+        );
+    }
+  }
+
+  renderNavigationLeftView() {
+    return this.renderLeftRightView(this.state.leftView);
+  }
+
+  renderNavigationRightView() {
+    return this.renderLeftRightView(this.state.rightView);
+  }
+
+  renderNavigationBar() {
+    let {hidden, animated, statusBarHidden} = this.state;
     return (
       <NavigationBar
-        style={style}
-        type={type}
-        tintColor={tintColor}
-        title={title}
-        leftView={leftView}
-        rightView={rightView}
+        style={this.style}
+        type={this.type}
+        title={this.renderNavigationTitle()}
+        leftView={this.renderNavigationLeftView()}
+        rightView={this.renderNavigationRightView()}
+        tintColor={this.tintColor}
+        hidden={hidden}
+        animated={animated}
+        statusBarStyle={this.statusBarStyle}
+        statusBarHidden={statusBarHidden}
         />
     );
   }
 
   renderPage() {
+    let {type, title, leftView, rightView, bgColor, tintColor, hidden, animated, statusBarStyle, statusBarHidden} = this.state;
     return (
       <ScrollView style={{flex: 1}}>
-        {this.renderHeader('Android')}
-        <ListRow titlePlace='none' detail={this.renderDetail('android', 'Default')} topSeparator='full' />
-        <ListRow titlePlace='none' detail={this.renderDetail('android', 'Custom')} bottomSeparator='full' />
-        {this.renderHeader('iOS')}
-        <ListRow titlePlace='none' detail={this.renderDetail('ios', 'Default')} topSeparator='full' />
-        <ListRow titlePlace='none' detail={this.renderDetail('ios', 'Custom')} />
-        <ListRow titlePlace='none' detail={this.renderDetail('ios', 'Back Button')} bottomSeparator='full' />
-        {this.renderHeader('Auto')}
-        <ListRow titlePlace='none' detail={this.renderDetail('auto', 'Link Button')} topSeparator='full' bottomSeparator='full' />
+        <View style={{height: Platform.OS === 'ios' ? 64 : 44, alignItems: 'center', justifyContent: 'center'}}>
+          <Label style={{color: '#ccc'}} size='xl' text='ScrollView header' />
+        </View>
+        <View style={{height: 20}} />
+        <SelectRow
+          title='Type'
+          value={type}
+          items={this.typeItems}
+          onSelected={(item, index) => this.setState({type: item})}
+          topSeparator='full'
+          />
+        <SelectRow
+          title='Title'
+          value={title}
+          items={this.titleItems}
+          onSelected={(item, index) => this.setState({title: item})}
+          />
+        <SelectRow
+          title='Left view'
+          value={leftView}
+          items={this.leftViewItems}
+          onSelected={(item, index) => this.setState({leftView: item})}
+          />
+        <SelectRow
+          title='Right view'
+          value={rightView}
+          items={this.rightViewItems}
+          onSelected={(item, index) => this.setState({rightView: item})}
+          />
+        <SelectRow
+          title='Background color'
+          value={bgColor}
+          items={this.bgColorItems}
+          onSelected={(item, index) => this.setState({bgColor: item})}
+          />
+        <SelectRow
+          title='Tint color'
+          value={tintColor}
+          items={this.tintColorItems}
+          onSelected={(item, index) => this.setState({tintColor: item})}
+          />
+        <ListRow
+          title='Hidden'
+          detail={<Switch value={hidden} onValueChange={value => this.setState({hidden: value})} />}
+          />
+        <ListRow
+          title='Animated'
+          detail={<Switch value={animated} onValueChange={value => this.setState({animated: value})} />}
+          bottomSeparator='full'
+          />
+        <View style={{height: 20}} />
+        <SelectRow
+          title='Status bar style (iOS)'
+          value={statusBarStyle}
+          items={this.statusBarStyleItems}
+          onSelected={(item, index) => this.setState({statusBarStyle: item})}
+          topSeparator='full'
+          />
+        <ListRow
+          title='Status bar hidden'
+          detail={<Switch value={statusBarHidden} onValueChange={value => this.setState({statusBarHidden: value})} />}
+          bottomSeparator='full'
+          />
       </ScrollView>
     );
+  }
+
+}
+
+class SelectRow extends ListRow {
+
+  static propTypes = {
+    ...ListRow.propTypes,
+    value: PropTypes.any,
+    items: PropTypes.array,
+    getItemValue: PropTypes.func,
+    getItemText: PropTypes.func,
+    emptyText: PropTypes.string,
+    emptyTextColor: PropTypes.string,
+    onSelected: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    ...ListRow.defaultProps,
+    emptyText: 'Select item',
+    emptyTextColor: '#ff8f99',
+  };
+
+  buildProps() {
+    let {title, detail, value, items, getItemValue, getItemText, emptyText, emptyTextColor, onSelected, ...others} = this.props;
+    detail = (
+      <Select
+        style={{borderWidth: 0, flex: 1}}
+        value={value}
+        valueStyle={{textAlign: 'right'}}
+        items={items}
+        getItemValue={getItemValue}
+        getItemText={getItemText}
+        editable={items && items.length > 0}
+        placeholder={emptyText}
+        placeholderTextColor={emptyTextColor}
+        pickerTitle={typeof title === 'string' ? title : null}
+        onSelected={(item, index) => onSelected && onSelected(items[index], index)}
+        />
+    );
+
+    this.props = {title, detail, value, items, getItemValue, getItemText, emptyText, emptyTextColor, onSelected, ...others};
+
+    super.buildProps();
   }
 
 }

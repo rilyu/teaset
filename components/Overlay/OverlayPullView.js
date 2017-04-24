@@ -15,7 +15,7 @@ export default class OverlayPullView extends OverlayView {
     ...OverlayView.propTypes,
     side: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     containerStyle: View.propTypes.style,
-    rootTransform: PropTypes.oneOfType(
+    rootTransform: PropTypes.oneOfType([
       PropTypes.oneOf(['none', 'translate', 'scale']),
       PropTypes.arrayOf(PropTypes.shape({
         translateX: PropTypes.number,
@@ -23,7 +23,7 @@ export default class OverlayPullView extends OverlayView {
         scaleX: PropTypes.number,
         scaleY: PropTypes.number,
       })),
-    ),
+    ]),
   };
 
   static defaultProps = {

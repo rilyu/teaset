@@ -16,6 +16,7 @@ export default class NavigationPage extends BasePage {
     ...BasePage.propTypes,
     title: PropTypes.string,
     showBackButton: PropTypes.bool,
+    navigationBarInsets: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -23,18 +24,19 @@ export default class NavigationPage extends BasePage {
     scene: Navigator.SceneConfigs.PushFromRight,
     title: null,
     showBackButton: false,
+    navigationBarInsets: true,
   };
 
   buildProps() {
     super.buildProps();
 
-    let {...others} = this.props;
+    let {navigationBarInsets, ...others} = this.props;
     let pageContainerStyle = [{
       flex: 1,
       padding: 0,
-      marginTop: Platform.OS === 'ios' ? 64 : 44,
+      marginTop: navigationBarInsets ? (Platform.OS === 'ios' ? 64 : 44) : 0,
     }];
-    this.props = {pageContainerStyle, ...others};
+    this.props = {navigationBarInsets, pageContainerStyle, ...others};
   }
 
   renderNavigationTitle() {

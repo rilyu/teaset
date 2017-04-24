@@ -86,8 +86,8 @@ The document is being written, please refer to the example source code.
 
 ## Overlay
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay2.png?raw=true)
-![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay3.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay4.png?raw=true)
-![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay5.png?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay3.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay6.png?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay4.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay5.png?raw=true)
 
 ## Toast
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/16-Toast1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/16-Toast2.png?raw=true)
