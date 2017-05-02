@@ -7,7 +7,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
-export default class PopoverPickerItem extends Component {
+export default class MenuItem extends Component {
 
   static propTypes = {
     ...TouchableOpacity.propTypes,

@@ -15,6 +15,7 @@ ListRow 组件用于显示一个列表行, 定义了一系列易于使用的元�
 | topSeparator | string<br/>element | 'none' | 上分隔线, 可以是字符串或 React Native 组件。<br/>- none: 无<br/>- full: 满行分隔线<br/>- indent: 缩进分隔线
 | bottomSeparator | string<br/>element | 'indent' | 下分隔线, 可以是字符串或 React Native 组件。<br/>- none: 无<br/>- full: 满行分隔线<br/>- indent: 缩进分隔线
 | titlePlace | string | 'left' | 标题位置。<br/>- none: 不显示标题<br/>- left: 标题显示在左侧<br/>- top: 标题显示在上侧<br>显示效果参见[Screenshots](#screenshots)。
+| swipeActions | [element] |  | 向左滑动时显示的操作按钮列表, 建议使用 [ListRow.SwipeActionButton](#listrowswipeactionbutton--props) 组件。
 | activeOpacity | number | null | 继承自 TouchableOpacity 并修改默认值, 传入 onPress 时默认为 0.2, 否则为 1。
 
 ## Events
@@ -22,11 +23,26 @@ ListRow 组件用于显示一个列表行, 定义了一系列易于使用的元�
 |---|---|---|
 | [TouchableOpacity events...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  | ListRow 组件继承 TouchableOpacity 组件的全部事件。
 
+## Static Props
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| [SwipeActionButton](#listrowswipeactionbutton--props) | class |  | 滑动按钮组件。
+
+## `<ListRow.SwipeActionButton />` Props
+| Prop | Type | Default | Note |
+|---|---|---|---|
+| [TouchableOpacity props...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  |  | SwipeActionButton 组件继承 TouchableOpacity 组件的全部属性。
+| type | string | 'default' | 显示样式类型。<br/>- default: 默认- danger: 危险
+| title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
+| titleStyle | 同Text.style |  | 标题样式, 当 title 类型为 element 时无效。
+
+## `<ListRow.SwipeActionButton />` Events
+| Event Name | Returns | Notes |
+|---|---|---|
+| [TouchableOpacity events...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  | SwipeActionButton 组件继承 TouchableOpacity 组件的全部事件。
+
 <!--
 ## Methods
-None.
-
-## Static Props
 None.
 
 ## Static Methods
@@ -79,7 +95,16 @@ detail 长文本、标题显示在上侧
 <ListRow title='Press able' onPress={() => alert('Press!')} />
 ```
 
-
+滑动操作按钮
+```
+<ListRow
+  title='Swipe able'
+  swipeActions={[
+    <ListRow.SwipeActionButton title='Cancel' />,
+    <ListRow.SwipeActionButton title='Remove' type='danger' onPress={() => alert('Remove')}/>,          
+  ]}
+  />
+```
 
 ## Screenshots
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/09-ListRow.png?raw=true)

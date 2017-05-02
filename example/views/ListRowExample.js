@@ -15,6 +15,10 @@ export default class ListRowExample extends NavigationPage {
     showBackButton: true,
   };
 
+  constructor(props) {
+    super(props);
+  }
+
   renderPage() {
     return (
       <ScrollView style={{flex: 1}}>
@@ -33,7 +37,16 @@ export default class ListRowExample extends NavigationPage {
         <ListRow title='Icon' icon={require('../icons/config.png')} />
         <ListRow title='Accessory indicator' accessory='indicator' />
         <ListRow title='Custom accessory' accessory={<Image source={require('../icons/location.png')} />} />
-        <ListRow title='Press able' onPress={() => alert('Press!')} bottomSeparator='full' />
+        <ListRow title='Press able' onPress={() => alert('Press!')} />
+        <ListRow
+          title='Swipe able'
+          detail='Swipe to show action buttons'
+          swipeActions={[
+            <ListRow.SwipeActionButton title='Cancel' />,
+            <ListRow.SwipeActionButton title='Remove' type='danger' onPress={() => alert('Remove')}/>,          
+          ]}
+          bottomSeparator='full'
+          />
       </ScrollView>
     );
   }

@@ -3,15 +3,17 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import Label from '../Label/Label';
+import SwipeTouchableOpacity from './SwipeTouchableOpacity';
+import SwipeActionButton from './SwipeActionButton';
 
 export default class ListRow extends Component {
 
   static propTypes = {
-    ...TouchableOpacity.propTypes,
+    ...SwipeTouchableOpacity.propTypes,
     title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
     detail: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
     titleStyle: Text.propTypes.style,
@@ -22,10 +24,11 @@ export default class ListRow extends Component {
     topSeparator: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf(['none', 'full', 'indent'])]),
     bottomSeparator: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf(['none', 'full', 'indent'])]),
     titlePlace: PropTypes.oneOf(['none', 'left', 'top']),
+    swipeActions: PropTypes.arrayOf(PropTypes.element),
   };
 
   static defaultProps = {
-    ...TouchableOpacity.defaultProps,
+    ...SwipeTouchableOpacity.defaultProps,
     activeOpacity: null,
     accessory: 'auto',
     topSeparator: 'none',
@@ -33,8 +36,22 @@ export default class ListRow extends Component {
     titlePlace: 'left',
   };
 
+  static SwipeActionButton = SwipeActionButton;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      swipeSts: 'none',
+      swipeWidth: 0,
+    }
+  }
+
   measureInWindow(callback) {
     this.refs.containerView && this.refs.containerView.measureInWindow(callback);
+  }
+
+  closeSwipeActions() {
+    this.refs.containerView && this.refs.containerView.timingClose();
   }
 
   buildProps() {
@@ -169,21 +186,60 @@ export default class ListRow extends Component {
     this.props = {style, activeOpacity, onPress, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, contentStyle, ...others};
   }
 
+  renderSwipeActionView() {
+    let {swipeActions} = this.props;
+    if (!(swipeActions instanceof Array) || swipeActions.length == 0) return null;
+
+    let {swipeSts} = this.state;
+    let swipeActionViewStyle = {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      right: 0,
+      opacity: swipeSts === 'none' ? 0 : 1,
+      flexDirection: 'row',
+      alignItems: 'stretch',
+      justifyContent: 'flex-end',
+    }
+    return (
+      <View
+        style={swipeActionViewStyle}
+        onLayout={e => this.setState({swipeWidth: e.nativeEvent.layout.width})}
+      >
+        {swipeActions.map((item, index) => React.cloneElement(item, {
+          key: item.key ? item.key : 'action' + index,
+          onPress: () => {
+            this.refs.containerView && this.refs.containerView.timingClose();
+            item.props.onPress && item.props.onPress();
+          }
+        }))}
+      </View>
+    );
+  }
+
   render() {
     this.buildProps();
 
-    let {title, detail, icon, accessory, topSeparator, bottomSeparator, contentStyle, children, ...others} = this.props;
+    let {title, detail, icon, accessory, topSeparator, bottomSeparator, swipeActions, contentStyle, children, ...others} = this.props;
+    let {swipeSts} = this.state;
     return (
       <View>
         {topSeparator}
-        <TouchableOpacity {...others} ref='containerView'>
+        {this.renderSwipeActionView()}
+        <SwipeTouchableOpacity
+          {...others}
+          swipeable={swipeActions instanceof Array && swipeActions.length > 0}
+          swipeWidth={this.state.swipeWidth}
+          onSwipeStsChange={swipeSts => this.setState({swipeSts})}
+          ref='containerView'
+        >
           {icon}
           <View style={contentStyle}>
             {title}
             {detail}
           </View>
           {accessory}
-        </TouchableOpacity>
+        </SwipeTouchableOpacity>
         {bottomSeparator}
         {children}
       </View>

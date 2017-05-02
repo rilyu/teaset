@@ -285,6 +285,12 @@ export default {
   rowSeparatorLineWidth: pixelSize,
   rowPaddingTitleDetail: 4,
   rowDetailLineHeight: 18,
+  rowActionButtonColor: '#494f6f',
+  rowActionButtonDangerColor: '#e34043',
+  rowActionButtonTitleColor: '#fff',
+  rowActionButtonDangerTitleColor: '#fff',
+  rowActionButtonTitleFontSize: 15,
+  rowActionButtonPaddingHorizontal: 12,
 
   //Carousel
   carouselDotSize: 9,

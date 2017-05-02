@@ -181,7 +181,7 @@ if (this.layout) {
   renderPage() {
     return (
       <View style={{flex: 1}}>
-        <View style={styles.full} {...this.panResponder.panHandlers} />
+        <MyTouchableOpacity style={styles.full} {...this.panResponder.panHandlers} />
         <View style={styles.box} />
       </View>
     );
@@ -206,3 +206,100 @@ var styles = StyleSheet.create({
     bottom: 100,    
   },
 });
+
+class MyTouchableOpacity extends TouchableOpacity {
+
+  constructor(props) {
+    super(props);
+
+    let touchableHandleStartShouldSetResponder = this.touchableHandleStartShouldSetResponder;
+    let touchableHandleResponderTerminationRequest = this.touchableHandleResponderTerminationRequest;
+    let touchableHandleResponderGrant = this.touchableHandleResponderGrant;
+    let touchableHandleResponderMove = this.touchableHandleResponderMove;
+    let touchableHandleResponderRelease = this.touchableHandleResponderRelease;
+    let touchableHandleResponderTerminate = this.touchableHandleResponderTerminate;
+
+    this.touchableHandleStartShouldSetResponder = (e) => {
+      return this.onStartShouldSetResponder(touchableHandleStartShouldSetResponder, e);
+    }
+    this.touchableHandleResponderTerminationRequest = (e) => {
+      return this.onResponderTerminationRequest(touchableHandleResponderTerminationRequest, e);
+    }
+    this.touchableHandleResponderGrant = (e) => {
+      return this.onResponderGrant(touchableHandleResponderGrant, e);
+    }
+    this.touchableHandleResponderMove = (e) => {
+      this._opacityInactive();
+      return this.onResponderMove(touchableHandleResponderMove, e);
+    }
+    this.touchableHandleResponderRelease = (e) => {
+      return this.onResponderRelease(touchableHandleResponderRelease, e);
+    }
+    this.touchableHandleResponderTerminate = (e) => {
+      return this.onResponderTerminate(touchableHandleResponderTerminate, e);
+    }
+
+  }
+
+  onStartShouldSetResponder(s, e) {
+    console.log('==> onStartShouldSetResponder', e);
+    return s(e);
+  }
+
+  onResponderTerminationRequest(s, e) {
+    console.log('==> onResponderTerminationRequest', e);
+    return s(e);
+  }
+
+  onResponderGrant(s, e) {
+    console.log('==> onResponderGrant', e);
+    return s(e);
+  }
+
+  onResponderMove(s, e) {
+    console.log('==> onResponderMove', e);
+    return s(e);
+  }
+
+  onResponderRelease(s, e) {
+    console.log('==> onResponderRelease', e);
+    return s(e);
+  }
+
+  onResponderTerminate(s, e) {
+    console.log('==> onResponderTerminate', e);
+    return s(e);
+  }
+
+
+  // touchableHandleStartShouldSetResponder(e) {
+  //   console.log('===> touchableHandleStartShouldSetResponder', e);
+  //   super.touchableHandleStartShouldSetResponder(e);
+  // }
+
+  // touchableHandleResponderTerminationRequest(e) {
+  //   console.log('===> touchableHandleResponderTerminationRequest', e);
+  //   super.touchableHandleResponderTerminationRequest(e);
+  // }
+
+  // touchableHandleResponderGrant(e) {
+  //   console.log('===> touchableHandleResponderGrant', e);
+  //   super.touchableHandleResponderGrant(e);
+  // }
+
+  // touchableHandleResponderMove(e) {
+  //   console.log('===> touchableHandleResponderMove', e);
+  //   super.touchableHandleResponderMove(e);
+  // }
+
+  // touchableHandleResponderRelease(e) {
+  //   console.log('===> touchableHandleResponderRelease', e);
+  //   super.touchableHandleResponderRelease(e);
+  // }
+
+  // touchableHandleResponderTerminate(e) {
+  //   console.log('===> touchableHandleResponderTerminate', e);
+  //   super.touchableHandleResponderTerminate(e);
+  // }
+
+}
