@@ -5,8 +5,8 @@
 import React from 'react';
 import {Dimensions, PixelRatio} from 'react-native';
 
-import NavigatorSceneConfigs from 'react-native/Libraries/CustomComponents/Navigator/NavigatorSceneConfigs.js';
-import buildStyleInterpolator from 'react-native/Libraries/Utilities/buildStyleInterpolator';
+import NavigatorSceneConfigs from 'react-native-deprecated-custom-components/src/NavigatorSceneConfigs.js';
+import buildStyleInterpolator from 'react-native-deprecated-custom-components/src/buildStyleInterpolator';
 
 var SCREEN_WIDTH = Dimensions.get('window').width;
 var SCREEN_HEIGHT = Dimensions.get('window').height;

@@ -3,9 +3,10 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {Platform, BackAndroid, Navigator, View} from 'react-native';
+import ReactNative, {Platform, View} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
+import TeaNavigator from '../TeaNavigator/TeaNavigator';
 import KeyboardSpace from '../KeyboardSpace/KeyboardSpace';
 
 export default class BasePage extends Component {
@@ -19,7 +20,7 @@ export default class BasePage extends Component {
 
   static defaultProps = {
     ...View.defaultProps,
-    scene: Navigator.SceneConfigs.Replace,
+    scene: TeaNavigator.SceneConfigs.Replace,
     autoKeyboardInsets: Platform.OS === 'ios',
     keyboardTopInsets: 0,
   };
@@ -38,7 +39,9 @@ export default class BasePage extends Component {
 
   componentWillMount() {
     if (!this.backListener && Platform.OS === 'android') {
-      this.backListener = BackAndroid.addEventListener('hardwareBackPress', () => this.onHardwareBackPress());
+aaa
+      let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
+      this.backListener = BackHandler.addEventListener('hardwareBackPress', () => this.onHardwareBackPress());
     }
   }
 

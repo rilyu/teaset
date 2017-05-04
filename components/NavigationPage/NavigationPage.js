@@ -3,9 +3,10 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {Platform, Navigator, View} from 'react-native';
+import {Platform, View} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
+import TeaNavigator from '../TeaNavigator/TeaNavigator';
 import BasePage from '../BasePage/BasePage';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import KeyboardSpace from '../KeyboardSpace/KeyboardSpace';
@@ -21,7 +22,7 @@ export default class NavigationPage extends BasePage {
 
   static defaultProps = {
     ...BasePage.defaultProps,
-    scene: Navigator.SceneConfigs.PushFromRight,
+    scene: TeaNavigator.SceneConfigs.PushFromRight,
     title: null,
     showBackButton: false,
     navigationBarInsets: true,

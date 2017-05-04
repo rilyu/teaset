@@ -3,15 +3,15 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {StyleSheet, View, ScrollView, Navigator} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 
-import {NavigationPage, BasePage, ListRow, TabView, Label, PullPicker} from 'teaset';
+import {TeaNavigator, NavigationPage, BasePage, ListRow, TabView, Label, PullPicker} from 'teaset';
 
 export default class TabViewExample extends BasePage {
 
   static defaultProps = {
     ...BasePage.defaultProps,
-    scene: Navigator.SceneConfigs.PushFromRight,
+    scene: TeaNavigator.SceneConfigs.PushFromRight,
   };
 
   constructor(props) {

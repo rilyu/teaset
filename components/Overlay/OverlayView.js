@@ -3,7 +3,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from "react";
-import {StyleSheet, Animated, View, PanResponder, Platform, BackAndroid} from 'react-native';
+import ReactNative, {StyleSheet, Animated, View, PanResponder, Platform} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import KeyboardSpace from '../KeyboardSpace/KeyboardSpace';
@@ -43,7 +43,8 @@ export default class OverlayView extends Component {
 
   componentWillMount() {
     if (Platform.OS === 'android') {
-      this.backListener = BackAndroid.addEventListener('hardwareBackPress', () => {
+      let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
+      this.backListener = BackHandler.addEventListener('hardwareBackPress', () => {
         this.closeRequest();
         return true;
       });
