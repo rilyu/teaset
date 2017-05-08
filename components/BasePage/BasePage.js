@@ -39,7 +39,6 @@ export default class BasePage extends Component {
 
   componentWillMount() {
     if (!this.backListener && Platform.OS === 'android') {
-aaa
       let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
       this.backListener = BackHandler.addEventListener('hardwareBackPress', () => this.onHardwareBackPress());
     }
