@@ -57,16 +57,12 @@ export default class SegmentedBarExample extends NavigationPage {
     if (index != this.state.activeIndex) {
       this.setState({activeIndex: index});
       if (this.refs.carousel) {
-        this._ignoreCarouselChange = setTimeout(() => {
-          this._ignoreCarouselChange = null;
-        }, 300);
-        this.refs.carousel.scrollToPage(index);
+        this.refs.carousel.scrollToPage(index, false);
       }
     }
   }
 
   onCarouselChange(index) {
-    if (this._ignoreCarouselChange) return;
     this.setState({activeIndex: index});
   }
 
