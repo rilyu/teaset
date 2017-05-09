@@ -32,6 +32,7 @@ export default class Carousel extends Component {
     bounces: false,
     automaticallyAdjustContentInsets: false,
     scrollEventThrottle: 200,
+    scrollsToTop: false,
 
     carousel: true,
     interval: 3000,

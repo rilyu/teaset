@@ -237,6 +237,7 @@ export default class SegmentedBar extends Component {
         style={style}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
+        scrollsToTop={false}
         onLayout={e => this.onScrollViewLayout(e)}
         ref='scrollView'
         {...others}
