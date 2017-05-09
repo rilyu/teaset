@@ -75,6 +75,10 @@ The document is being written, please refer to the example source code.
 ## Projector
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/11-Projector.png?raw=true)
 
+## SegmentedBar
+![](https://github.com/rilyu/teaset/blob/master/screenshots/11a-SegmentedBar1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/11a-SegmentedBar2?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/11a-SegmentedBar3?raw=true)
+
 ## SegmentedView
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/12-SegmentedView.png?raw=true)
 

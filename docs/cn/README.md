@@ -95,6 +95,8 @@ react-native run-android
 
 [`<Projector />` 幻灯机](./Projector.md)
 
+[`<SegmentedBar />` 分段工具条](./SegmentedBar.md)
+
 [`<SegmentedView />` 分段器](./SegmentedView.md)
 
 [`<TabView />` 标签页](./TabView.md)

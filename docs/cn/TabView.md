@@ -43,9 +43,11 @@ None.
 |---|---|---|---|
 | [TouchableOpacity props...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  |  | TabView.Button 组件继承 TouchableOpacity 组件的全部属性。
 | title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
+| titleStyle | 同Text.style |  | 标题样式, 当 title 类型为 element 时无效。
+| activeTitleStyle | 同Text.style |  | 激活状态标题样式, 当 title 类型为 element 时无效。
 | icon | 同Image.source<br/>element |  | 按钮图标, 可以是 Image.source 或 React Native 组件。
 | activeIcon | 同Image.source<br/>element |  | 激活状态按钮图标, 可以是 Image.source 或 React Native 组件。
-| badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 `<Badge />`组件渲染。
+| badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 [`<Badge />`](./Badge.md) 组件渲染。
 | active | bool | false | 是否激活。
 
 ## Example
