@@ -22,6 +22,7 @@ To run example on Android:
 ```
 react-native run-android
 ```
+**Tips: In the Android system, the animations is not smooth, switch to the release mode can be resolved.**
 
 # Documentation
 The document is being written, please refer to the example source code.

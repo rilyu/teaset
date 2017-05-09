@@ -60,6 +60,7 @@ react-native run-ios
 ```
 react-native run-android
 ```
+**提示：在 Android 下运行示例程序时，部分动画效果不太流畅，打包为 release 包运行即可解决，在 release 模式下运行非常流畅。**
 
 # 文档
 中文文档已编写完成, 暂时没时间编写英文文档, 如果你乐意为 Teaset 贡献力量, 欢迎 PR。

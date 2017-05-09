@@ -112,19 +112,30 @@ export default class SegmentedBar extends Component {
 
   updateIndicator() {
     if (!this._indicatorX || !this._indicatorWidth) return;
+
+    let indicatorXValue = this.indicatorXValue;
+    let indicatorWidthValue = this.indicatorWidthValue;
+    if (indicatorXValue === this._saveIndicatorXValue
+        && indicatorWidthValue === this._saveIndicatorWidthValue) {
+      return;
+    }
+
+    this._saveIndicatorXValue = indicatorXValue;
+    this._saveIndicatorWidthValue = indicatorWidthValue;
     if (this.props.animated) {
       Animated.parallel([
-        Animated.spring(this._indicatorX, {toValue: this.indicatorXValue, friction: 9}),
-        Animated.spring(this._indicatorWidth, {toValue: this.indicatorWidthValue, friction: 9}),
+        Animated.spring(this._indicatorX, {toValue: indicatorXValue, friction: 9}),
+        Animated.spring(this._indicatorWidth, {toValue: indicatorWidthValue, friction: 9}),
       ]).start();
     } else {
-      this._indicatorX.setValue(this.indicatorXValue)
-      this._indicatorWidth.setValue(this.indicatorWidthValue)
+      this._indicatorX.setValue(indicatorXValue)
+      this._indicatorWidth.setValue(indicatorWidthValue)
     }
+
     if (this.props.autoScroll && this.refs.scrollView) {
       let contextWidth = 0;
       this._buttonsLayout.map(item => contextWidth += item.width);
-      let x = this.indicatorXValue + this.indicatorWidthValue / 2 - this._scrollViewWidth / 2;
+      let x = indicatorXValue + indicatorWidthValue / 2 - this._scrollViewWidth / 2;
       if (x < 0) {
         x = 0;
       } else if (x > contextWidth - this._scrollViewWidth) {

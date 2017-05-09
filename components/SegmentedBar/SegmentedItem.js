@@ -8,7 +8,7 @@ import {View, Text} from 'react-native';
 import Theme from 'teaset/themes/Theme';
 import Badge from '../Badge/Badge';
 
-export default class SegmentedItem extends View {
+export default class SegmentedItem extends Component {
 
   static propTypes = {
     ...View.propTypes,
@@ -91,6 +91,6 @@ export default class SegmentedItem extends View {
   render() {
     this.buildProps();
 
-    return super.render();
+    return <View {...this.props} />;
   }
 }
