@@ -238,6 +238,21 @@ export default {
   navSeparatorColor: '#282828',
   navSeparatorLineWidth: pixelSize,
 
+  //SegmentedBar
+  sbColor: defaultColor,
+  sbHeight: 40,
+  sbBtnPaddingTop: 8,
+  sbBtnPaddingBottom: 8,
+  sbBtnPaddingLeft: 8,
+  sbBtnPaddingRight: 8,
+  sbBtnTitleColor: '#989898',
+  sbBtnTextFontSize: 13,
+  sbBtnActiveTitleColor: primaryColor,
+  sbBtnActiveTextFontSize: 13,
+  sbIndicatorLineColor: primaryColor,
+  svIndicatorLineWidth: 2,
+  svIndicatorPositionPadding: 0,
+
   //SegmentedView
   svBarColor: defaultColor,
   svBarHeight: 40,
@@ -265,6 +280,7 @@ export default {
   tvBarBtnTitleColor: '#989898',
   tvBarBtnTextFontSize: 10,
   tvBarBtnActiveTitleColor: '#fff',
+  tvBarBtnActiveTextFontSize: 10,
 
   //ListRow
   rowColor: defaultColor,

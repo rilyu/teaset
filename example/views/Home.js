@@ -20,6 +20,7 @@ import NavigationBarExample from './NavigationBarExample';
 import ListRowExample from './ListRowExample';
 import CarouselExample from './CarouselExample';
 import ProjectorExample from './ProjectorExample';
+import SegmentedBarExample from './SegmentedBarExample';
 import SegmentedViewExample from './SegmentedViewExample';
 import TabViewExample from './TabViewExample';
 import TransformViewExample from './TransformViewExample';
@@ -57,6 +58,7 @@ export default class Home extends NavigationPage {
         <ListRow title='ListRow' detail='列表行' onPress={() => this.navigator.push({view: <ListRowExample />})} />
         <ListRow title='Carousel' detail='走马灯' onPress={() => this.navigator.push({view: <CarouselExample />})} />
         <ListRow title='Projector' detail='幻灯机' onPress={() => this.navigator.push({view: <ProjectorExample />})} />
+        <ListRow title='SegmentedBar' detail='分段工具条' onPress={() => this.navigator.push({view: <SegmentedBarExample />})} />
         <ListRow title='SegmentedView' detail='分段器' onPress={() => this.navigator.push({view: <SegmentedViewExample />})} />
         <ListRow title='TabView' detail='标签页' onPress={() => this.navigator.push({view: <TabViewExample />})} />
         <ListRow title='TransformView' detail='可变视图' onPress={() => this.navigator.push({view: <TransformViewExample />})} />

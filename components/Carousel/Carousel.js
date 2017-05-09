@@ -235,7 +235,7 @@ export default class Carousel extends Component {
       let fixStyle;
       if (horizontal) fixStyle = {width: width * this.cardCount, height: height};
       else fixStyle = {width: width, height: height * this.cardCount};
-      contentContainerStyle = [contentContainerStyle, fixStyle];
+      contentContainerStyle = [].concat(contentContainerStyle).concat(fixStyle);
     }
     if (React.isValidElement(control)) {
       control = React.cloneElement(control, {index: pageIndex, total: this.pageCount, carousel: this});

@@ -17,6 +17,7 @@ import NavigationBar from './components/NavigationBar/NavigationBar';
 import ListRow from './components/ListRow/ListRow';
 import Carousel from './components/Carousel/Carousel';
 import Projector from './components/Projector/Projector';
+import SegmentedBar from './components/SegmentedBar/SegmentedBar';
 import SegmentedView from './components/SegmentedView/SegmentedView';
 import TabView from './components/TabView/TabView';
 import TransformView from './components/TransformView/TransformView';
@@ -53,6 +54,7 @@ var Teaset = {
   ListRow,
   Carousel,
   Projector,
+  SegmentedBar,
   SegmentedView,
   TabView,
   TransformView,

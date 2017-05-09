@@ -13,6 +13,8 @@ export default class TabButton extends Component {
   static propTypes = {
     ...TouchableOpacity.propTypes,
     title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
+    titleStyle: Text.propTypes.style,
+    activeTitleStyle: Text.propTypes.style,
     icon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number]),
     activeIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number]),
     active: PropTypes.bool,
@@ -25,7 +27,7 @@ export default class TabButton extends Component {
   };
 
   buildProps() {
-    let {style, title, icon, activeIcon, active, badge, ...others} = this.props;
+    let {style, title, titleStyle, activeTitleStyle, icon, activeIcon, active, badge, ...others} = this.props;
 
     style = [{
       width: Theme.tvBarBtnWidth,
@@ -35,10 +37,18 @@ export default class TabButton extends Component {
     }].concat(style);
 
     if (!React.isValidElement(title) && (title || title === 0)) {
-      let textStyle = {
-        color: active ? Theme.tvBarBtnActiveTitleColor : Theme.tvBarBtnTitleColor,
-        fontSize: Theme.tvBarBtnTextFontSize,
-      };
+      let textStyle;
+      if (active) {
+        textStyle = [{
+          color: Theme.tvBarBtnActiveTitleColor,
+          fontSize: Theme.tvBarBtnActiveTextFontSize,
+        }].concat(titleStyle).concat(activeTitleStyle);
+      } else {
+        textStyle = [{
+          color: Theme.tvBarBtnTitleColor,
+          fontSize: Theme.tvBarBtnTextFontSize,
+        }].concat(titleStyle);
+      }
       title = <Text style={textStyle} numberOfLines={1}>{title}</Text>;
     }
 
@@ -71,7 +81,7 @@ export default class TabButton extends Component {
       badge = <Badge style={badgeStyle} count={badge} />;
     }
 
-    this.props = {style, title, icon, activeIcon, active, badge, ...others};
+    this.props = {style, title, titleStyle, activeTitleStyle, icon, activeIcon, active, badge, ...others};
   }
 
   render() {

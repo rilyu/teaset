@@ -220,10 +220,10 @@ export default class ListRow extends Component {
   render() {
     this.buildProps();
 
-    let {title, detail, icon, accessory, topSeparator, bottomSeparator, swipeActions, contentStyle, children, ...others} = this.props;
+    let {title, detail, icon, accessory, topSeparator, bottomSeparator, swipeActions, contentStyle, onLayout, children, ...others} = this.props;
     let {swipeSts} = this.state;
     return (
-      <View>
+      <View onLayout={onLayout}>
         {topSeparator}
         {this.renderSwipeActionView()}
         <SwipeTouchableOpacity
