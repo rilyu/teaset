@@ -83,6 +83,7 @@ export default class SegmentedView extends Component {
   }
 
   onCarouselChange(index) {
+    if (index == this.state.activeIndex) return;
     this.setState({activeIndex: index}, () => {
       this.props.onChange && this.props.onChange(index);
     });
