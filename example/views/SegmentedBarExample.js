@@ -63,7 +63,7 @@ export default class SegmentedBarExample extends NavigationPage {
   }
 
   onCarouselChange(index) {
-    this.setState({activeIndex: index});
+    index != this.state.activeIndex && this.setState({activeIndex: index});
   }
 
   renderCustomItems() {

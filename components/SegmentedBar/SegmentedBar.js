@@ -55,8 +55,8 @@ export default class SegmentedBar extends Component {
     if (this._activeIndex >= nextItemsLayout.length) {
       this._activeIndex = nextItemsLayout.length - 1;
     }
-    this.props = nextProps;
-    this.updateIndicator();
+   this.props = nextProps;
+   this.updateIndicator();
   }
 
   get activeIndex() {
@@ -68,6 +68,7 @@ export default class SegmentedBar extends Component {
       this._activeIndex = value;
       this.updateIndicator();
       this.forceUpdate();
+      this.props.onChange && this.props.onChange(value);
     }
   }
 
@@ -128,8 +129,8 @@ export default class SegmentedBar extends Component {
         Animated.spring(this._indicatorWidth, {toValue: indicatorWidthValue, friction: 9}),
       ]).start();
     } else {
-      this._indicatorX.setValue(indicatorXValue)
-      this._indicatorWidth.setValue(indicatorWidthValue)
+      this._indicatorX.setValue(indicatorXValue);
+      this._indicatorWidth.setValue(indicatorWidthValue);
     }
 
     if (this.props.autoScroll && this.refs.scrollView) {
@@ -151,7 +152,6 @@ export default class SegmentedBar extends Component {
 
   onButtonPress(index) {
     this.activeIndex = index;
-    this.props.onChange && this.props.onChange(index);
   }
 
   onButtonLayout(index, e) {

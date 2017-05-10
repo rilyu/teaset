@@ -60,7 +60,9 @@ react-native run-ios
 ```
 react-native run-android
 ```
-**提示：在 Android 下运行示例程序时，部分动画效果不太流畅，打包为 release 包运行即可解决，在 release 模式下运行非常流畅。**
+
+## 动画流畅度
+在使用 debug 模式运行, 特别是在 Android 设备上运行时, 部分动画效果不太流畅, 有时会有卡顿现象, 这是由于 debug 模式下有日志输出、远程调试等操作比较耗时导致, 在 release 模式下运行完全没有问题。
 
 # 文档
 中文文档已编写完成, 暂时没时间编写英文文档, 如果你乐意为 Teaset 贡献力量, 欢迎 PR。
