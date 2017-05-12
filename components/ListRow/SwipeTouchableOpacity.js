@@ -6,7 +6,6 @@ import React, {Component, PropTypes} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, Animated} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
-import Overlay from '../Overlay/Overlay';
 
 export default class SwipeTouchableOpacity extends TouchableOpacity {
   

@@ -250,21 +250,10 @@ export default {
   sbBtnActiveTitleColor: primaryColor,
   sbBtnActiveTextFontSize: 13,
   sbIndicatorLineColor: primaryColor,
-  svIndicatorLineWidth: 2,
-  svIndicatorPositionPadding: 0,
+  sbIndicatorLineWidth: 2,
+  sbIndicatorPositionPadding: 0,
 
   //SegmentedView
-  svBarColor: defaultColor,
-  svBarHeight: 40,
-  svBarBtnPaddingTop: 6,
-  svBarBtnPaddingBottom: 6,
-  svBarBtnPaddingLeft: 10,
-  svBarBtnPaddingRight: 10,
-  svBarBtnTitleColor: '#989898',
-  svBarBtnTextFontSize: 13,
-  svBarBtnActiveTitleColor: primaryColor,
-  svBarBtnActiveLineColor: primaryColor,
-  svBarBtnActiveLineWidth: 2,
 
   //TabView
   tvBarColor: '#f8f8f8',

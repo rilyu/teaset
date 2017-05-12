@@ -193,12 +193,12 @@ export default class SegmentedBar extends Component {
       position: 'absolute',
       left: this._indicatorX,
       width: this._indicatorWidth,
-      height: Theme.svIndicatorLineWidth,
+      height: Theme.sbIndicatorLineWidth,
     };
     if (this.props.indicatorPosition == 'top') {
-      style.top = Theme.svIndicatorPositionPadding;
+      style.top = Theme.sbIndicatorPositionPadding;
     } else {
-      style.bottom = Theme.svIndicatorPositionPadding;
+      style.bottom = Theme.sbIndicatorPositionPadding;
     }
     return (
       <Animated.View style={style} />
@@ -208,7 +208,7 @@ export default class SegmentedBar extends Component {
   renderFixed() {
     let {style, justifyItem, indicatorType, animated, activeIndex, onChange, children, ...others} = this.props;
     style = [{
-      backgroundColor: Theme.svBarColor,
+      backgroundColor: Theme.sbColor,
       flexDirection: 'row',
     }].concat(style);
     if (!children) {
@@ -236,7 +236,7 @@ export default class SegmentedBar extends Component {
   renderScrollable() {
     let {style, justifyItem, indicatorType, animated, activeIndex, onChange, onLayout, children, ...others} = this.props;
     style = [{
-      backgroundColor: Theme.svBarColor,
+      backgroundColor: Theme.sbColor,
     }].concat(style);
     if (!children) {
       children = [];

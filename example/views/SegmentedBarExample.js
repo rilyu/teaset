@@ -5,7 +5,7 @@
 import React, {Component, PropTypes} from 'react';
 import {StyleSheet, View, Image, ScrollView, Switch} from 'react-native';
 
-import {Theme, NavigationPage, ListRow, Label, SegmentedBar, PullPicker, Carousel, TabView} from 'teaset';
+import {Theme, NavigationPage, ListRow, Label, SegmentedBar, PullPicker, Carousel} from 'teaset';
 import SelectRow from './SelectRow';
 
 export default class SegmentedBarExample extends NavigationPage {
@@ -78,18 +78,26 @@ export default class SegmentedBarExample extends NavigationPage {
       require('../icons/me_active.png'),
     ];
     let {activeIndex} = this.state;
-    return this.barCustomItems.map((item, index) => (
-      <View key={index} style={{padding: 8}} pointerEvents='none'>
-        <TabView.Button title={item} icon={icons[index]} activeIcon={activeIcons[index]} active={activeIndex == index} />
-      </View>
-    ));
+    return this.barCustomItems.map((item, index) => {
+      let isActive = index == activeIndex;
+      let tintColor = isActive ? Theme.primaryColor : '#989898';
+      return (
+        <View key={index} style={{padding: 8, alignItems: 'center'}}>
+          <Image
+            style={{width: 20, height: 20, tintColor}}
+            source={isActive ? activeIcons[index] : icons[index]}
+            />
+          <Label style={{color: tintColor, paddingTop: 4}} text={item} />
+        </View>
+      );
+    });
   }
 
   renderPage() {
     let {justifyItem, indicatorType, indicatorPosition, animated, autoScroll, custom, activeIndex} = this.state;
     let barItems = custom ? this.barCustomItems : (justifyItem == 'scrollable' ? this.barScrollItems : this.barItems);
     return (
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{flex: 1}} stickyHeaderIndices={[1]}>
         <View style={{height: 20}} />
         <SegmentedBar
           justifyItem={justifyItem}

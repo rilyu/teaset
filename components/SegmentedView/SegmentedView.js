@@ -50,26 +50,19 @@ export default class SegmentedView extends Component {
   }
 
   buildProps() {
-    let {style, barStyle, children, ...others} = this.props;
+    let {style, children, ...others} = this.props;
 
     style = [{
       flexDirection: 'column',
       alignItems: 'stretch',
     }].concat(style);
-    barStyle = [{
-      backgroundColor: Theme.svBarColor,
-      height: Theme.svBarHeight,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-    }].concat(barStyle);
 
     if (!(children instanceof Array)) {
       if (children) children = [children];
       else children = [];
     }
 
-    this.props = {style, barStyle, children, ...others};
+    this.props = {style, children, ...others};
   }
 
   onSegmentedBarChange(index) {
