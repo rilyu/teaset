@@ -31,6 +31,7 @@ import ActionPopoverExample from './ActionPopoverExample';
 import PullPickerExample from './PullPickerExample';
 import PopoverPickerExample from './PopoverPickerExample';
 import MenuExample from './MenuExample';
+import DrawerExample from './DrawerExample';
 import ModalIndicatorExample from './ModalIndicatorExample';
 
 export default class Home extends NavigationPage {
@@ -69,6 +70,7 @@ export default class Home extends NavigationPage {
         <ListRow title='PullPicker' detail='上拉选择器' onPress={() => this.navigator.push({view: <PullPickerExample />})} />
         <ListRow title='PopoverPicker' detail='气泡选择器' onPress={() => this.navigator.push({view: <PopoverPickerExample />})} />
         <ListRow title='Menu' detail='菜单' onPress={() => this.navigator.push({view: <MenuExample />})} />
+        <ListRow title='Drawer' detail='抽屉' onPress={() => this.navigator.push({view: <DrawerExample />})} />
         <ListRow title='ModalIndicator' detail='模态指示器' onPress={() => this.navigator.push({view: <ModalIndicatorExample />})} bottomSeparator='full' />
       </ScrollView>
     );

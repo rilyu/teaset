@@ -29,6 +29,7 @@ import ActionPopover from './components/ActionPopover/ActionPopover';
 import PullPicker from './components/PullPicker/PullPicker';
 import PopoverPicker from './components/PopoverPicker/PopoverPicker';
 import Menu from './components/Menu/Menu';
+import Drawer from './components/Drawer/Drawer';
 import ModalIndicator from './components/ModalIndicator/ModalIndicator';
 
 import TeaNavigator from './components/TeaNavigator/TeaNavigator';
@@ -66,6 +67,7 @@ var Teaset = {
   PullPicker,
   PopoverPicker,
   Menu,
+  Drawer,
   ModalIndicator,
 
   TeaNavigator,

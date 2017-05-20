@@ -103,6 +103,9 @@ export default class SegmentedBarExample extends NavigationPage {
           justifyItem={justifyItem}
           indicatorType={indicatorType}
           indicatorPosition={indicatorPosition}
+          indicatorLineColor={custom ? '#5cb85c' : undefined}
+          indicatorLineWidth={custom ? 1 : undefined}
+          indicatorPositionPadding={custom ? 3 : undefined}
           animated={animated}
           autoScroll={autoScroll}
           activeIndex={activeIndex}
