@@ -5,7 +5,7 @@ Drawer 为抽屉静态类, 内部视图为 Overlay.PullView 的易用性简单�
 | Method | Params | Returns | Notes |
 |---|---|---|---|
 | [Overlay methods](./Overlay.md) |  |  | Drawer 继承 Overlay 的全部静态方法。
-| show | view, side, rootTransform options | object | 显示一个抽屉, 重写 [Overlay{}](./Overlay.md) 中的同名函数。 参数说明：<br/>- view: 抽屉内部视图内容<br/>- side: 抽屉拉出边, 默认为 'left'<br/>- rootTransform: 根组件转换动画, 默认为 'none'<br/>- options: Drawer.DrawerView 其它属性, 参数类型参见 [DrawerView](#drawerdrawerview--props)<br/>返回值为一个对象, 对象属性说明：<br>- key: 浮层唯一键值<br/>- close: 关上抽屉函数, 调用该函数将关上抽屉
+| open | view, side, rootTransform options | object | 打开一个抽屉。 参数说明：<br/>- view: 抽屉内部视图内容<br/>- side: 抽屉拉出边, 默认为 'left'<br/>- rootTransform: 根组件转换动画, 默认为 'none'<br/>- options: Drawer.DrawerView 其它属性, 参数类型参见 [DrawerView](#drawerdrawerview--props)<br/>返回值为一个对象, 对象属性说明：<br>- key: 浮层唯一键值<br/>- close: 关上抽屉函数, 调用该函数将关上抽屉
 
 ## Static Props
 | Prop | Type | Default | Note |

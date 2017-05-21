@@ -26,9 +26,9 @@ export default class DrawerExample extends NavigationPage {
   show(side) {
     let {rootTransform} = this.state;
     if (side == 'left' || side == 'right') {
-      this.drawer = Drawer.show(this.renderDrawerMenu(), side, rootTransform);
+      this.drawer = Drawer.open(this.renderDrawerMenu(), side, rootTransform);
     } else {
-      this.drawer = Drawer.show(this.renderDrawerBox(side), side, rootTransform);
+      this.drawer = Drawer.open(this.renderDrawerBox(side), side, rootTransform);
     }
   }
 

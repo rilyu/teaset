@@ -11,7 +11,7 @@ export default class Drawer extends Overlay {
 
   static DrawerView = Overlay.PullView;
 
-  static show(view, side = 'left', rootTransform = 'none', options = {}) {
+  static open(view, side = 'left', rootTransform = 'none', options = {}) {
     let drawer;
     let key = super.show(
       <this.DrawerView side={side} rootTransform={rootTransform} {...options} ref={v => drawer = v}>
