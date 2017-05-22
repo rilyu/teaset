@@ -42,6 +42,8 @@ None.
 |---|---|---|---|
 | [View props...](https://facebook.github.io/react-native/docs/view.html) |  |  | SegmentedView.Sheet 组件继承 View 组件的全部属性。
 | title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
+| titleStyle | 同Text.style |  | 标题样式, 当 title 类型为 element 时无效。
+| activeTitleStyle | 同Text.style |  | 激活状态标题样式, 当 title 类型为 element 时无效。
 | badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 `<Badge />`组件渲染。
 
 ## Example
