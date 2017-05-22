@@ -51,7 +51,7 @@ export default class SegmentedItem extends Component {
         textStyle = [{
           color: Theme.sbBtnActiveTitleColor,
           fontSize: Theme.sbBtnActiveTextFontSize,
-        }].concat(titleStyle).concat(activeTitleStyle);
+        }].concat(activeTitleStyle);
       } else {
         textStyle = [{
           color: Theme.sbBtnTitleColor,

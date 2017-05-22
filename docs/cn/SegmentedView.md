@@ -28,7 +28,6 @@ SegmentedView 组件定义一个分段器组件, 一般用于同一页面中多�
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [Sheet](#segmentedviewsheet--props) | class |  | 分段器 Sheet 组件。
-| [Button](#segmentedviewbutton--props) | class |  | 分段器按钮组件。<br/>此组件由 Sheet 组件自动渲染, 无须代码显式声明, 但可以修改 SegmentedView.Button 为自定义类以更改分段器按钮组件。
 
 <!--
 ## Methods
@@ -44,14 +43,6 @@ None.
 | [View props...](https://facebook.github.io/react-native/docs/view.html) |  |  | SegmentedView.Sheet 组件继承 View 组件的全部属性。
 | title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
 | badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 `<Badge />`组件渲染。
-
-## `<SegmentedView.Button />` Props
-| Prop | Type | Default | Note |
-|---|---|---|---|
-| [TouchableOpacity props...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  |  | SegmentedView.Button 组件继承 TouchableOpacity 组件的全部属性。
-| title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
-| badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 `<Badge />`组件渲染。
-| active | bool | false | 是否激活。
 
 ## Example
 简单用法

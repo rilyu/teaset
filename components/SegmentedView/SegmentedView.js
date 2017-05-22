@@ -86,7 +86,7 @@ export default class SegmentedView extends Component {
   }
 
   renderBar() {
-    let {barPosition, barStyle, justifyItem, indicatorType, indicatorPosition, animated, autoScroll, onChange, children} = this.props;
+    let {barPosition, barStyle, justifyItem, indicatorType, indicatorPosition, indicatorLineColor, indicatorLineWidth, indicatorPositionPadding, animated, autoScroll, onChange, children} = this.props;
 
     if (!indicatorPosition && barPosition == 'bottom') {
       indicatorPosition = 'top';
@@ -98,13 +98,22 @@ export default class SegmentedView extends Component {
         justifyItem={justifyItem}
         indicatorType={indicatorType}
         indicatorPosition={indicatorPosition}
+        indicatorLineColor={indicatorLineColor}
+        indicatorLineWidth={indicatorLineWidth}
+        indicatorPositionPadding={indicatorPositionPadding}
         animated={animated}
         autoScroll={autoScroll}
         activeIndex={this.activeIndex}
         onChange={index => this.onSegmentedBarChange(index)}
       >
         {children.map((item, index) => (
-          <SegmentedBar.Item key={index} title={item.props.title} badge={item.props.badge} />
+          <SegmentedBar.Item
+            key={index}
+            title={item.props.title}
+            titleStyle={item.props.titleStyle}
+            activeTitleStyle={item.props.activeTitleStyle}
+            badge={item.props.badge}
+            />
         ))}
       </SegmentedBar>
     );

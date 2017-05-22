@@ -64,12 +64,15 @@ export default class SegmentedViewExample extends NavigationPage {
   }
 
   renderPage() {
-
+    let {custom} = this.state;
     return (
       <View style={{flex: 1}}>
         <SegmentedView
           style={{flex: 1}}
           type={this.state.type}
+          indicatorLineColor={custom ? '#5cb85c' : undefined}
+          indicatorLineWidth={custom ? 1 : undefined}
+          indicatorPositionPadding={custom ? 3 : undefined}
           onChange={index => this.setState({activeIndex: index})}
         >
           <SegmentedView.Sheet title={this.renderTitle(0)}>
