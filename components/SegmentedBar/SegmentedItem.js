@@ -17,6 +17,7 @@ export default class SegmentedItem extends Component {
     activeTitleStyle: Text.propTypes.style,
     active: PropTypes.bool,
     badge: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
+    onAddWidth: PropTypes.func, //(width)
   };
 
   static defaultProps = {
@@ -29,11 +30,13 @@ export default class SegmentedItem extends Component {
     this.state = {
       badgeRight: 0,
       badgeTop: 0,
+      badgeWidth: 0,
     };
   }
 
   buildProps() {
-    let {style, title, titleStyle, active, activeTitleStyle, badge, children, ...others} = this.props;
+    let {style, title, titleStyle, active, activeTitleStyle, badge, onAddWidth, children, ...others} = this.props;
+    let {badgeWidth} = this.state;
 
     style = [{
       paddingTop: Theme.sbBtnPaddingTop,
@@ -73,11 +76,12 @@ export default class SegmentedItem extends Component {
           style={badgeStyle}
           count={badge}
           onLayout={e => {
-            let {width, height} = e.nativeEvent.layout;
+            let {width} = e.nativeEvent.layout;
             let badgeRight = -width / 2;
             let badgeTop = 0;
-            if (badgeRight != this.state.badgeRight || badgeTop != this.state.badgeTop) {
-              this.setState({badgeRight, badgeTop});
+            if (badgeRight != this.state.badgeRight || badgeTop != this.state.badgeTop || badgeWidth != this.state.badgeWidth) {
+              this.setState({badgeRight, badgeTop, badgeWidth: width});
+              onAddWidth && onAddWidth(width);
             }
           }}/>
       );
