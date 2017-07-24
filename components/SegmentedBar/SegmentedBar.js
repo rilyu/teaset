@@ -235,6 +235,7 @@ export default class SegmentedBar extends Component {
             style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: this._itemsAddWidth[index] / 2}}
             onPress={() => this.onButtonPress(index)}
             onLayout={e => this.onButtonLayout(index, e)}
+            style={item.props.touchableStyle}
           >
             {this.renderItem(item, index)}
           </TouchableOpacity>
@@ -272,6 +273,7 @@ export default class SegmentedBar extends Component {
             style={{paddingHorizontal: this._itemsAddWidth[index] / 2}}
             onPress={() => this.onButtonPress(index)}
             onLayout={e => this.onButtonLayout(index, e)}
+            style={item.props.touchableStyle}
           >
             {this.renderItem(item, index)}
           </TouchableOpacity>

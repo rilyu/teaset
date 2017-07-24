@@ -112,6 +112,7 @@ export default class SegmentedView extends Component {
             title={item.props.title}
             titleStyle={item.props.titleStyle}
             activeTitleStyle={item.props.activeTitleStyle}
+            touchableStyle={item.props.touchableStyle}
             badge={item.props.badge}
             />
         ))}
