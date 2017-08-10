@@ -2,7 +2,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
+import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
@@ -31,7 +32,7 @@ export default class ActionPopoverItem extends Component {
       borderRightWidth: rightSeparator ? Theme.apSeparatorWidth : 0,
     }].concat(style);
 
-    if ((title || title === 0) && !React.isValidElement(title)) {
+    if ((title || title === '' || title === 0) && !React.isValidElement(title)) {
       let textStyle = {
         backgroundColor: 'rgba(0, 0, 0, 0)',
         color: Theme.apItemTitleColor,

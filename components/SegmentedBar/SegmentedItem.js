@@ -2,7 +2,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {View, Text} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
@@ -48,7 +49,7 @@ export default class SegmentedItem extends Component {
       justifyContent: 'center',
     }].concat(style);
 
-    if (!React.isValidElement(title) && (title || title === 0)) {
+    if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
       let textStyle;
       if (active) {
         textStyle = [{

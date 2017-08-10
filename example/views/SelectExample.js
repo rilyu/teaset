@@ -2,7 +2,7 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {View, Text, ScrollView} from 'react-native';
 
 import {NavigationPage, ListRow, Select, Label} from 'teaset';
@@ -39,15 +39,15 @@ export default class SelectExample extends NavigationPage {
       }
     ];
     Object.assign(this.state, {
-      valueSM: 'Size sm',
-      valueMD: 'Size md',
-      valueLG: 'Size lg',
+      valueSM: null,
+      valueMD: null,
+      valueLG: null,
       valueAuto: null,
       valuePull: null,
       valuePopover: null,
       valueReadonly: 'Readonly',
       valueDisable: null,
-      valueCustom: 'Custom',
+      valueCustom: null,
     });
   }
 

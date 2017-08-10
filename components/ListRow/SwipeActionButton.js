@@ -2,7 +2,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
@@ -43,7 +44,7 @@ export default class SwipeActionButton extends TouchableOpacity {
       justifyContent: 'center',
     }].concat(style);
 
-    if (!React.isValidElement(title) && (title || title === 0)) {
+    if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
       titleStyle = [{
         color: textColor,
         fontSize: Theme.rowActionButtonTitleFontSize,

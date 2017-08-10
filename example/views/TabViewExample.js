@@ -2,10 +2,10 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
-import {StyleSheet, View, ScrollView} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, View, ScrollView, Image, Switch} from 'react-native';
 
-import {TeaNavigator, NavigationPage, BasePage, ListRow, TabView, Label, PullPicker} from 'teaset';
+import {Theme, TeaNavigator, NavigationPage, BasePage, ListRow, TabView, Label, PullPicker} from 'teaset';
 
 export default class TabViewExample extends BasePage {
 
@@ -18,19 +18,64 @@ export default class TabViewExample extends BasePage {
     super(props);
     Object.assign(this.state, {
       type: 'projector',
+      custom: false,
     });
   }
 
-  renderPage() {
+  renderCustomButton() {
+    let bigIcon = (
+        <View style={{
+          width: 54,
+          height: 54,
+          borderRadius: 27,
+          shadowColor: '#ccc',
+          shadowOffset: {height: -1},
+          shadowOpacity: 0.5,
+          shadowRadius: 0.5,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <Image
+            style={{width: 44, height: 44, borderRadius: 22}}
+            source={require('../images/faircup.jpg')}
+            />
+        </View>
+    );
     return (
-      <TabView style={{flex: 1}} type={this.state.type}>
+      <TabView.Sheet
+        type='button'
+        title='Custom'
+        icon={bigIcon}
+        iconContainerStyle={{justifyContent: 'flex-end'}}
+        onPress={() => alert('Custom button press')}
+        />
+    );
+  }
+
+  renderPage() {
+    let {type, custom} = this.state;
+    let customBarStyle = {
+      borderTopWidth: 0,
+      shadowColor: '#ccc',
+      shadowOffset: {height: -1},
+      shadowOpacity: 0.4,
+      shadowRadius: 0.5,
+    };
+    return (
+      <TabView style={{flex: 1}} barStyle={custom ? customBarStyle : null} type={type}>
         <TabView.Sheet
           title='Home'
           icon={require('../icons/home.png')}
           activeIcon={require('../icons/home_active.png')}
         >
-          <HomePage type={this.state.type} onChangeType={type => this.setState({type})} />
+          <HomePage
+            type={type}
+            custom={custom}
+            onChangeType={type => this.setState({type})}
+            onChangeCustom={custom => this.setState({custom})}
+            />
         </TabView.Sheet>
+        {custom ? this.renderCustomButton() : null}
         <TabView.Sheet
           title='Me'
           icon={require('../icons/me.png')}
@@ -65,10 +110,13 @@ class HomePage extends NavigationPage {
   }
 
   renderPage() {
+    let {type, custom, onChangeCustom} = this.props;
     return (
       <ScrollView style={{flex: 1}}>
         <View style={{height: 20}} />
-        <ListRow title='Type' detail={this.props.type} onPress={() => this.selectType()} topSeparator='full' bottomSeparator='full' />
+        <ListRow title='Type' detail={type} onPress={() => this.selectType()} topSeparator='full' bottomSeparator='full' />
+        <View style={{height: 20}} />
+        <ListRow title='Custom' detail={<Switch value={custom} onValueChange={value => onChangeCustom(value)} />} topSeparator='full' bottomSeparator='full' />
       </ScrollView>
     );
   }

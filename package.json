@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/rilyu/teaset#readme",
   "dependencies": {
-    "react-native-deprecated-custom-components": "^0.1.0"
+    "prop-types": "^15.5.10",
+    "react-native-deprecated-custom-components": "latest"
   }
 }

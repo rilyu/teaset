@@ -2,7 +2,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
@@ -18,6 +19,7 @@ export default class TabButton extends Component {
     icon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number]),
     activeIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number]),
     active: PropTypes.bool,
+    iconContainerStyle: View.propTypes.style,
     badge: PropTypes.oneOfType([PropTypes.element, PropTypes.number]),
   };
 
@@ -27,16 +29,16 @@ export default class TabButton extends Component {
   };
 
   buildProps() {
-    let {style, title, titleStyle, activeTitleStyle, icon, activeIcon, active, badge, ...others} = this.props;
+    let {style, title, titleStyle, activeTitleStyle, icon, activeIcon, active, badge, iconContainerStyle, ...others} = this.props;
 
     style = [{
       width: Theme.tvBarBtnWidth,
-      overflow: 'hidden',
+      overflow: 'visible',
       alignItems: 'center',
       justifyContent: 'center',
     }].concat(style);
 
-    if (!React.isValidElement(title) && (title || title === 0)) {
+    if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
       let textStyle;
       if (active) {
         textStyle = [{
@@ -81,18 +83,24 @@ export default class TabButton extends Component {
       badge = <Badge style={badgeStyle} count={badge} />;
     }
 
-    this.props = {style, title, titleStyle, activeTitleStyle, icon, activeIcon, active, badge, ...others};
+    iconContainerStyle = [{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    }].concat(iconContainerStyle);
+
+    this.props = {style, title, titleStyle, activeTitleStyle, icon, activeIcon, active, badge, iconContainerStyle, ...others};
   }
 
   render() {
     this.buildProps();
 
-    let {title, icon, activeIcon, active, badge, ...others} = this.props;
+    let {title, icon, activeIcon, active, badge, iconContainerStyle, ...others} = this.props;
     let useIcon = active ? activeIcon : icon;
     return (
       <TouchableOpacity {...others}>
         {!useIcon ? null :
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <View style={iconContainerStyle}>
             {useIcon}
           </View>
         }

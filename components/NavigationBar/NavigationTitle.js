@@ -2,7 +2,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Text} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
@@ -37,7 +38,7 @@ export default class NavigationTitle extends Text {
       fontSize: Theme.navTitleFontSize,
     }].concat(style);
 
-    if (text || text === 0) children = text;
+    if (text || text === '' || text === 0) children = text;
 
     this.props = {style, text, children, ...others};
   }

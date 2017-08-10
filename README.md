@@ -84,7 +84,7 @@ The document is being written, please refer to the example source code.
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/12-SegmentedView.png?raw=true)
 
 ## TabView
-![](https://github.com/rilyu/teaset/blob/master/screenshots/13-TabView.png?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/13-TabView.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/13-TabView2.png?raw=true)
 
 ## TransformView
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/14-TransformView.png?raw=true)

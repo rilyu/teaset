@@ -2,7 +2,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
@@ -88,7 +89,7 @@ export default class Checkbox extends TouchableOpacity {
       if (!title.props.key) {
         title = React.cloneElement(title, {key: 'title'});
       }
-    } else if ((title || title === 0)) {
+    } else if ((title || title === '' || title === 0)) {
       title = (
         <Text key='title' style={textStyle} numberOfLines={1}>
           {title}

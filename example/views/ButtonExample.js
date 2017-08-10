@@ -2,7 +2,7 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {View, ScrollView, Text, Image} from 'react-native';
 
 import {NavigationPage, ListRow, Button, Label} from 'teaset';

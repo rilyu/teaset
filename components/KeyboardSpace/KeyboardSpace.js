@@ -3,7 +3,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, Platform, View, Keyboard, LayoutAnimation} from 'react-native';
 
 export default class KeyboardSpace extends Component {

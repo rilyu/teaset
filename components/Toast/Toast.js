@@ -2,7 +2,7 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
 import {View} from 'react-native';
 
 import Overlay from '../Overlay/Overlay';

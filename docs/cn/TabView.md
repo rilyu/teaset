@@ -32,11 +32,16 @@ None.
 ## `<TabView.Sheet />` Props
 | Prop | Type | Default | Note |
 |---|---|---|---|
-| [View props...](https://facebook.github.io/react-native/docs/view.html) |  |  | TabView.Sheet 组件继承 View 组件的全部属性。
+| type | string | 'sheet' | Sheet 类型。<br/>- sheet: 页面<br/>- button: 按钮
 | title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
 | icon | 同Image.source<br/>element |  | 按钮图标, 可以是 Image.source 或 React Native 组件。
 | activeIcon | 同Image.source<br/>element |  | 激活状态按钮图标, 可以是 Image.source 或 React Native 组件。
 | badge | string<br/>number<br/>element |  | 徽章, 可以是字符串、数字或 React Native 组件, 为字符串、数字时使用 `<Badge />`组件渲染。
+
+## `<TabView.Sheet />` Events
+| Event Name | Returns | Notes |
+|---|---|---|
+| onPress | event | Sheet 按钮点击事件, 触摸结束时调用, 与 TouchableOpacity.onPress 一致。
 
 ## `<TabView.Button />` Props
 | Prop | Type | Default | Note |
@@ -74,4 +79,4 @@ None.
 
 
 ## Screenshots
-![](https://github.com/rilyu/teaset/blob/master/screenshots/13-TabView.png?raw=true)
+![](https://github.com/rilyu/teaset/blob/master/screenshots/13-TabView.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/13-TabView2.png?raw=true)

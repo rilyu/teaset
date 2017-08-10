@@ -2,7 +2,8 @@
 
 'use strict';
 
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {View} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
@@ -65,29 +66,37 @@ export default class TabView extends Component {
       if (children) children = [children];
       else children = [];
     }
+    children = children.filter(item => item); //remove empty item
 
     this.props = {style, barStyle, children, ...others};
   }
 
   renderBar() {
     let {barStyle, onChange, children} = this.props;
+    let sheetCount = 0;
     return (
       <View style={barStyle}>
         {children.map((item, index) => {
-          let {icon, activeIcon, title, badge} = item.props;
+          let {type, title, icon, activeIcon, iconContainerStyle, badge, onPress} = item.props;
+          let sheetIndex = sheetCount;
+          if (type === 'sheet') sheetCount += 1;
           return (
             <this.constructor.Button
               key={index}
               title={title}
               icon={icon}
               activeIcon={activeIcon}
-              active={index === this.activeIndex}
+              active={type === 'sheet' ? sheetIndex === this.activeIndex : false}
+              iconContainerStyle={iconContainerStyle}
               badge={badge}
-              onPress={() => {
-                this.setState({activeIndex: index}, () => {
-                  this.refs.carousel && this.refs.carousel.scrollToPage(index);                  
-                  onChange && onChange(index);
-                });
+              onPress={e => {
+                if (type === 'sheet') {
+                  this.setState({activeIndex: sheetIndex}, () => {
+                    this.refs.carousel && this.refs.carousel.scrollToPage(sheetIndex);                  
+                    onChange && onChange(sheetIndex);
+                  });
+                }
+                onPress && onPress(e);
               }}
               />
           );
@@ -99,7 +108,7 @@ export default class TabView extends Component {
   renderProjector() {
     return (
       <Projector style={{flex: 1}} index={this.activeIndex}>
-        {this.props.children}
+        {this.props.children.filter(item => item && item.props.type === 'sheet')}
       </Projector>
     );
   }
@@ -114,10 +123,11 @@ export default class TabView extends Component {
         cycle={false}
         ref='carousel'
         onChange={index => {
+          if (typeof index !== 'number') return;
           this.setState({activeIndex: index}, () => onChange && onChange(index));
         }}
       >
-        {children}
+        {children.filter(item => item && item.props.type === 'sheet')}
       </Carousel>
     );
   }
