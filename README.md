@@ -27,6 +27,8 @@ react-native run-android
 # Documentation
 The document is being written, please refer to the example source code.
 
+[Translation project](https://github.com/emersonlaurentino/teaset/projects/1)
+
 # Screenshots
 
 ## Components
