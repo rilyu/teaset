@@ -91,6 +91,9 @@ The document is being written, please refer to the example source code.
 ## TransformView
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/14-TransformView.png?raw=true)
 
+## AlbumView
+![](https://github.com/rilyu/teaset/blob/master/screenshots/14a-AlbumView1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/14a-AlbumView2.png?raw=true)
+
 ## Overlay
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay1.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay2.png?raw=true)
 ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay3.png?raw=true) ![](https://github.com/rilyu/teaset/blob/master/screenshots/15-Overlay6.png?raw=true)

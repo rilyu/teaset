@@ -21,6 +21,7 @@ import SegmentedBar from './components/SegmentedBar/SegmentedBar';
 import SegmentedView from './components/SegmentedView/SegmentedView';
 import TabView from './components/TabView/TabView';
 import TransformView from './components/TransformView/TransformView';
+import AlbumView from './components/AlbumView/AlbumView';
 
 import Overlay from './components/Overlay/Overlay';
 import Toast from './components/Toast/Toast';
@@ -59,6 +60,7 @@ var Teaset = {
   SegmentedView,
   TabView,
   TransformView,
+  AlbumView,
 
   Overlay,
   Toast,

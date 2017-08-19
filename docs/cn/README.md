@@ -106,6 +106,8 @@ react-native run-android
 
 [`<TransformView />` 可变视图](./TransformView.md)
 
+[`<AlbumView />` 相册视图](./AlbumView.md)
+
 ## 浮层
 [`Overlay{}` 浮层](./Overlay.md)
 

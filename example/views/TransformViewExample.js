@@ -18,10 +18,9 @@ export default class TransformViewExample extends NavigationPage {
   renderPage() {
     return (
       <TransformView
-        style={{backgroundColor: Theme.pageColor, flex: 1, alignItems: 'center', justifyContent: 'center'}}
+        style={{backgroundColor: Theme.pageColor, flex: 1}}
         minScale={0.5}
-        maxScale={2}
-        magnetic={true}
+        maxScale={2.5}
       >
         <Image style={{width: 375, height: 300}} resizeMode='cover' source={require('../images/teaset1.jpg')} />
       </TransformView>

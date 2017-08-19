@@ -16,22 +16,28 @@ export default class TransformView extends Component {
     maxScale: PropTypes.number,
     minScale: PropTypes.number,
     magnetic: PropTypes.bool,
+    tension: PropTypes.bool,
     onWillTransform: PropTypes.func, //(translateX, translateY, scale)
     onTransforming: PropTypes.func, //(translateX, translateY, scale)
     onDidTransform: PropTypes.func, //(translateX, translateY, scale)
+    onWillMagnetic: PropTypes.func, //(translateX, translateY, scale, newX, newY, newScale), return ture or false
+    onDidMagnetic: PropTypes.func, //(translateX, translateY, scale)
     onPress: PropTypes.func, //(event)
+    onLongPress: PropTypes.func, //(event)
   };
 
   static defaultProps = {
     ...View.defaultProps,
     magnetic: true,
+    tension: true,
   };
 
   constructor(props) {
     super(props);
     this.createPanResponder();
     this.prevTouches = [];
-    this.initLayout = {x: 0, y: 0, width: 0, height: 0};
+    this.viewLayout = {x: 0, y: 0, width: 0, height: 0};
+    this.initContentLayout = {x: 0, y: 0, width: 0, height: 0};
     this.state = {
       translateX: new Animated.Value(0),
       translateY: new Animated.Value(0),
@@ -39,41 +45,34 @@ export default class TransformView extends Component {
     };
   }
 
-  get layout() {
+  get contentLayout() {
     let {translateX, translateY, scale} = this.state;
-    let originX = this.initLayout.x + this.initLayout.width / 2;
-    let originY = this.initLayout.y + this.initLayout.height / 2;
+    let originX = this.initContentLayout.x + this.initContentLayout.width / 2;
+    let originY = this.initContentLayout.y + this.initContentLayout.height / 2;
     let scaleOriginX = originX + translateX._value;
     let scaleOriginY = originY + translateY._value;
-    let scaleWidth = this.initLayout.width * scale._value;
-    let scaleHeight = this.initLayout.height * scale._value;
+    let scaleWidth = this.initContentLayout.width * scale._value;
+    let scaleHeight = this.initContentLayout.height * scale._value;
     let scaleX = scaleOriginX - scaleWidth / 2;
     let scaleY = scaleOriginY - scaleHeight / 2;
-    let layout = {x: scaleX, y: scaleY, width: scaleWidth, height: scaleHeight};
-    return layout;
+    let contentLayout = {x: scaleX, y: scaleY, width: scaleWidth, height: scaleHeight};
+    return contentLayout;
   }
 
-  restoreLayout(animated) {
-    let {translateX, translateY, scale} = this.state;
-    if (animated) {
-      Animated.parallel([
-        Animated.spring(translateX, {
-          toValue: 0,
-          friction: 7,
-        }),
-        Animated.spring(translateY, {
-          toValue: 0,
-          friction: 7,
-        }),
-        Animated.spring(scale, {
-          toValue: 1,
-          friction: 7,
-        }),
-      ]).start();
-    } else {
-      translateX.setValue(0);
-      translateY.setValue(0);
-      scale.setValue(1);
+  setupLongPressTimer(e) {
+    let {onLongPress} = this.props;
+    if (!onLongPress) return;
+    this.removeLongPressTimer();
+    this.longPressTimer = setTimeout(() => {
+      this.longPressTimer = null;
+      onLongPress && onLongPress(e);
+    }, 500);
+  }
+
+  removeLongPressTimer() {
+    if (this.longPressTimer) {
+      clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
     }
   }
 
@@ -93,12 +92,11 @@ export default class TransformView extends Component {
   }
 
   onPanResponderGrant(e, gestureState) {
-    //let initLayout relative to screen
-    this.refs.view && this.refs.view.measureInWindow((x, y, width, height) => {
-      Object.assign(this.initLayout, {x, y, width, height});
-    });
-
+    this.setupLongPressTimer(e);
     this.touchMoved = false;
+    this.lockDirection = 'none';
+    this.dxSum = 0;
+    this.dySum = 0;
     this.touchTime = new Date();
     this.prevTouches = e.nativeEvent.touches;
     let {onWillTransform} = this.props;
@@ -107,25 +105,51 @@ export default class TransformView extends Component {
   }
 
   onPanResponderMove(e, gestureState) {
+    this.removeLongPressTimer();
     this.touchMoved = true;
     this.handleTouches(e.nativeEvent.touches, (dx, dy, scaleRate) => {
-      let {magnetic, onTransforming} = this.props;
+      let {tension, onTransforming} = this.props;
       let {translateX, translateY, scale} = this.state;
 
-      let {x, y, width, height} = this.layout;
-      if (x > this.initLayout.x) dx /= 3;
-      else if ((x + width) < (this.initLayout.x + this.initLayout.width)) dx /= 3;
-      if (y > this.initLayout.y) dy /= 3;
-      else if ((y + height) < (this.initLayout.y + this.initLayout.height)) dy /= 3;
+      let {x, y, width, height} = this.contentLayout;
+      if (tension) {
+        if (x > this.initContentLayout.x) dx /= 3;
+        else if ((x + width) < (this.initContentLayout.x + this.initContentLayout.width)) dx /= 3;
+        if (y > this.initContentLayout.y) dy /= 3;
+        else if ((y + height) < (this.initContentLayout.y + this.initContentLayout.height)) dy /= 3;
+      }
+      this.dxSum += dx;
+      this.dySum += dy;
+      if (e.nativeEvent.touches.length == 1 && this.lockDirection === 'none') {
+        let adx = Math.abs(this.dxSum), ady = Math.abs(this.dySum);
+        if (adx > ady && height <= this.viewLayout.height) {
+          this.lockDirection = 'y';
+        } else if (adx < ady && width <= this.viewLayout.width) {
+          this.lockDirection = 'x';
+        }
+      }
 
-      translateX.setValue(translateX._value + dx);
-      translateY.setValue(translateY._value + dy);
-      scale.setValue(scale._value * scaleRate);
+      switch(this.lockDirection) {
+        case 'x':
+          translateX.setValue(0);
+          translateY.setValue(translateY._value + dy);
+          break;
+        case 'y':
+          translateX.setValue(translateX._value + dx);
+          translateY.setValue(0);
+          break;
+        default:
+          translateX.setValue(translateX._value + dx);
+          translateY.setValue(translateY._value + dy);
+          scale.setValue(scale._value * scaleRate);
+      }
+
       onTransforming && onTransforming(translateX._value, translateY._value, scale._value);
     });
   }
 
   onPanResponderRelease(e, gestureState) {
+    this.removeLongPressTimer();
     this.prevTouches = [];
     this.handleRelease();
     let {onDidTransform, onPress} = this.props;
@@ -133,7 +157,10 @@ export default class TransformView extends Component {
     onDidTransform && onDidTransform(translateX._value, translateY._value, scale._value);
     let now = new Date();
     if (!this.touchTime) this.touchTime = now;
-    !this.touchMoved && now.getTime() - this.touchTime.getTime() < 500 && onPress && onPress(e);
+    if (!this.touchMoved) {
+      let duration = now.getTime() - this.touchTime.getTime();
+      if (duration < 500) onPress && onPress(e);
+    }
   }
 
   handleTouches(touches, onHandleCompleted) {
@@ -183,7 +210,7 @@ export default class TransformView extends Component {
 
       let scalePointX = (prevTouches[1].pageX + prevTouches[0].pageX) / 2;
       let scalePointY = (prevTouches[1].pageY + prevTouches[0].pageY) / 2;
-      let {x, y, width, height} = this.layout;
+      let {x, y, width, height} = this.contentLayout;
       //view center point position
       let viewCenterX = x + width / 2;
       let viewCenterY = y + height / 2;
@@ -202,25 +229,29 @@ export default class TransformView extends Component {
   }
 
   handleRelease() {
-    let {magnetic, maxScale, minScale} = this.props;
+    let {magnetic, maxScale, minScale, onDidTransform, onWillMagnetic, onDidMagnetic} = this.props;
     let {translateX, translateY, scale} = this.state;
     let newX = null, newY = null, newScale = null;
     if (magnetic) {
-      let {x, y, width, height} = this.layout;
-      if (width < this.initLayout.width || height < this.initLayout.height) {
+      let {x, y, width, height} = this.contentLayout;
+      if (width < this.initContentLayout.width || height < this.initContentLayout.height) {
         newX = 0;
         newY = 0;
         newScale = 1;
       } else {
-        if (x > this.initLayout.x) {
-          newX = translateX._value - (x - this.initLayout.x);
-        } else if ((x + width) < (this.initLayout.x + this.initLayout.width)) {
-          newX = translateX._value + ((this.initLayout.x + this.initLayout.width) - (x + width));
+        if (width < this.viewLayout.width) {
+          newX = 0;
+        } else if (x > this.viewLayout.x) {
+          newX = translateX._value - (x - this.viewLayout.x);
+        } else if ((x + width) < (this.viewLayout.x + this.viewLayout.width)) {
+          newX = translateX._value + ((this.viewLayout.x + this.viewLayout.width) - (x + width));
         }
-        if (y > this.initLayout.y) {
-          newY = translateY._value - (y - this.initLayout.y);
-        } else if ((y + height) < (this.initLayout.y + this.initLayout.height)) {
-          newY = translateY._value + ((this.initLayout.y + this.initLayout.height) - (y + height));
+        if (height < this.viewLayout.height) {
+          newY = 0;
+        } else if (y > this.viewLayout.y) {
+          newY = translateY._value - (y - this.viewLayout.y);
+        } else if ((y + height) < (this.viewLayout.y + this.viewLayout.height)) {
+          newY = translateY._value + ((this.viewLayout.y + this.viewLayout.height) - (y + height));
         }
       }
     }
@@ -233,37 +264,54 @@ export default class TransformView extends Component {
     newX !== null && animates.push(
       Animated.spring(translateX, {
         toValue: newX,
-        friction: 7,
+        friction: 9,
       })
     );
     newY !== null && animates.push(
       Animated.spring(translateY, {
         toValue: newY,
-        friction: 7,
+        friction: 9,
       })
     );
     newScale !== null && animates.push(
       Animated.spring(scale, {
         toValue: newScale,
-        friction: 7,
+        friction: 9,
       })
     );
-    animates.length > 0 && Animated.parallel(animates).start();
+    if (animates.length > 0) {
+      if (newX === null) newX = translateX._value;
+      if (newY === null) newY = translateY._value;
+      if (newScale === null) newScale = scale._value;
+      let canDoMagnetic = !onWillMagnetic || onWillMagnetic(
+        translateX._value,
+        translateY._value,
+        scale._value,
+        newX,
+        newY,
+        newScale,
+      );
+      canDoMagnetic && Animated.parallel(animates).start(e => {
+        translateX.setValue(newX);
+        translateY.setValue(newY);
+        scale.setValue(newScale);
+        onDidTransform && onDidTransform(newX, newY, newScale);
+        onDidMagnetic && onDidMagnetic(newX, newY, newScale);
+      });
+    }
   }
 
   buildProps() {
     let {style, containerStyle, ...others} = this.props;
     let {translateX, translateY, scale} = this.state;
 
-    style = StyleSheet.flatten([{overflow: 'hidden'}].concat(style));
-    let {flexDirection, alignItems, justifyContent, ...styleOthers} = style;
-    style = {...styleOthers};
-    containerStyle = [{
-      flexDirection,
-      alignItems,
-      justifyContent,      
-    }].concat(containerStyle).concat({
-      flexGrow: 1,
+    style = StyleSheet.flatten([{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+    }].concat(style));
+    containerStyle = [].concat(containerStyle).concat({
       transform: [{translateX: translateX}, {translateY: translateY}, {scale: scale}],
     });
 
@@ -273,17 +321,23 @@ export default class TransformView extends Component {
   render() {
     this.buildProps();
 
-    let {containerStyle, children,...others} = this.props;
+    let {containerStyle, children, onLayout, ...others} = this.props;
     return (
-      <View {...others} ref='view'>
+      <View
+        {...others}
+        onLayout={e => {
+          this.viewLayout = e.nativeEvent.layout;
+          onLayout && onLayout(e);
+        }}
+        ref='view'
+        {...this.panResponder.panHandlers}
+      >
         <Animated.View
           style={containerStyle}
           ref='containerView'
           onLayout={e => {
-            this.initLayout = e.nativeEvent.layout;
-            this.restoreLayout(false);
+            this.initContentLayout = e.nativeEvent.layout;
           }}
-          {...this.panResponder.panHandlers}
         >
           {children}
         </Animated.View>
