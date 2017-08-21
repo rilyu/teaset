@@ -74,3 +74,10 @@ export default class AlbumViewExample extends NavigationPage {
   }
 
 }
+/*
+      {uri: 'https://b-ssl.duitang.com/uploads/item/201207/23/20120723200549_ZhRre.thumb.700_0.jpeg'},
+      {uri: 'https://b-ssl.duitang.com/uploads/item/201207/23/20120723200511_8ihrP.thumb.700_0.jpeg'},
+      {uri: 'https://b-ssl.duitang.com/uploads/item/201207/23/20120723200118_acfUi.thumb.700_0.jpeg'},
+      {uri: 'http://img.warting.com/allimg/2017/0308/exsaicsvc5w-92.jpg'},
+      {uri: 'http://img.warting.com/allimg/2017/0308/o4ovnsq2uqj-96.jpg'},
+*/

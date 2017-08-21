@@ -5,7 +5,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Image, Animated} from 'react-native';
-import resolveAssetSource from 'resolveAssetSource';
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 import Theme from 'teaset/themes/Theme';
 import TransformView from '../TransformView/TransformView';
@@ -213,7 +213,7 @@ export default class AlbumView extends Component {
     ]).start(e => this.checkStopScroll(false));
     // let the animation stop faster
     lrAnimated.addListener(e => {
-      if (Math.abs(e.value - lrValue) < 3) {
+      if (Math.abs(e.value - lrValue) <= 1) {
         lrAnimated.stopAnimation();
         this.refs.transformView.state.translateX.stopAnimation();
         lrAnimated.removeAllListeners();
