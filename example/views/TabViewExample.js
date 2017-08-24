@@ -3,7 +3,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {StyleSheet, View, ScrollView, Image, Switch} from 'react-native';
+import {StyleSheet, View, ScrollView, Image, Switch, Platform} from 'react-native';
 
 import {Theme, TeaNavigator, NavigationPage, BasePage, ListRow, TabView, Label, PullPicker} from 'teaset';
 
@@ -54,7 +54,7 @@ export default class TabViewExample extends BasePage {
 
   renderPage() {
     let {type, custom} = this.state;
-    let customBarStyle = {
+    let customBarStyle = Platform.OS == 'android'  ? null : {
       borderTopWidth: 0,
       shadowColor: '#ccc',
       shadowOffset: {height: -1},

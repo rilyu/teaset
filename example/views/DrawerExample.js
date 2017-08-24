@@ -28,7 +28,7 @@ export default class DrawerExample extends NavigationPage {
     if (side == 'left' || side == 'right') {
       this.drawer = Drawer.open(this.renderDrawerMenu(), side, rootTransform);
     } else {
-      this.drawer = Drawer.open(this.renderDrawerBox(side), side, rootTransform);
+      this.drawer = Drawer.open(this.renderDrawerBox(side), side, rootTransform, {containerStyle: {backgroundColor: 'rgba(0, 0, 0, 0)'}});
     }
   }
 
@@ -60,13 +60,22 @@ export default class DrawerExample extends NavigationPage {
   }
 
   renderDrawerBox(side) {
+    //Overflow is not supported on Android, then use a higher container view to implement this functionality
     return (
-      <View style={{backgroundColor: Theme.defaultColor, height: 260}}>
+      <View style={{
+        height: 290,
+        justifyContent: side == 'top' ? 'flex-start' : 'flex-end',
+      }}>
+        <View style={{backgroundColor: Theme.defaultColor, height: 260}}>
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Label type='detail' size='xl' text='Drawer' />
+          </View>
+        </View>
         <Image
           style={{
             position: 'absolute',
-            top: side == 'bottom' ? -30 : undefined,
-            bottom: side == 'top' ? -30 : undefined,
+            top: side == 'bottom' ? 0 : undefined,
+            bottom: side == 'top' ? 0 : undefined,
             left: 12,
             width: 60,
             height: 60,
@@ -74,9 +83,6 @@ export default class DrawerExample extends NavigationPage {
           }}
           source={require('../images/faircup.jpg')}
           />
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Label type='detail' size='xl' text='Drawer' />
-        </View>
       </View>
     );
   }
