@@ -208,8 +208,8 @@ export default class TransformView extends Component {
         scaleRate = maxScale / scale._value;
       }
 
-      let scalePointX = (prevTouches[1].pageX + prevTouches[0].pageX) / 2;
-      let scalePointY = (prevTouches[1].pageY + prevTouches[0].pageY) / 2;
+      let scalePointX = (prevTouches[1].locationX + prevTouches[0].locationX) / 2;
+      let scalePointY = (prevTouches[1].locationY + prevTouches[0].locationY) / 2;
       let {x, y, width, height} = this.contentLayout;
       //view center point position
       let viewCenterX = x + width / 2;
@@ -241,19 +241,20 @@ export default class TransformView extends Component {
       } else {
         if (width < this.viewLayout.width) {
           newX = 0;
-        } else if (x > this.viewLayout.x) {
-          newX = translateX._value - (x - this.viewLayout.x);
-        } else if ((x + width) < (this.viewLayout.x + this.viewLayout.width)) {
-          newX = translateX._value + ((this.viewLayout.x + this.viewLayout.width) - (x + width));
+        } else if (x > 0) {
+          newX = translateX._value - x;
+        } else if ((x + width) < this.viewLayout.width) {
+          newX = translateX._value + (this.viewLayout.width - (x + width));
         }
         if (height < this.viewLayout.height) {
           newY = 0;
-        } else if (y > this.viewLayout.y) {
-          newY = translateY._value - (y - this.viewLayout.y);
-        } else if ((y + height) < (this.viewLayout.y + this.viewLayout.height)) {
-          newY = translateY._value + ((this.viewLayout.y + this.viewLayout.height) - (y + height));
+        } else if (y > 0) {
+          newY = translateY._value - y;
+        } else if ((y + height) <  this.viewLayout.height) {
+          newY = translateY._value + (this.viewLayout.height - (y + height));
         }
       }
+
     }
     if (newScale === null) {
       if (scale._value > maxScale) newScale = maxScale;

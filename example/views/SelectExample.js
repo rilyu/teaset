@@ -3,7 +3,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, Image, ScrollView} from 'react-native';
 
 import {NavigationPage, ListRow, Select, Label} from 'teaset';
 
@@ -32,11 +32,13 @@ export default class SelectExample extends NavigationPage {
       {
         text: 'Long long long long long long long',
         value: 1,
-      },
-      {
+      }, {
         text: 'Short',
         value: 2,
-      }
+      }, {
+        text: <Image style={{width: 40, height: 40}} source={require('../images/teaset1_s.jpg')} />,
+        value: 3,
+      },
     ];
     Object.assign(this.state, {
       valueSM: null,
@@ -166,6 +168,7 @@ export default class SelectExample extends NavigationPage {
           detail={
             <Select
               style={{width: 200, backgroundColor: '#rgba(238, 169, 91, 0.1)', borderColor: '#8a6d3b'}}
+              size='lg'
               value={valueCustom}
               valueStyle={{flex: 1, color: '#8a6d3b', textAlign: 'right'}}
               items={this.customItems}

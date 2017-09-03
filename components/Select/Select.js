@@ -76,7 +76,7 @@ export default class Select extends Component {
         }
       }
     }
-    return text ? `${text}` : text;
+    return (!text || React.isValidElement(text)) ? text : `${text}`;
   }
 
   buildProps() {
@@ -141,7 +141,12 @@ export default class Select extends Component {
       valueStyle = valueStyle.concat({color: placeholderTextColor});
       valueElement = <Text style={valueStyle} numberOfLines={1} allowFontScaling={false}>{placeholder}</Text>;
     } else {
-      valueElement = <Text style={valueStyle} numberOfLines={1} allowFontScaling={false}>{this.valueText}</Text>;
+      let valueText = this.valueText;
+      if (React.isValidElement(valueText)) {
+        valueElement = valueText;
+      } else {
+        valueElement = <Text style={valueStyle} numberOfLines={1} allowFontScaling={false}>{valueText}</Text>;
+      }
     }
 
     //iconTintColor
