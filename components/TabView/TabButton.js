@@ -42,11 +42,13 @@ export default class TabButton extends Component {
       let textStyle;
       if (active) {
         textStyle = [{
+          backgroundColor: 'rgba(0, 0, 0, 0)',
           color: Theme.tvBarBtnActiveTitleColor,
           fontSize: Theme.tvBarBtnActiveTextFontSize,
         }].concat(titleStyle).concat(activeTitleStyle);
       } else {
         textStyle = [{
+          backgroundColor: 'rgba(0, 0, 0, 0)',
           color: Theme.tvBarBtnTitleColor,
           fontSize: Theme.tvBarBtnTextFontSize,
         }].concat(titleStyle);

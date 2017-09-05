@@ -17,7 +17,8 @@ AlbumView 组件定义一个相册视图, 支持多图左右切换显示，支�
 | Event Name | Returns | Notes |
 |---|---|---|
 | [View events...](https://facebook.github.io/react-native/docs/view.html) |  | AlbumView 组件继承 View 组件的全部事件。
-| onChange | index, oldIndex | 改变当前页面时调用, index 为改变后页面索引值, oldIndex 为改变前页面索引值。
+| onWillChange | index, newIndex | 改变当前页面前时调用, index 为当前页面索引值, newIndex 为将要改变的页面索引值。
+| onChange | index, oldIndex | 改变当前页面完成后调用, index 为改变后页面索引值, oldIndex 为改变前页面索引值。
 | onPress | index, event | 单击事件, 触摸结束时调用。
 | onLongPress | index, event | 长按事件, 按压组件超过 500ms 时调用。
 | onWillLoadImage | index | 加载图片前调用。

@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 import {View, Image, TouchableOpacity, StatusBar} from 'react-native';
 
-import {Theme, NavigationPage, AlbumView, Overlay} from 'teaset';
+import {Theme, NavigationPage, AlbumView, Overlay, Button} from 'teaset';
 
 export default class AlbumViewExample extends NavigationPage {
 
@@ -61,14 +61,16 @@ export default class AlbumViewExample extends NavigationPage {
 
   renderPage() {
     return (
-      <View style={{padding: 20, flex: 1, flexDirection:'row', flexWrap:'wrap', alignItems:'flex-start'}}>
-        {this.thumbs.map((item, index) => (
-          <View style={{width: 100, height: 100, padding: 10}} key={index}>
-            <TouchableOpacity style={{flex: 1}} ref={'it' + index} onPress={() => this.onImagePress(index)}>
-              <Image style={{width: null, height: null, flex: 1}} source={item} resizeMode='cover' />
-            </TouchableOpacity>
-          </View>
-        ))}
+      <View style={{flex: 1}}>
+        <View style={{padding: 20, flexDirection:'row', flexWrap:'wrap', alignItems:'flex-start'}}>
+          {this.thumbs.map((item, index) => (
+            <View style={{width: 100, height: 100, padding: 10}} key={index}>
+              <TouchableOpacity style={{flex: 1}} ref={'it' + index} onPress={() => this.onImagePress(index)}>
+                <Image style={{width: null, height: null, flex: 1}} source={item} resizeMode='cover' />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
       </View>
     );
   }
@@ -80,4 +82,21 @@ export default class AlbumViewExample extends NavigationPage {
       {uri: 'https://b-ssl.duitang.com/uploads/item/201207/23/20120723200118_acfUi.thumb.700_0.jpeg'},
       {uri: 'http://img.warting.com/allimg/2017/0308/exsaicsvc5w-92.jpg'},
       {uri: 'http://img.warting.com/allimg/2017/0308/o4ovnsq2uqj-96.jpg'},
+
+import AlbumSheet from 'teaset/components/AlbumView/AlbumSheet';
+
+        <View style={{flexDirection:'row', flex: 1}}>
+          <View style={{width: 100}} />
+          <AlbumSheet
+            style={{backgroundColor: '#faa', flex: 1}}
+            image={require('../images/teaset1.jpg')}
+            ref='albumSheet'
+            />
+        </View>
+        <View style={{flexDirection:'row'}}>
+          <Button title='left' onPress={() => this.refs.albumSheet.scrollTo('left')} />
+          <Button title='center' onPress={() => this.refs.albumSheet.scrollTo('center')} />
+          <Button title='right' onPress={() => this.refs.albumSheet.scrollTo('right')} />
+        </View>
+
 */

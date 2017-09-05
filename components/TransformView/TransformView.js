@@ -105,8 +105,6 @@ export default class TransformView extends Component {
   }
 
   onPanResponderMove(e, gestureState) {
-    this.removeLongPressTimer();
-    this.touchMoved = true;
     this.handleTouches(e.nativeEvent.touches, (dx, dy, scaleRate) => {
       let {tension, onTransforming} = this.props;
       let {translateX, translateY, scale} = this.state;
@@ -120,8 +118,11 @@ export default class TransformView extends Component {
       }
       this.dxSum += dx;
       this.dySum += dy;
+      let adx = Math.abs(this.dxSum), ady = Math.abs(this.dySum), asr = Math.abs(scaleRate - 1);
+      if (!this.touchMoved && adx < 6 && ady < 6 && asr < 0.01) {
+        return;
+      }
       if (e.nativeEvent.touches.length == 1 && this.lockDirection === 'none') {
-        let adx = Math.abs(this.dxSum), ady = Math.abs(this.dySum);
         if (adx > ady && height <= this.viewLayout.height) {
           this.lockDirection = 'y';
         } else if (adx < ady && width <= this.viewLayout.width) {
@@ -144,6 +145,8 @@ export default class TransformView extends Component {
           scale.setValue(scale._value * scaleRate);
       }
 
+      this.removeLongPressTimer();
+      this.touchMoved = true;
       onTransforming && onTransforming(translateX._value, translateY._value, scale._value);
     });
   }
@@ -208,20 +211,22 @@ export default class TransformView extends Component {
         scaleRate = maxScale / scale._value;
       }
 
-      let scalePointX = (prevTouches[1].locationX + prevTouches[0].locationX) / 2;
-      let scalePointY = (prevTouches[1].locationY + prevTouches[0].locationY) / 2;
-      let {x, y, width, height} = this.contentLayout;
-      //view center point position
-      let viewCenterX = x + width / 2;
-      let viewCenterY = y + height / 2;
-      //the scale point with the center of the view as the origin
-      let spBeforScaleX = scalePointX - viewCenterX;
-      let spBeforScaleY = scalePointY - viewCenterY;
-      let spAfterScaleX = spBeforScaleX * scaleRate;
-      let spAfterScaleY = spBeforScaleY * scaleRate;
-      //So that the scale point does not seem to move
-      dx += spBeforScaleX - spAfterScaleX;
-      dy += spBeforScaleY - spAfterScaleY;
+      // unused code
+      // let {x, y, width, height} = this.contentLayout;
+      // let scalePointX = (prevTouches[1].locationX + prevTouches[0].locationX) / 2 - x;
+      // let scalePointY = (prevTouches[1].locationY + prevTouches[0].locationY) / 2 - y;
+      // //view center point position
+      // let centerX = width / 2;
+      // let centerY = height / 2;
+      // //the scale point with the center of the view as the origin
+      // let spBeforScaleX = scalePointX - centerX;
+      // let spBeforScaleY = scalePointY - centerY;
+      // let spAfterScaleX = spBeforScaleX * scaleRate;
+      // let spAfterScaleY = spBeforScaleY * scaleRate;
+      // //So that the scale point does not seem to move
+      // dx += spBeforScaleX - spAfterScaleX;
+      // dy += spBeforScaleY - spAfterScaleY;
+
       onHandleCompleted(dx, dy, scaleRate);
     } else {
       onHandleCompleted(dx, dy, 1);
