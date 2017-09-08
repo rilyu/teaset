@@ -108,6 +108,8 @@ react-native run-android
 
 [`<AlbumView />` 相册视图](./AlbumView.md)
 
+[`<Wheel />` 滚轮](./Wheel.md)
+
 ## 浮层
 [`Overlay{}` 浮层](./Overlay.md)
 

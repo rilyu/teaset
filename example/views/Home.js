@@ -25,6 +25,7 @@ import SegmentedViewExample from './SegmentedViewExample';
 import TabViewExample from './TabViewExample';
 import TransformViewExample from './TransformViewExample';
 import AlbumViewExample from './AlbumViewExample';
+import WheelExample from './WheelExample';
 import OverlayExample from './OverlayExample';
 import ToastExample from './ToastExample';
 import ActionSheetExample from './ActionSheetExample';
@@ -65,6 +66,7 @@ export default class Home extends NavigationPage {
         <ListRow title='TabView' detail='标签页' onPress={() => this.navigator.push({view: <TabViewExample />})} />
         <ListRow title='TransformView' detail='可变视图' onPress={() => this.navigator.push({view: <TransformViewExample />})} />
         <ListRow title='AlbumView' detail='相册视图' onPress={() => this.navigator.push({view: <AlbumViewExample />})} />
+        <ListRow title='Wheel' detail='滚轮' onPress={() => this.navigator.push({view: <WheelExample />})} />
         <ListRow title='Overlay' detail='浮层' onPress={() => this.navigator.push({view: <OverlayExample />})} />
         <ListRow title='Toast' detail='轻提示' onPress={() => this.navigator.push({view: <ToastExample />})} />
         <ListRow title='ActionSheet' detail='操作选单' onPress={() => this.navigator.push({view: <ActionSheetExample />})} />

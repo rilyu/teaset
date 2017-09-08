@@ -303,6 +303,16 @@ export default {
   carouselDotColor: 'rgba(255, 255, 255, 0.4)',
   carouselActiveDotColor: 'rgba(255, 255, 255, 0.85)',
 
+  //Wheel
+  wheelColor: defaultColor,
+  wheelFontSize: 14,
+  wheelTextColor: defaultTextColor,
+  wheelHoleHeight: 28,
+  wheelHoleLineWidth: pixelSize,
+  wheelHoleLineColor: '#ccc',
+  wheelMaskColor: defaultColor,
+  wheelMaskOpacity: 0.4,
+
   //Overlay
   overlayOpacity: 0.4,
   overlayRootScale: 0.93,

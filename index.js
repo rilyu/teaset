@@ -22,6 +22,7 @@ import SegmentedView from './components/SegmentedView/SegmentedView';
 import TabView from './components/TabView/TabView';
 import TransformView from './components/TransformView/TransformView';
 import AlbumView from './components/AlbumView/AlbumView';
+import Wheel from './components/Wheel/Wheel';
 
 import Overlay from './components/Overlay/Overlay';
 import Toast from './components/Toast/Toast';
@@ -61,6 +62,7 @@ var Teaset = {
   TabView,
   TransformView,
   AlbumView,
+  Wheel,
 
   Overlay,
   Toast,

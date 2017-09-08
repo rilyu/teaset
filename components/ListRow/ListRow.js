@@ -86,7 +86,8 @@ export default class ListRow extends Component {
     //title
     if (titlePlace === 'none') {
       title = null;
-    } if (typeof title === 'string' || typeof title === 'number') {
+    }
+    if (typeof title === 'string' || typeof title === 'number') {
       let textStyle = (!detail && titlePlace === 'left') ? {flexGrow: 1, flexShrink: 1} : null;
       title = <Label style={[textStyle, titleStyle]} type='title' text={title} />
     }

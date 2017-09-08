@@ -5,7 +5,7 @@ AlbumView 组件定义一个相册视图, 支持多图左右切换显示，支�
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [View props...](https://facebook.github.io/react-native/docs/view.html) |  |  | AlbumView 组件继承 View 组件的全部属性。
-| images | array |  | 相册图片数组，必填，数组元素为 Image.source 。
+| images | array |  | 相册图片数组，必填，数组元素为 Image.source 或 React Native 组件。
 | thumbs | array |  | 相册缩略图数组，可空，数组元素为 Image.source 。
 | defaultIndex | number | 0 | 默认显示图片索引。
 | index | number | | 显示图片索引，设置此属性需要监听 onChange 事件并自行维护状态。
