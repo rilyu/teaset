@@ -61,7 +61,7 @@ export default class NavigationPage extends BasePage {
 
   renderNavigationBar() {
     return (
-      <NavigationBar 
+      <NavigationBar
         title={this.renderNavigationTitle()}
         leftView={this.renderNavigationLeftView()}
         rightView={this.renderNavigationRightView()}

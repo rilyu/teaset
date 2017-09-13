@@ -5,7 +5,8 @@ ModalIndicator 为模态指示器静态类, 一般在需要阻止用户操作时
 | Method | Params | Returns | Notes |
 |---|---|---|---|
 | [Overlay methods](./Overlay.md) |  |  | ModalIndicator 继承 Overlay 的全部静态方法。
-| show | text | key | 显示一个弹出菜单, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 text 为模态指示器下显示的文本。<br/>返回唯一的浮层 key 值。
+| show | text | key | 弹出模态指示器, 重写 [Overlay{}](./Overlay.md) 中的同名函数, 输入参数 text 为模态指示器下显示的文本，如调用此函数前已显示模态指示器则仅更换文本。
+| hide |  |  | 隐藏模态指示器。
 
 ## Static Props
 | Prop | Type | Default | Note |
