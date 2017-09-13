@@ -106,9 +106,9 @@ export default class AlbumSheet extends TransformView {
   }
 
   getElementSize(element) {
-    let width = 0, htight = 0;
-    if (React.isValidElement(props.image)) {
-      let style = StyleSheet.flatten(props.image.props.style);
+    let width = 0, height = 0;
+    if (React.isValidElement(element)) {
+      let style = StyleSheet.flatten(element.props.style);
       if (style.width === null || style.width === undefined
         || style.height === null || style.height === undefined) {
         console.error('You need to specify the width and height style when the image is a element');
@@ -117,7 +117,7 @@ export default class AlbumSheet extends TransformView {
         height = style.height;
       }
     }
-    return {width, htight};
+    return {width, height};
   }
 
   getFitSize(actualWidth, actualHeight, viewWidth, viewHeight) {
