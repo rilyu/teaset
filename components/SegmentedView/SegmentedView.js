@@ -47,6 +47,12 @@ export default class SegmentedView extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.activeIndex != this.props.activeIndex && this.refs.carousel) {
+      this.refs.carousel.scrollToPage(nextProps.activeIndex);
+    }
+  }
+
   get activeIndex() {
     let activeIndex = this.props.activeIndex;
     if (activeIndex || activeIndex === 0) return activeIndex;
@@ -65,12 +71,13 @@ export default class SegmentedView extends Component {
       if (children) children = [children];
       else children = [];
     }
+    children = children.filter(item => item); //remove empty item
 
     this.props = {style, children, ...others};
   }
 
   onSegmentedBarChange(index) {
-    if (index == this.state.activeIndex) return;
+    if (index == this.activeIndex) return;
     this.setState({activeIndex: index}, () => {
       if (this.refs.carousel) {
         this.refs.carousel.scrollToPage(index, false);
