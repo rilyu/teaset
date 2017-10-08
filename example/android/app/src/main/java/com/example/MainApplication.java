@@ -1,4 +1,4 @@
-package com.taiyuninfo.teaset.example;
+package com.example;
 
 import android.app.Application;
 
@@ -10,8 +10,6 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
-
-import com.taiyuninfo.teaset.example.BuildConfig;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -26,6 +24,11 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage()
       );
+    }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
     }
   };
 

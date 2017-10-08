@@ -1,4 +1,4 @@
-package com.taiyuninfo.teaset.example;
+package com.example;
 
 import com.facebook.react.ReactActivity;
 
