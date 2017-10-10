@@ -74,7 +74,7 @@ export default class OverlayPopoverView extends OverlayView {
           default: arrow = 'top'; break;
         }
       }
-      popoverStyle = [].concat(popoverStyle).concat({position: 'absolute', left: 0, top: 0, opacity: 0});
+      popoverStyle = [].concat(popoverStyle).concat({position: 'absolute', left: 0, top: 0});
       this.props = {popoverStyle, direction, showArrow, arrow, ...others};
       return;
     }
@@ -182,12 +182,20 @@ export default class OverlayPopoverView extends OverlayView {
 
   renderContent() {
     let {popoverStyle, arrow, paddingCorner, children} = this.props;
+
+    //in react native 0.49, this.props will not reset at rerender, then move opacity=0 to here
+    let {popoverWidth, popoverHeight} = this.state;
+    if (popoverWidth === null || popoverHeight === null) {
+      popoverStyle = popoverStyle.concat({opacity: 0});
+    }
+
     return (
       <Popover
         style={popoverStyle}
         arrow={arrow}
         paddingCorner={paddingCorner}
-        onLayout={(e) => this.onPopoverLayout(e)}>
+        onLayout={(e) => this.onPopoverLayout(e)}
+      >
         {children}
       </Popover>
     );
