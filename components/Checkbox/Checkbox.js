@@ -13,6 +13,7 @@ export default class Checkbox extends TouchableOpacity {
   static propTypes = {
     ...TouchableOpacity.propTypes,
     checked: PropTypes.bool,
+    defaultChecked: PropTypes.bool,
     size: PropTypes.oneOf(['lg', 'md', 'sm']),
     title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
     titleStyle: Text.propTypes.style,
@@ -25,15 +26,31 @@ export default class Checkbox extends TouchableOpacity {
 
   static defaultProps = {
     ...TouchableOpacity.defaultProps,
-    checked: false,
+    defaultChecked: false,
     size: 'md',
     checkedIcon: require('../../icons/checked.png'),
     uncheckedIcon: require('../../icons/unchecked.png'),
     hitSlop: {top: 8, bottom: 8, left: 8, right: 8},
   };
 
+  constructor(props) {
+    super(props);
+    this.state = Object.assign(this.state, {
+      checked: props.checked === true || props.checked === false ? props.checked : props.defaultChecked,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.checked === true || nextProps.checked === false) {
+      if (nextProps.checked != this.state.checked) {
+        this.setState({checked: nextProps.checked});
+      }
+    }
+  }
+
   buildProps() {
-    let {style, checked, size, title, checkedIcon, uncheckedIcon, titleStyle, checkedIconStyle, uncheckedIconStyle, children, onPress, onChange, ...others} = this.props;
+    let {style, size, title, checkedIcon, uncheckedIcon, titleStyle, checkedIconStyle, uncheckedIconStyle, children, onPress, onChange, ...others} = this.props;
+    let {checked} = this.state;
 
     let iconSize, textFontSize, textPaddingLeft;
     switch (size) {
@@ -72,23 +89,17 @@ export default class Checkbox extends TouchableOpacity {
     }].concat(titleStyle);
 
     if (React.isValidElement(checkedIcon)) {
-      if (!checkedIcon.props.key) {
-        checkedIcon = React.cloneElement(checkedIcon, {key: 'icon'});
-      }
+      checkedIcon = React.cloneElement(checkedIcon, {key: 'icon'});
     } else if (checkedIcon || checkedIcon === 0) {
       checkedIcon = <Image key='icon' style={iconStyle} source={checkedIcon} />;
     }
     if (React.isValidElement(uncheckedIcon)) {
-      if (!uncheckedIcon.props.key) {
-        uncheckedIcon = React.cloneElement(uncheckedIcon, {key: 'icon'});
-      }
+      uncheckedIcon = React.cloneElement(uncheckedIcon, {key: 'icon'});
     } else if (uncheckedIcon || uncheckedIcon === 0) {
       uncheckedIcon = <Image key='icon' style={iconStyle} source={uncheckedIcon} />;
     }
     if (React.isValidElement(title)) {
-      if (!title.props.key) {
-        title = React.cloneElement(title, {key: 'title'});
-      }
+      title = React.cloneElement(title, {key: 'title'});
     } else if ((title || title === '' || title === 0)) {
       title = (
         <Text key='title' style={textStyle} numberOfLines={1}>
@@ -102,9 +113,12 @@ export default class Checkbox extends TouchableOpacity {
       title ? title : null,
     ];
 
-    onPress = () => onChange && onChange(!checked);
+    onPress = () => {
+      this.setState({checked: !checked});
+      onChange && onChange(!checked);
+    };
 
-    this.props = {style, checked, size, title, checkedIcon, uncheckedIcon, titleStyle, checkedIconStyle, uncheckedIconStyle, children, onPress, onChange, ...others};
+    this.props = {style, size, title, checkedIcon, uncheckedIcon, titleStyle, checkedIconStyle, uncheckedIconStyle, children, onPress, onChange, ...others};
   }
 
   render() {
