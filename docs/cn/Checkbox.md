@@ -5,7 +5,8 @@ Checkbox 组件定义一个复选框, 具有选中、非选中两种状态。
 | Prop | Type | Default | Note |
 |---|---|---|---|
 | [TouchableOpacity props...](https://facebook.github.io/react-native/docs/touchableopacity.html) |  |  | Checkbox 组件继承 TouchableOpacity 组件的全部属性。
-| checked | bool | false | 是否勾选 |
+| checked | bool | false | 是否勾选。
+| defaultChecked | bool | false | 默认是否勾选，仅创建时使用一次，不想自行监听维护 checked 状态时用 defaultChecked 代替。
 | size | string | 'md' | 显示尺寸大小。<br/>- lg: 大<br/>- md: 中<br/>- sm: 小<br/>显示效果参见[Screenshots](#screenshots)。
 | title | string<br/>number<br/>element |  | 标题, 可以是字符串、数字或 React Native 组件。
 | titleStyle | 同Text.style |  | 标题样式, 当 title 类型为 element 时无效。

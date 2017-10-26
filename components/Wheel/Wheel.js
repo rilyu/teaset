@@ -18,6 +18,7 @@ export default class Wheel extends Component {
     itemStyle: Text.propTypes.style,
     holeStyle: View.propTypes.style, //height is required
     maskStyle: View.propTypes.style,
+    holeLine: PropTypes.oneOfType([PropTypes.element, PropTypes.number]),
     index: PropTypes.number,
     defaultIndex: PropTypes.number,
     onChange: PropTypes.func, //(index)
@@ -177,7 +178,7 @@ export default class Wheel extends Component {
   }
 
   buildProps() {
-    let {style, items, itemStyle, holeStyle, maskStyle, ...others} = this.props;
+    let {style, items, itemStyle, holeStyle, maskStyle, holeLine, ...others} = this.props;
 
     style = [{
       backgroundColor: Theme.wheelColor,
@@ -191,9 +192,6 @@ export default class Wheel extends Component {
     holeStyle = [{
       backgroundColor: 'rgba(0, 0, 0, 0)',
       height: Theme.wheelHoleHeight,
-      borderColor: Theme.wheelHoleLineColor,
-      borderTopWidth: Theme.wheelHoleLineWidth,
-      borderBottomWidth: Theme.wheelHoleLineWidth,
       zIndex: 1,
     }].concat(holeStyle);
     maskStyle = [{
@@ -202,8 +200,13 @@ export default class Wheel extends Component {
       flex: 1,
       zIndex: 100,
     }].concat(maskStyle);
+    if (holeLine === undefined) {
+      holeLine = <View style={{height: Theme.wheelHoleLineWidth, backgroundColor: Theme.wheelHoleLineColor}} />;
+    } else if (typeof holeLine === 'number') {
+      holeLine = <View style={{height: holeLine, backgroundColor: Theme.wheelHoleLineColor}} />;
+    }
 
-    this.props = {style, items, itemStyle, holeStyle, maskStyle, ...others};
+    this.props = {style, items, itemStyle, holeStyle, maskStyle, holeLine, ...others};
   }
 
   renderItem(item, itemIndex) {
@@ -232,7 +235,7 @@ export default class Wheel extends Component {
     this.buildProps();
     this.lastRenderIndex = this.index;
 
-    let {items, itemStyle, holeStyle, maskStyle, defaultIndex, onChange, onLayout, ...others} = this.props;
+    let {items, itemStyle, holeStyle, maskStyle, holeLine, defaultIndex, onChange, onLayout, ...others} = this.props;
 
     return (
       <View
@@ -242,7 +245,9 @@ export default class Wheel extends Component {
       >
         {items.map((item, index) => this.renderItem(item, index))}
         <View style={maskStyle} />
+        {holeLine}
         <View style={holeStyle} onLayout={e => this.onHoleLayout(e)} />
+        {holeLine}
         <View style={maskStyle} />
       </View>
     )
