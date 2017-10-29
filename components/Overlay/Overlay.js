@@ -19,11 +19,11 @@ export default class Overlay {
   static PopoverView = OverlayPopoverView;
 
   // base props
-  //   style: View.propTypes.style,
+  //   style: ViewPropTypes.style,
   //   modal: PropTypes.bool,
   //   animated: PropTypes.bool,
   //   overlayOpacity: PropTypes.number,
-  //   overlayPointerEvents: View.propTypes.pointerEvents,
+  //   overlayPointerEvents: ViewPropTypes.pointerEvents,
   static show(overlayView) {
     let key;
     let onDisappearCompletedSave = overlayView.props.onDisappearCompleted;

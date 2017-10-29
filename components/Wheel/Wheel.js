@@ -1,11 +1,10 @@
 // Wheel.js
-//问题2：不支持受控，对于月份-日期不合法时有问题，如3月31日换到2月
 
 'use strict';
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, Animated, PanResponder} from 'react-native';
+import {StyleSheet, View, Text, Animated, PanResponder, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import WheelItem from './WheelItem';
@@ -13,11 +12,11 @@ import WheelItem from './WheelItem';
 export default class Wheel extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     items: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number])).isRequired,
     itemStyle: Text.propTypes.style,
-    holeStyle: View.propTypes.style, //height is required
-    maskStyle: View.propTypes.style,
+    holeStyle: ViewPropTypes.style, //height is required
+    maskStyle: ViewPropTypes.style,
     holeLine: PropTypes.oneOfType([PropTypes.element, PropTypes.number]),
     index: PropTypes.number,
     defaultIndex: PropTypes.number,

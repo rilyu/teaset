@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Platform, StatusBar, View, Text, Animated} from 'react-native';
+import {StyleSheet, Platform, StatusBar, View, Text, Animated, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import NavigationTitle from './NavigationTitle';
@@ -16,7 +16,7 @@ import NavigationBackButton from './NavigationBackButton';
 export default class NavigationBar extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     type: PropTypes.oneOf(['auto', 'ios', 'android']),
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     titleStyle: Text.propTypes.style,

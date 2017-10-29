@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Animated, View} from 'react-native';
+import {Animated, View, ViewPropTypes} from 'react-native';
 
 import OverlayView from './OverlayView';
 
@@ -13,7 +13,7 @@ export default class OverlayPopView extends OverlayView {
   static propTypes = {
     ...OverlayView.propTypes,
     type: PropTypes.oneOf(['zoomOut', 'zoomIn', 'custom']),
-    containerStyle: View.propTypes.style,
+    containerStyle: ViewPropTypes.style,
     customBounds: PropTypes.shape({
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,

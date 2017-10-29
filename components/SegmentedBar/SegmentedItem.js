@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text} from 'react-native';
+import {View, Text, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import Badge from '../Badge/Badge';
@@ -12,7 +12,7 @@ import Badge from '../Badge/Badge';
 export default class SegmentedItem extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
     titleStyle: Text.propTypes.style,
     activeTitleStyle: Text.propTypes.style,
@@ -62,7 +62,7 @@ export default class SegmentedItem extends Component {
           fontSize: Theme.sbBtnTextFontSize,
         }].concat(titleStyle);
       }
-      title = <Text style={textStyle} numberOfLines={1}>{title}</Text>;
+      title = <Text key='title' style={textStyle} numberOfLines={1}>{title}</Text>;
     }
     if (badge === 0) {
       badge = null;
@@ -74,6 +74,7 @@ export default class SegmentedItem extends Component {
       };
       badge = (
         <Badge
+          key='badge'
           style={badgeStyle}
           count={badge}
           onLayout={e => {

@@ -4,15 +4,15 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Animated, PanResponder} from 'react-native';
+import {StyleSheet, View, Animated, PanResponder, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
 export default class TransformView extends Component {
 
   static propTypes = {
-    ...View.propTypes,
-    containerStyle: View.propTypes.style,
+    ...ViewPropTypes,
+    containerStyle: ViewPropTypes.style,
     maxScale: PropTypes.number,
     minScale: PropTypes.number,
     magnetic: PropTypes.bool,

@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import Badge from '../Badge/Badge';
@@ -19,7 +19,7 @@ export default class TabButton extends Component {
     icon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number]),
     activeIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number]),
     active: PropTypes.bool,
-    iconContainerStyle: View.propTypes.style,
+    iconContainerStyle: ViewPropTypes.style,
     badge: PropTypes.oneOfType([PropTypes.element, PropTypes.number]),
   };
 

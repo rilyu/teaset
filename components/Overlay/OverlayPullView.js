@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {Animated, View} from 'react-native';
+import {Animated, View, ViewPropTypes} from 'react-native';
 
 import Theme from '../../themes/Theme';
 import TopView from './TopView';
@@ -15,7 +15,7 @@ export default class OverlayPullView extends OverlayView {
   static propTypes = {
     ...OverlayView.propTypes,
     side: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-    containerStyle: View.propTypes.style,
+    containerStyle: ViewPropTypes.style,
     rootTransform: PropTypes.oneOfType([
       PropTypes.oneOf(['none', 'translate', 'scale']),
       PropTypes.arrayOf(PropTypes.shape({

@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View} from 'react-native';
+import {View, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import SegmentedSheet from './SegmentedSheet';
@@ -15,11 +15,11 @@ import Carousel from '../Carousel/Carousel';
 export default class SegmentedView extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     type: PropTypes.oneOf(['projector', 'carousel']),
     barPosition: PropTypes.oneOf(['top', 'bottom']),
     //SegmentedBar
-    barStyle: View.propTypes.style,
+    barStyle: ViewPropTypes.style,
     justifyItem: PropTypes.oneOf(['fixed', 'scrollable']),
     indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth']),
     indicatorPosition: PropTypes.oneOf(['top', 'bottom']),

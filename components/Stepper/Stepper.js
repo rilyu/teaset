@@ -4,14 +4,14 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
 export default class Stepper extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     defaultValue: PropTypes.number,
     value: PropTypes.number,
     step: PropTypes.number,

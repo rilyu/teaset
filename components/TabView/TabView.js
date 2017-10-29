@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import TabSheet from './TabSheet';
@@ -15,9 +15,9 @@ import Carousel from '../Carousel/Carousel';
 export default class TabView extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     type: PropTypes.oneOf(['projector', 'carousel']),
-    barStyle: View.propTypes.style,
+    barStyle: ViewPropTypes.style,
     activeIndex: PropTypes.number,
     onChange: PropTypes.func, //(index)
   };

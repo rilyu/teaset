@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import ReactNative, {StyleSheet, Animated, View, PanResponder, Platform} from 'react-native';
+import ReactNative, {StyleSheet, Animated, View, PanResponder, Platform, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import KeyboardSpace from '../KeyboardSpace/KeyboardSpace';
@@ -12,11 +12,11 @@ import KeyboardSpace from '../KeyboardSpace/KeyboardSpace';
 export default class OverlayView extends Component {
 
   static propTypes = {
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     modal: PropTypes.bool,
     animated: PropTypes.bool,
     overlayOpacity: PropTypes.number,
-    overlayPointerEvents: View.propTypes.pointerEvents,
+    overlayPointerEvents: ViewPropTypes.pointerEvents,
     autoKeyboardInsets: PropTypes.bool,
     onAppearCompleted: PropTypes.func,
     onDisappearCompleted: PropTypes.func,

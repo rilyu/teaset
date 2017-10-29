@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactNative, {Platform, View} from 'react-native';
+import ReactNative, {Platform, View, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import TeaNavigator from '../TeaNavigator/TeaNavigator';
@@ -13,7 +13,7 @@ import KeyboardSpace from '../KeyboardSpace/KeyboardSpace';
 export default class BasePage extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     scene: PropTypes.object, //转场效果
     autoKeyboardInsets: PropTypes.bool, //自动插入键盘占用空间
     keyboardTopInsets: PropTypes.number, //插入键盘占用空间顶部偏移，用于底部有固定占用空间(如TabNavigator)的页面

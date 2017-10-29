@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, ScrollView, TouchableOpacity, Animated} from 'react-native';
+import {View, ScrollView, TouchableOpacity, Animated, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import SegmentedItem from './SegmentedItem';
@@ -12,7 +12,7 @@ import SegmentedItem from './SegmentedItem';
 export default class SegmentedBar extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     justifyItem: PropTypes.oneOf(['fixed', 'scrollable']),
     indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth']),
     indicatorPosition: PropTypes.oneOf(['top', 'bottom']),

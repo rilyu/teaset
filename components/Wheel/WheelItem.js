@@ -4,14 +4,14 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, Animated} from 'react-native';
+import {StyleSheet, View, Text, Animated, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
 export default class WheelItem extends Component {
 
   static propTypes = {
-    ...Animated.View.propTypes,
+    ...ViewPropTypes,
     index: PropTypes.number.isRequired,
     itemHeight: PropTypes.number.isRequired,
     wheelHeight: PropTypes.number.isRequired,

@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TextInput, Image, LayoutAnimation} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Image, LayoutAnimation, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
@@ -12,7 +12,7 @@ export default class SearchInput extends Component {
 
   static propTypes = {
     ...TextInput.propTypes,
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     inputStyle: TextInput.propTypes.style,
     iconSize: PropTypes.number,
     disabled: PropTypes.bool,
