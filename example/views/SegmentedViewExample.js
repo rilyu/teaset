@@ -53,7 +53,7 @@ export default class SegmentedViewExample extends NavigationPage {
     let tintColor = isActive ? Theme.primaryColor : '#989898';
 
     return (
-      <View style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center'}} key={index}>
         <Image
           style={{width: 20, height: 20, tintColor}}
           source={isActive ? activeIcons[index] : icons[index]}

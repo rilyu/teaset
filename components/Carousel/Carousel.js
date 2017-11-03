@@ -231,7 +231,7 @@ export default class Carousel extends Component {
   }
 
   render() {
-    let {style, children, horizontal, contentContainerStyle, control, onScroll, onLayout, direction, ...others} = this.props;
+    let {style, children, horizontal, contentContainerStyle, control, onScroll, onLayout, onChange, direction, ...others} = this.props;
     let {width, height, pageIndex} = this.state;
     if (width > 0 && height > 0) {
       let fixStyle;

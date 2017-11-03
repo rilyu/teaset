@@ -441,7 +441,7 @@ export default class AlbumView extends Component {
   }
 
   render() {
-    let {images, thumbs, defaultIndex, index, maxScale, space, control, children, onLayout, ...others} = this.props;
+    let {images, thumbs, defaultIndex, index, maxScale, space, control, children, onLayout, onChange, ...others} = this.props;
 
     if (React.isValidElement(control)) {
       control = React.cloneElement(control, {index: this.state.index, total: images.length, carousel: this});
