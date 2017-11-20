@@ -146,7 +146,7 @@ export default class NavigationBar extends Component {
 
     //convert string title to NavigationBar.Title
     if (typeof title === 'string') {
-      title = <this.constructor.Title style={{textAlign: titleTextAlign, color: Theme.navTitleColor}} text={title} />;
+      title = <this.constructor.Title style={[{textAlign: titleTextAlign, color: Theme.navTitleColor}].concat(titleStyle)} text={title} />;
     }
 
     this.props = {style, type, title, titleStyle, tintColor, titleViewStyle, leftRightViewStyle, hidden, animated, statusBarColor, statusBarStyle, statusBarInsets, ...others};
