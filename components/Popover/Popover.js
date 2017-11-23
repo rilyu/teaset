@@ -131,22 +131,23 @@ export default class Popover extends Component {
     }
 
     if (!arrow) arrow = 'none';
+    let useArrow = arrow;
     switch (arrow) {
       case 'topLeft':
       case 'topRight':
-        if (headerPaddingCorner + contentPadding > this.state.width / 2) arrow = 'top';
+        if (headerPaddingCorner + contentPadding > this.state.width / 2) useArrow = 'top';
         break;
       case 'rightTop':
       case 'rightBottom':
-        if (headerPaddingCorner + contentPadding > this.state.height / 2) arrow = 'right';
+        if (headerPaddingCorner + contentPadding > this.state.height / 2) useArrow = 'right';
         break;
       case 'bottomRight':
       case 'bottomLeft':
-        if (headerPaddingCorner + contentPadding > this.state.width / 2) arrow = 'bottom';
+        if (headerPaddingCorner + contentPadding > this.state.width / 2) useArrow = 'bottom';
         break;
       case 'leftBottom':
       case 'leftTop':
-        if (headerPaddingCorner + contentPadding > this.state.height / 2) arrow = 'left';
+        if (headerPaddingCorner + contentPadding > this.state.height / 2) useArrow = 'left';
         break;
     }
 
@@ -154,7 +155,7 @@ export default class Popover extends Component {
       position: 'absolute',
       overflow: 'hidden',
       backgroundColor: 'rgba(0, 0, 0, 0)',
-    }, headerLayouts[arrow]);
+    }, headerLayouts[useArrow]);
     let arrowStyle = Object.assign({
       backgroundColor,
       width: arrowSize,
@@ -162,11 +163,11 @@ export default class Popover extends Component {
       borderColor,
       borderTopWidth: borderWidth,
       borderLeftWidth: borderWidth,
-    }, arrowLayouts[arrow]);
+    }, arrowLayouts[useArrow]);
     let contentStyle = this.filterContentStyle(fs);
-    let popoverStyle = [this.filterPopoverStyle(fs, arrow === 'none'), {
-      backgroundColor: arrow === 'none' ? Theme.popoverColor : 'rgba(0, 0, 0, 0)', //Transparent background will cause a warning at debug mode
-    }].concat(popoverLayouts[arrow]);
+    let popoverStyle = [this.filterPopoverStyle(fs, useArrow === 'none'), {
+      backgroundColor: useArrow === 'none' ? Theme.popoverColor : 'rgba(0, 0, 0, 0)', //Transparent background will cause a warning at debug mode
+    }].concat(popoverLayouts[useArrow]);
 
     this.props = {style, arrow, paddingCorner, headerStyle, arrowStyle, contentStyle, popoverStyle, ...others};
   }
