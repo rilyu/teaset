@@ -36,7 +36,7 @@ export default class NavigationPage extends BasePage {
     let pageContainerStyle = [{
       flex: 1,
       padding: 0,
-      marginTop: navigationBarInsets ? (Platform.OS === 'ios' ? 64 : 44) : 0,
+      marginTop: navigationBarInsets ? (Platform.OS === 'ios' || Platform.Version > 20 ? 64 : 44) : 0,
     }];
     this.props = {navigationBarInsets, pageContainerStyle, ...others};
   }
