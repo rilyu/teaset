@@ -89,8 +89,8 @@ export default class NavigationBar extends Component {
       position: 'absolute',
       left: 0,
       right: 0,
-      height: statusBarInsets && Platform.OS === 'ios' ? 64 : 44,
-      paddingTop: statusBarInsets && Platform.OS === 'ios' ? 20 : 0,
+      height: statusBarInsets && Platform.OS === 'ios' || Platform.Version > 20 ? 64 : 44,
+      paddingTop: statusBarInsets && Platform.OS === 'ios' || Platform.Version > 20 ? 20 : 0,
       paddingLeft: 4,
       paddingRight: 4,
       borderBottomWidth: Theme.navSeparatorLineWidth,
@@ -108,7 +108,7 @@ export default class NavigationBar extends Component {
     if (!tintColor) tintColor = Theme.navTintColor;
 
     //build statusBarColor and statusBarStyle
-    if (!statusBarColor) statusBarColor = fs.backgroundColor;
+    if (!statusBarColor) statusBarColor = statusBarInsets && Platform.OS === 'ios' || Platform.Version > 20 ? 'rgba(0,0,0,0)' : fs.backgroundColor;
     if (!statusBarStyle) statusBarStyle = Theme.navStatusBarStyle ? Theme.navStatusBarStyle : 'default';
 
     //build titleViewStyle
@@ -129,7 +129,7 @@ export default class NavigationBar extends Component {
     }
     let titleViewStyle = {
       position: 'absolute',
-      top: statusBarInsets && Platform.OS === 'ios' ? 20 : 0,
+      top: statusBarInsets && Platform.OS === 'ios' || Platform.Version > 20 ? 20 : 0,
       left: 0,
       right: 0,
       height: 44,
@@ -195,7 +195,7 @@ export default class NavigationBar extends Component {
     let {style, animated, statusBarStyle, statusBarColor, statusBarHidden, title, titleViewStyle, leftRightViewStyle, leftView, rightView, ...others} = this.props;
     return (
       <Animated.View style={style} {...others} onLayout={e => this.onLayout(e)}>
-        <StatusBar backgroundColor={statusBarColor} barStyle={statusBarStyle} animated={animated} hidden={statusBarHidden} />
+        <StatusBar backgroundColor={statusBarColor} translucent={true} barStyle={statusBarStyle} animated={animated} hidden={statusBarHidden} />
         <Animated.View style={titleViewStyle}>{title}</Animated.View>
         <Animated.View style={leftRightViewStyle} onLayout={e => this.onLeftViewLayout(e)}>{leftView}</Animated.View>
         <Animated.View style={leftRightViewStyle} onLayout={e => this.onRightViewLayout(e)}>{rightView}</Animated.View>

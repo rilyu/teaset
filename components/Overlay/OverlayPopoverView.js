@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {View, Dimensions, Platform} from 'react-native';
+import {View, Dimensions, Platform, StatusBar} from 'react-native';
 
 import OverlayView from './OverlayView';
 import Popover from '../Popover/Popover';
@@ -83,6 +83,7 @@ export default class OverlayPopoverView extends OverlayView {
     let screenWidth = Dimensions.get('window').width;
     let screenHeight = Dimensions.get('window').height;
     let {x, y, width, height} = fromBounds ? fromBounds : {};
+    if (y) y = Platform.OS === 'android' && Platform.Version > 20 ? y + StatusBar.currentHeight : y;
     if (!x && x !== 0) x = screenWidth / 2;
     if (!y && y !== 0) y = screenHeight / 2;
     if (!width) width = 0;
