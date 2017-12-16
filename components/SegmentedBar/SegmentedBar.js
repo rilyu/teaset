@@ -82,7 +82,7 @@ export default class SegmentedBar extends Component {
       case 'boxWidth':
         return this._buttonsLayout[this._activeIndex].x;
       case 'itemWidth':
-        return this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x;
+        return this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x + this._itemsAddWidth[this._activeIndex] / 2;
     }
     return 0;
   }
@@ -92,7 +92,7 @@ export default class SegmentedBar extends Component {
       case 'boxWidth':
         return this._buttonsLayout[this.activeIndex].width;
       case 'itemWidth':
-        return this._itemsLayout[this.activeIndex].width;
+        return this._itemsLayout[this.activeIndex].width - this._itemsAddWidth[this._activeIndex];
     }
     return 0;
   }
@@ -233,7 +233,7 @@ export default class SegmentedBar extends Component {
         {children.map((item, index) => (
           <TouchableOpacity
             key={index}
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: this._itemsAddWidth[index] / 2}}
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
             onPress={() => this.onButtonPress(index)}
             onLayout={e => this.onButtonLayout(index, e)}
           >
@@ -270,7 +270,6 @@ export default class SegmentedBar extends Component {
           return (
           <TouchableOpacity
             key={index}
-            style={{paddingHorizontal: this._itemsAddWidth[index] / 2}}
             onPress={() => this.onButtonPress(index)}
             onLayout={e => this.onButtonLayout(index, e)}
           >
