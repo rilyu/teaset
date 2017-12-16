@@ -202,6 +202,7 @@ export default class OverlayExample extends NavigationPage {
           />
         <View style={{height: 20}} />
         <ListRow title='Multi overlay' onPress={() => this.showMulti()} topSeparator='full' bottomSeparator='full' />
+        <View style={{height: Theme.screenInset.bottom}} />
       </ScrollView>
     );
   }

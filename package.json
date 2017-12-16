@@ -1,6 +1,6 @@
 {
   "name": "teaset",
-  "version": "0.4.9",
+  "version": "0.5.0",
   "description": "A UI library for react native.",
   "main": "index.js",
   "scripts": {

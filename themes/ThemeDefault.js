@@ -2,7 +2,7 @@
 
 'use strict';
 
-import {PixelRatio, Dimensions} from 'react-native';
+import {PixelRatio} from 'react-native';
 
 //primary color
 const primaryColor = '#337ab7';
@@ -21,9 +21,6 @@ const pixelSize = (function() {
   else return 1;
 })();
 
-//is pad
-const isPad = Dimensions.get('window').width >= 768 && Dimensions.get('window').height >= 768;
-
 export default {
   //General
   screenColor: '#444',
@@ -33,7 +30,6 @@ export default {
   defaultTextColor: defaultTextColor,
   pageColor: '#f8f8f8',
   pixelSize: pixelSize,
-  isPad: isPad,
 
   //Label - color
   labelTextColor: defaultTextColor,
@@ -230,6 +226,7 @@ export default {
   //NavigationBar
   navType: 'ios', //'auto', 'ios', 'android'
   navStatusBarStyle: 'light-content', //'default', 'light-content'
+  navBarContentHeight: 44,
   navColor: primaryColor,
   navTintColor: '#fff',
   navTitleColor: '#fff',

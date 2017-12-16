@@ -84,9 +84,6 @@ export default class OverlayPopoverView extends OverlayView {
     let screenHeight = Dimensions.get('window').height;
     let {x, y, width, height} = fromBounds ? fromBounds : {};
 
-    //Use measure instead of measureInWindow, do NOT need to add the StatusBar height here
-    //if (y) y = Platform.OS === 'android' && Platform.Version > 20 ? y + StatusBar.currentHeight : y;
-    
     if (!x && x !== 0) x = screenWidth / 2;
     if (!y && y !== 0) y = screenHeight / 2;
     if (!width) width = 0;

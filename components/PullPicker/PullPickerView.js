@@ -70,6 +70,7 @@ export default class PullPickerView extends Overlay.PullView {
               onPress={() => this.onItemPress(index)}
               />
           ))}
+          <View style={{height: Theme.screenInset.bottom}} />
         </ScrollView>
       </View>
     );

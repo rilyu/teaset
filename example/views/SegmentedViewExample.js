@@ -104,6 +104,7 @@ export default class SegmentedViewExample extends NavigationPage {
           detail={<Switch value={this.state.custom} onValueChange={value => this.setState({custom: value})} />}
           bottomSeparator='full'
           />
+        <View style={{height: Theme.screenInset.bottom}} />
       </View>
     );
   }

@@ -148,8 +148,8 @@ export default class NavigationBarExample extends NavigationPage {
   renderPage() {
     let {type, title, leftView, rightView, bgColor, tintColor, hidden, animated, statusBarStyle, statusBarHidden} = this.state;
     return (
-      <ScrollView style={{flex: 1}}>
-        <View style={{height: Platform.OS === 'ios' ? 64 : 44, alignItems: 'center', justifyContent: 'center'}}>
+      <ScrollView style={{flex: 1, paddingTop: Theme.statusBarHeight}}>
+        <View style={{height: Theme.navBarContentHeight, alignItems: 'center', justifyContent: 'center'}}>
           <Label style={{color: '#ccc'}} size='xl' text='ScrollView header' />
         </View>
         <View style={{height: 20}} />
