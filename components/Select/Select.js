@@ -23,6 +23,7 @@ export default class Select extends Component {
     pickerType: PropTypes.oneOf(['auto', 'pull', 'popover']),
     pickerTitle: PropTypes.string, //PullPicker only
     editable: PropTypes.bool,
+    icon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number, PropTypes.oneOf(['none', 'default'])]),
     iconTintColor: PropTypes.string,
     placeholder: PropTypes.string,
     placeholderTextColor: PropTypes.string,
@@ -33,6 +34,7 @@ export default class Select extends Component {
     ...TouchableOpacity.defaultProps,
     size: 'md',
     editable: true,
+    icon: 'default',
     pickerType: 'auto',
   };
 
@@ -155,6 +157,7 @@ export default class Select extends Component {
 
     //iconTintColor
     if (!iconTintColor) iconTintColor = Theme.selectIconTintColor;
+    
     this.props = {style, size, value, valueStyle, valueElement, disabled, iconTintColor, iconSize, placeholder, placeholderTextColor, ...others};
   }
 
@@ -196,10 +199,28 @@ export default class Select extends Component {
     }
   }
 
+  renderIconElement() {
+    let {icon, iconTintColor, iconSize} = this.props;
+    let iconElement;
+    if (icon === null || icon === undefined || icon === 'none') {
+      iconElement = null;
+    } else if (React.isValidElement(icon)) {
+      iconElement = icon;
+    } else {
+      iconElement = (
+        <Image
+          style={{width: iconSize, height: iconSize, tintColor: iconTintColor}}
+          source={icon === 'default' ? require('../../icons/select.png') : icon}
+          />
+      );
+    }
+    return iconElement;
+  }
+
   render() {
     this.buildProps();
 
-    let {style, disabled, iconTintColor, editable, iconSize, valueElement, children, onPress, onLayout, ...others} = this.props;
+    let {style, disabled, icon, iconTintColor, editable, iconSize, valueElement, children, onPress, onLayout, ...others} = this.props;
     let ViewClass = disabled ? View : TouchableOpacity;
     return (
       <ViewClass
@@ -217,7 +238,7 @@ export default class Select extends Component {
       >
         {valueElement}
         <View style={{position: 'absolute', top: 0, bottom: 0, right: 0, justifyContent: 'center'}}>
-          <Image style={{width: iconSize, height: iconSize, tintColor: iconTintColor}} source={require('../../icons/select.png')} />
+          {this.renderIconElement()}
         </View>
       </ViewClass>
     );

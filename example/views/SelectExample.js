@@ -174,7 +174,7 @@ export default class SelectExample extends NavigationPage {
               items={this.customItems}
               getItemValue={(item, index) => item.value}
               getItemText={(item, index) => item.text}
-              iconTintColor='#8a6d3b'
+              icon={<Text style={{color: '#8a6d3b', fontSize: 16, paddingRight: 4}}>▼</Text>}
               placeholder='Select item'
               pickerTitle='Custom'
               onSelected={(item, index) => this.setState({valueCustom: item.value})}
