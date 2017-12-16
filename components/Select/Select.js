@@ -40,6 +40,10 @@ export default class Select extends Component {
     this.refs.selectView && this.refs.selectView.measureInWindow(callback);
   }
 
+  measure(callback) {
+    this.refs.selectView && this.refs.selectView.measure(callback);
+  }
+
   get selectedIndex() {
     let {value, items, getItemValue} = this.props;
     if (items instanceof Array) {
@@ -166,10 +170,10 @@ export default class Select extends Component {
   }
 
   showPopoverPicker() {
-    this.measureInWindow((x, y, width, height) => {
+    this.measure((x, y, width, height, pageX, pageY) => {
       let {items, getItemText, onSelected} = this.props;
       PopoverPicker.show(
-        {x, y, width, height},
+        {x: pageX, y: pageY, width, height},
         items,
         this.selectedIndex,
         onSelected,
@@ -203,8 +207,8 @@ export default class Select extends Component {
         disabled={disabled || !editable}
         onPress={e => onPress ? onPress(e) : this.showPicker()}
         onLayout={e => {
-          this.measureInWindow((x, y, width, height) => {
-            this.popoverView && this.popoverView.updateFromBounds({x, y, width, height});
+          this.measure((x, y, width, height, pageX, pageY) => {
+            this.popoverView && this.popoverView.updateFromBounds({x: pageX, y: pageY, width, height});
           });
           onLayout && onLayout(e);
         }}

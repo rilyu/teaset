@@ -16,13 +16,13 @@ export default class MenuExample extends NavigationPage {
   };
 
   show(view, align) {
-    view.measureInWindow((x, y, width, height) => {
+    view.measure((x, y, width, height, pageX, pageY) => {
       let items = [
         {title: 'Search', icon: require('../icons/search.png'), onPress: () => alert('Search')},
         {title: 'Edit', icon: require('../icons/edit.png'), onPress: () => alert('Edit')},
         {title: 'Remove', icon: require('../icons/trash.png'), onPress: () => alert('Remove')},
       ];
-      Menu.show({x, y, width, height}, items, {align});
+      Menu.show({x: pageX, y: pageY, width, height}, items, {align});
     });
   }
 

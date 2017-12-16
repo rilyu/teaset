@@ -51,6 +51,10 @@ export default class ListRow extends Component {
     this.refs.containerView && this.refs.containerView.measureInWindow(callback);
   }
 
+  measure(callback) {
+    this.refs.containerView && this.refs.containerView.measure(callback);
+  }
+
   closeSwipeActions() {
     this.refs.containerView && this.refs.containerView.timingClose();
   }
