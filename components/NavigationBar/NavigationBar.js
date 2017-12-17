@@ -85,6 +85,7 @@ export default class NavigationBar extends Component {
         titleTextAlign = 'left';
         break;
     }
+    let {left: leftInset, right: rightInset} = Theme.screenInset;
     style = [{
       backgroundColor: Theme.navColor,
       position: 'absolute',
@@ -92,8 +93,8 @@ export default class NavigationBar extends Component {
       right: 0,
       height: Theme.navBarContentHeight + (statusBarInsets ? Theme.statusBarHeight : 0),
       paddingTop: statusBarInsets ? Theme.statusBarHeight : 0,
-      paddingLeft: 4,
-      paddingRight: 4,
+      paddingLeft: 4 + leftInset,
+      paddingRight: 4 + rightInset,
       borderBottomWidth: Theme.navSeparatorLineWidth,
       borderBottomColor: Theme.navSeparatorColor,
       flexDirection: 'row',
