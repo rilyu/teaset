@@ -13,11 +13,12 @@ const X_WIDTH = 375;
 const X_HEIGHT = 812;
 const PAD_WIDTH = 768;
 const PAD_HEIGHT = 1024;
+const {width: D_WIDTH, height: D_HEIGHT} = Dimensions.get('window');
 
 const { PlatformConstants = {} } = NativeModules;
 const { minor = 0 } = PlatformConstants.reactNativeVersion || {};
 
-const isPad = Dimensions.get('window').width >= PAD_WIDTH && Dimensions.get('window').height >= PAD_WIDTH;
+const isPad = D_WIDTH >= PAD_WIDTH && D_HEIGHT >= PAD_WIDTH;
 
 const isIPhoneX = (() => {
   if (Platform.OS === 'web') return false;
