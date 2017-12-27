@@ -3,7 +3,7 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {Platform, View, ScrollView, Switch} from 'react-native';
+import {Platform, View, ScrollView, Switch, Image} from 'react-native';
 
 import {Theme, NavigationPage, ListRow, NavigationBar, Label} from 'teaset';
 import SelectRow from './SelectRow';
@@ -34,6 +34,7 @@ export default class NavigationBarExample extends NavigationPage {
       rightView: 'None',
       bgColor: 'Default',
       tintColor: 'Default',
+      customBackground: false,
       hidden: false,
       animated: true,
       statusBarStyle: 'Light Content',
@@ -128,7 +129,7 @@ export default class NavigationBarExample extends NavigationPage {
   }
 
   renderNavigationBar() {
-    let {hidden, animated, statusBarHidden} = this.state;
+    let {customBackground, hidden, animated, statusBarHidden} = this.state;
     return (
       <NavigationBar
         style={this.style}
@@ -137,6 +138,9 @@ export default class NavigationBarExample extends NavigationPage {
         leftView={this.renderNavigationLeftView()}
         rightView={this.renderNavigationRightView()}
         tintColor={this.tintColor}
+        background={!customBackground ? null :
+          <Image style={{flex: 1}} resizeMode='cover' source={require('../images/teaset2.jpg')} />
+        }
         hidden={hidden}
         animated={animated}
         statusBarStyle={this.statusBarStyle}
@@ -146,7 +150,7 @@ export default class NavigationBarExample extends NavigationPage {
   }
 
   renderPage() {
-    let {type, title, leftView, rightView, bgColor, tintColor, hidden, animated, statusBarStyle, statusBarHidden} = this.state;
+    let {type, title, leftView, rightView, bgColor, tintColor, customBackground, hidden, animated, statusBarStyle, statusBarHidden} = this.state;
     return (
       <ScrollView style={{flex: 1, paddingTop: Theme.statusBarHeight}}>
         <View style={{height: Theme.navBarContentHeight, alignItems: 'center', justifyContent: 'center'}}>
@@ -189,6 +193,10 @@ export default class NavigationBarExample extends NavigationPage {
           value={tintColor}
           items={this.tintColorItems}
           onSelected={(item, index) => this.setState({tintColor: item})}
+          />
+        <ListRow
+          title='Custom background'
+          detail={<Switch value={customBackground} onValueChange={value => this.setState({customBackground: value})} />}
           />
         <ListRow
           title='Hidden'

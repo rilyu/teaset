@@ -23,6 +23,7 @@ export default class NavigationBar extends Component {
     leftView: PropTypes.element,
     rightView: PropTypes.element,
     tintColor: PropTypes.string, //bar tint color, default tint color leftView and rightView
+    background: PropTypes.element,
     hidden: PropTypes.bool, //bar hidden
     animated: PropTypes.bool, //hide or show bar with animation
     statusBarStyle: PropTypes.oneOf(['default', 'light-content']), //status bar style (iOS only)
@@ -130,6 +131,7 @@ export default class NavigationBar extends Component {
         break;
     }
     let titleViewStyle = {
+      backgroundColor: 'rgba(0, 0, 0, 0)',
       position: 'absolute',
       top: statusBarInsets ? Theme.statusBarHeight : 0,
       left: 0,
@@ -151,7 +153,18 @@ export default class NavigationBar extends Component {
       title = <this.constructor.Title style={[{textAlign: titleTextAlign, color: Theme.navTitleColor}].concat(titleStyle)} text={title} />;
     }
 
-    return ({style, type, title, titleStyle, tintColor, titleViewStyle, leftRightViewStyle, hidden, animated, statusBarColor, statusBarStyle, statusBarInsets, ...others});
+    //build backgroundView style
+    let backgroundViewStyle = {
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      opacity: this.state.barOpacity,
+    };
+
+    return ({style, type, title, titleStyle, tintColor, titleViewStyle, leftRightViewStyle, backgroundViewStyle, hidden, animated, statusBarColor, statusBarStyle, statusBarInsets, ...others});
   }
 
   checkBarHidden(hidden, animated) {
@@ -197,10 +210,11 @@ export default class NavigationBar extends Component {
   }
 
   render() {
-    let {style, animated, statusBarStyle, statusBarColor, statusBarHidden, title, titleViewStyle, leftRightViewStyle, leftView, rightView, ...others} = this.buildProps();
+    let {style, animated, statusBarStyle, statusBarColor, statusBarHidden, title, titleViewStyle, leftRightViewStyle, leftView, rightView, background, backgroundViewStyle, ...others} = this.buildProps();
     return (
       <Animated.View style={style} {...others} onLayout={e => this.onLayout(e)}>
         <StatusBar backgroundColor={statusBarColor} translucent={true} barStyle={statusBarStyle} animated={animated} hidden={statusBarHidden} />
+        <Animated.View style={backgroundViewStyle}>{background}</Animated.View>
         <Animated.View style={titleViewStyle}>{title}</Animated.View>
         <Animated.View style={leftRightViewStyle} onLayout={e => this.onLeftViewLayout(e)}>{leftView}</Animated.View>
         <Animated.View style={leftRightViewStyle} onLayout={e => this.onRightViewLayout(e)}>{rightView}</Animated.View>
