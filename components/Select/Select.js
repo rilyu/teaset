@@ -86,10 +86,10 @@ export default class Select extends Component {
   }
 
   buildProps() {
-    let {style, size, value, valueStyle, disabled, iconTintColor, placeholder, placeholderTextColor, ...others} = this.props;
+    let {style, size, value, valueStyle, valueElement, disabled, iconTintColor, iconSize, placeholder, placeholderTextColor, ...others} = this.props;
 
     //style
-    let borderRadius, fontSize, paddingTop, paddingBottom, paddingLeft, paddingRight, height, iconSize;
+    let borderRadius, fontSize, paddingTop, paddingBottom, paddingLeft, paddingRight, height;
     switch (size) {
       case 'lg':
         borderRadius = Theme.selectBorderRadiusLG;
@@ -135,7 +135,6 @@ export default class Select extends Component {
     if (disabled) style = style.concat({opacity: Theme.btnDisabledOpacity});
 
     //value
-    let valueElement;
     if (!placeholderTextColor) placeholderTextColor = Theme.selectPlaceholderTextColor;
     valueStyle = [{
       color: Theme.selectTextColor,

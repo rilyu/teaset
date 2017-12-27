@@ -63,8 +63,7 @@ export default class OverlayPopoverView extends OverlayView {
 
     let {fromBounds, popoverWidth, popoverHeight} = this.state;
     if (popoverWidth === null || popoverHeight === null) {
-      let {popoverStyle, direction, showArrow, ...others} = this.props;
-      let arrow;
+      let {popoverStyle, direction, showArrow, arrow, ...others} = this.props;
       if (!showArrow) arrow = 'none';
       else {
         switch (direction) {
@@ -79,7 +78,7 @@ export default class OverlayPopoverView extends OverlayView {
       return;
     }
 
-    let {popoverStyle, direction, autoDirection, directionInsets, align, alignInsets, showArrow, ...others} = this.props;
+    let {popoverStyle, direction, autoDirection, directionInsets, align, alignInsets, showArrow, arrow, ...others} = this.props;
     let screenWidth = Dimensions.get('window').width;
     let screenHeight = Dimensions.get('window').height;
     let {x, y, width, height} = fromBounds ? fromBounds : {};
@@ -110,7 +109,7 @@ export default class OverlayPopoverView extends OverlayView {
     }
 
     //calculate popover top-left position and arrow type
-    let px, py, arrow;
+    let px, py;
     switch (direction) {
       case 'right':
         px = x + width + directionInsets;

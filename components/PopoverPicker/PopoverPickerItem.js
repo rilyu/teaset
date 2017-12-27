@@ -17,7 +17,7 @@ export default class PopoverPickerItem extends Component {
   };
 
   buildProps() {
-    let {style, title, selected, ...others} = this.props;
+    let {style, title, accessory, selected, ...others} = this.props;
 
     style = [{
       backgroundColor: Theme.poppItemColor,
@@ -35,7 +35,7 @@ export default class PopoverPickerItem extends Component {
       height: Theme.poppAccessoryHeight,
       tintColor: Theme.poppAccessoryCheckColor,
     };
-    let accessory = (
+    accessory = (
       <View style={{paddingLeft: Theme.poppAccessoryPaddingLeft}}>
         <Image style={imageStyle} source={selected ? require('teaset/icons/check.png') : null} />
       </View>

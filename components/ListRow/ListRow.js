@@ -60,7 +60,7 @@ export default class ListRow extends Component {
   }
 
   buildProps() {
-    let {style, activeOpacity, onPress, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, ...others} = this.props;
+    let {style, activeOpacity, onPress, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, contentStyle, ...others} = this.props;
 
     //style
     style = [{
@@ -79,7 +79,7 @@ export default class ListRow extends Component {
     if (!activeOpacity && activeOpacity !== 0) activeOpacity = onPress ? 0.2 : 1;
 
     //contentStyle
-    let contentStyle = {
+    contentStyle = {
       flex: 1,
       overflow: 'hidden',
       flexDirection: titlePlace === 'top' ? 'column' : 'row',

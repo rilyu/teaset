@@ -100,8 +100,8 @@ export default class Button extends TouchableOpacity {
       alignItems: 'center',
       justifyContent: 'center',
     }].concat(style);
+    style = StyleSheet.flatten(style);
     if (disabled) {
-      style = StyleSheet.flatten(style);
       style.opacity = Theme.btnDisabledOpacity;
     }
     this.state.anim._value = style.opacity === undefined ? 1 : style.opacity;

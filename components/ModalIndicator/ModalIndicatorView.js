@@ -44,7 +44,7 @@ export default class ModalIndicatorView extends Overlay.View {
   buildProps() {
     super.buildProps();
 
-    let {style, position, color, ...others} = this.props;
+    let {style, contentStyle, position, color, ...others} = this.props;
 
     style = [{
       paddingLeft: Theme.miScreenPaddingLeft,
@@ -55,7 +55,7 @@ export default class ModalIndicatorView extends Overlay.View {
       alignItems: 'center',
     }].concat(style);
 
-    let contentStyle = {
+    contentStyle = {
       alignItems: 'center',
     };
 

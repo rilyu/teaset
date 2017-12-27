@@ -66,7 +66,7 @@ export default class Popover extends Component {
   }
 
   buildProps() {
-    let {style, arrow, paddingCorner, ...others} = this.props;
+    let {style, arrow, paddingCorner, headerStyle, arrowStyle, contentStyle, popoverStyle, ...others} = this.props;
 
     style = [{
       backgroundColor: Theme.popoverColor,
@@ -151,12 +151,12 @@ export default class Popover extends Component {
         break;
     }
 
-    let headerStyle = Object.assign({
+    headerStyle = Object.assign({
       position: 'absolute',
       overflow: 'hidden',
       backgroundColor: 'rgba(0, 0, 0, 0)',
     }, headerLayouts[useArrow]);
-    let arrowStyle = Object.assign({
+    arrowStyle = Object.assign({
       backgroundColor,
       width: arrowSize,
       height: arrowSize,
@@ -164,8 +164,8 @@ export default class Popover extends Component {
       borderTopWidth: borderWidth,
       borderLeftWidth: borderWidth,
     }, arrowLayouts[useArrow]);
-    let contentStyle = this.filterContentStyle(fs);
-    let popoverStyle = [this.filterPopoverStyle(fs, useArrow === 'none'), {
+    contentStyle = this.filterContentStyle(fs);
+    popoverStyle = [this.filterPopoverStyle(fs, useArrow === 'none'), {
       backgroundColor: useArrow === 'none' ? Theme.popoverColor : 'rgba(0, 0, 0, 0)', //Transparent background will cause a warning at debug mode
     }].concat(popoverLayouts[useArrow]);
 
