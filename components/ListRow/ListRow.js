@@ -240,14 +240,16 @@ export default class ListRow extends Component {
           ref='containerView'
         >
           {icon}
-          <View style={contentStyle}>
-            {title}
-            {detail}
-          </View>
+          {!title && !detail ? null :
+            <View style={contentStyle}>
+              {title}
+              {detail}
+            </View>
+          }
+          {!title && !detail ? children : null}
           {accessory}
         </SwipeTouchableOpacity>
         {bottomSeparator}
-        {children}
       </View>
     );
   }
