@@ -158,7 +158,7 @@ export default class TabView extends Component {
   render() {
     let props = this.buildProps();
 
-    let {barStyle, type, children, ...others} = props;
+    let {barStyle, type, children, onChange, ...others} = props; //disable View.onChange
     return (
       <View {...others}>
         {type === 'carousel' ? this.renderCarousel(props) : this.renderProjector(props)}
