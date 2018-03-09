@@ -19,6 +19,7 @@ export default class TabView extends Component {
     type: PropTypes.oneOf(['projector', 'carousel']),
     barStyle: ViewPropTypes.style,
     activeIndex: PropTypes.number,
+    activeOpacity: PropTypes.number,
     onChange: PropTypes.func, //(index)
   };
 
@@ -98,7 +99,7 @@ export default class TabView extends Component {
         <View style={barStyle} />
         <View style={buttonContainerStyle} pointerEvents='box-none'>
           {children.map((item, index) => {
-            let {type, title, icon, activeIcon, iconContainerStyle, badge, onPress} = item.props;
+            let {type, title, icon, activeIcon, iconContainerStyle, badge, onPress, activeOpacity} = item.props;
             let sheetIndex = sheetCount;
             if (type === 'sheet') sheetCount += 1;
             return (
@@ -108,6 +109,7 @@ export default class TabView extends Component {
                 title={title}
                 icon={icon}
                 activeIcon={activeIcon}
+                activeOpacity={activeOpacity}
                 active={type === 'sheet' ? sheetIndex === this.activeIndex : false}
                 iconContainerStyle={iconContainerStyle}
                 badge={badge}
