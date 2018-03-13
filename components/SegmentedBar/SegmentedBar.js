@@ -269,6 +269,7 @@ export default class SegmentedBar extends Component {
         {children.map((item, index) => {
           return (
           <TouchableOpacity
+            style={{alignItems: 'center', justifyContent: 'center'}}
             key={index}
             onPress={() => this.onButtonPress(index)}
             onLayout={e => this.onButtonLayout(index, e)}
