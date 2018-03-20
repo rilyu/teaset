@@ -40,7 +40,7 @@ None.
 <Checkbox
   title='Default'
   checked={this.state.checked}
-  onChange={checked => shis.setState({checked})}
+  onChange={checked => this.setState({checked})}
   />
 ```
 
@@ -50,7 +50,7 @@ None.
   title='Large'
   size='lg'
   checked={this.state.checked}
-  onChange={checked => shis.setState({checked})}
+  onChange={checked => this.setState({checked})}
   />
 ```
 
