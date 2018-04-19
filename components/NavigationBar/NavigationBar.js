@@ -26,7 +26,7 @@ export default class NavigationBar extends Component {
     background: PropTypes.element,
     hidden: PropTypes.bool, //bar hidden
     animated: PropTypes.bool, //hide or show bar with animation
-    statusBarStyle: PropTypes.oneOf(['default', 'light-content']), //status bar style (iOS only)
+    statusBarStyle: PropTypes.oneOf(['default', 'light-content','dark-content',]), //status bar style (iOS only)
     statusBarColor: PropTypes.string, //status bar color, default: style.backgroundColor
     statusBarHidden: PropTypes.bool, //status bar hidden
     statusBarInsets: PropTypes.bool, //auto add space for iOS status bar
