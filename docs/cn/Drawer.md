@@ -32,7 +32,7 @@ let view = (
     </View>
   </View>
 );
-let drawer = Drawer.show(view, 'bottom');
+let drawer = Drawer.open(view, 'bottom');
 
 ...
 

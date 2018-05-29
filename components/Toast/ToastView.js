@@ -33,7 +33,7 @@ export default class ToastView extends Overlay.View {
   buildProps() {
     super.buildProps();
 
-    let {style, text, icon, position, ...others} = this.props;
+    let {style, contentStyle, text, icon, position, ...others} = this.props;
 
     style = [{
       paddingLeft: Theme.toastScreenPaddingLeft,
@@ -44,7 +44,7 @@ export default class ToastView extends Overlay.View {
       alignItems: 'center',
     }].concat(style);
 
-    let contentStyle = {
+    contentStyle = {
       backgroundColor: Theme.toastColor,
       paddingLeft: Theme.toastPaddingLeft,
       paddingRight: Theme.toastPaddingRight,

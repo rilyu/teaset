@@ -5,7 +5,7 @@
 import React, {Component} from 'react';
 import {View, ScrollView, Text, Image} from 'react-native';
 
-import {NavigationPage, ListRow, Button, Label} from 'teaset';
+import {NavigationPage, ListRow, Button, Label, Theme} from 'teaset';
 
 export default class ButtonExample extends NavigationPage {
 
@@ -43,6 +43,7 @@ export default class ButtonExample extends NavigationPage {
             <Label style={{color: '#8a6d3b', fontSize: 16, paddingLeft: 8}} text='Search' />
           </Button>
         } topSeparator='full' bottomSeparator='full' />
+        <View style={{height: Theme.screenInset.bottom}} />
       </ScrollView>
     );
   }

@@ -61,13 +61,13 @@ export default class OverlayExample extends NavigationPage {
   }
 
   showPopCustom(imageSource, fromView) {
-    fromView.measureInWindow((x, y, width, height) => {
+    fromView.measure((x, y, width, height, pageX, pageY) => {
       let overlayView = (
         <Overlay.PopView
           style={{alignItems: 'center', justifyContent: 'center'}}
           overlayOpacity={1}
           type='custom'
-          customBounds={{x, y, width, height}}
+          customBounds={{x: pageX, y: pageY, width, height}}
           ref={v => this.customPopView = v}
           >
           <TouchableWithoutFeedback onPress={() => this.customPopView && this.customPopView.close()}>
@@ -113,8 +113,8 @@ export default class OverlayExample extends NavigationPage {
     };
     let popoverStyle = [].concat(black ? blackStyle : whiteStyle).concat(shadow ? shadowStyle : null);
 
-    view.measureInWindow((x, y, width, height) => {
-      let fromBounds = {x, y, width, height};
+    view.measure((x, y, width, height, pageX, pageY) => {
+      let fromBounds = {x: pageX, y: pageY, width, height};
       let overlayView = (
         <Overlay.PopoverView popoverStyle={popoverStyle} fromBounds={fromBounds} direction={direction} align={align} directionInsets={4} showArrow={showArrow}>
           <Label style={{color: black ? '#fff' : '#000'}} size='lg' text={direction + ' ' + align} />
@@ -202,6 +202,7 @@ export default class OverlayExample extends NavigationPage {
           />
         <View style={{height: 20}} />
         <ListRow title='Multi overlay' onPress={() => this.showMulti()} topSeparator='full' bottomSeparator='full' />
+        <View style={{height: Theme.screenInset.bottom}} />
       </ScrollView>
     );
   }

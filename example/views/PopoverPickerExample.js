@@ -35,9 +35,9 @@ export default class PopoverPickerExample extends NavigationPage {
   }
 
   show(view) {
-    view.measureInWindow((x, y, width, height) => {
+    view.measure((x, y, width, height, pageX, pageY) => {
       PopoverPicker.show(
-        {x, y, width, height},
+        {x: pageX, y: pageY, width, height},
         this.items,
         this.state.selectedIndex,
         (item, index) => this.setState({selectedIndex: index})
@@ -46,9 +46,9 @@ export default class PopoverPickerExample extends NavigationPage {
   }
 
   showModal(view) {
-    view.measureInWindow((x, y, width, height) => {
+    view.measure((x, y, width, height, pageX, pageY) => {
       PopoverPicker.show(
-        {x, y, width, height},
+        {x: pageX, y: pageY, width, height},
         this.items,
         this.state.modalSelectedIndex,
         (item, index) => this.setState({modalSelectedIndex: index}),

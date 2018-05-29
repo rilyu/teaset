@@ -33,14 +33,14 @@ export default class AlbumViewExample extends NavigationPage {
 
   onImagePress(index) {
     let pressView = this.refs['it' + index];
-    pressView.measureInWindow((x, y, width, height) => {
+    pressView.measure((x, y, width, height, pageX, pageY) => {
       let overlayView = (
         <Overlay.PopView
           style={{}}
           containerStyle={{flex: 1}}
           overlayOpacity={1}
           type='custom'
-          customBounds={{x, y, width, height}}
+          customBounds={{x: pageX, y: pageY, width, height}}
           ref={v => this.fullImageView = v}
         >
           <AlbumView

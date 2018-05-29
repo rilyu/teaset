@@ -156,7 +156,7 @@ export default class SegmentedView extends Component {
   render() {
     this.buildProps();
 
-    let {type, barPosition, children, ...others} = this.props;
+    let {type, barPosition, children, onChange, ...others} = this.props; //disable View.onChange
     return (
       <View {...others}>
         {barPosition === 'top' ? this.renderBar() : null}

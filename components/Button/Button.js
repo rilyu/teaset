@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
@@ -24,8 +24,19 @@ export default class Button extends TouchableOpacity {
     size: 'md',
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.disabled != this.props.disabled) {
+      let opacity = Theme.btnDisabledOpacity;
+      if (!nextProps.disabled) {
+        let fs = StyleSheet.flatten(nextProps.style);
+        opacity = fs && (fs.opacity || fs.opacity === 0) ? fs.opacity : 1;
+      }
+      this.state.anim.setValue(opacity);
+    }
+  }
+
   buildProps() {
-    let {style, type, size, title, titleStyle, activeOpacity, children, ...others} = this.props;
+    let {style, type, size, title, titleStyle, activeOpacity, disabled, children, ...others} = this.props;
 
     let backgroundColor, borderColor, borderWidth, borderRadius, paddingVertical, paddingHorizontal;
     let textColor, textFontSize;
@@ -100,6 +111,11 @@ export default class Button extends TouchableOpacity {
       alignItems: 'center',
       justifyContent: 'center',
     }].concat(style);
+    style = StyleSheet.flatten(style);
+    if (disabled) {
+      style.opacity = Theme.btnDisabledOpacity;
+    }
+    this.state.anim._value = style.opacity === undefined ? 1 : style.opacity;
 
     if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
       titleStyle = [{
@@ -111,20 +127,11 @@ export default class Button extends TouchableOpacity {
     }
     if (title) children = title;
 
-    this.props = {style, type, size, title, titleStyle, activeOpacity, children, ...others};
+    this.props = {style, type, size, title, titleStyle, activeOpacity, disabled, children, ...others};
   }
 
   render() {
     this.buildProps();
-
-    if (this.props.disabled) {
-      return (
-        <View style={{opacity: Theme.btnDisabledOpacity}}>
-          {super.render()}
-        </View>
-      );
-    } else {
-      return super.render();
-    }
+    return super.render();
   }
 }

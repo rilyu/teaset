@@ -90,10 +90,9 @@ export default class BasePage extends Component {
     let {style, ...others} = this.props;
     style = [{
       flex: 1,
-      height: 500,
       backgroundColor: Theme.pageColor,
     }].concat(style);
-    this.props = {style, ...others};
+    return ({style, ...others});
   }
 
   renderPage() {
@@ -101,9 +100,7 @@ export default class BasePage extends Component {
   }
 
   render() {
-    this.buildProps();
-    
-    let {autoKeyboardInsets, keyboardTopInsets, ...others} = this.props;
+    let {autoKeyboardInsets, keyboardTopInsets, ...others} = this.buildProps();
     return (
       <View {...others}>
         {this.renderPage()}

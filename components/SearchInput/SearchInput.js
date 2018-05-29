@@ -52,6 +52,22 @@ export default class SearchInput extends Component {
     }
   }
 
+  focus() {
+    return this.refs.textInput && this.refs.textInput.focus();
+  }
+
+  blur() {
+    return this.refs.textInput && this.refs.textInput.blur();
+  }
+
+  isFocused() {
+    return this.refs.textInput && this.refs.textInput.isFocused();
+  }
+
+  clear() {
+    return this.refs.textInput && this.refs.textInput.clear();
+  }
+
   buildProps() {
     let {style, inputStyle, iconSize, disabled, placeholderTextColor, pointerEvents, ...others} = this.props;
 
@@ -147,6 +163,7 @@ export default class SearchInput extends Component {
             onChangeText={text => this.onChangeText(text)}
             selectionColor={this.state.selectionColor ? this.state.selectionColor : selectionColor}
             {...others}
+            ref='textInput'
             />
         </View>
       </View>

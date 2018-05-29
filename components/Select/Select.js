@@ -23,6 +23,7 @@ export default class Select extends Component {
     pickerType: PropTypes.oneOf(['auto', 'pull', 'popover']),
     pickerTitle: PropTypes.string, //PullPicker only
     editable: PropTypes.bool,
+    icon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number, PropTypes.oneOf(['none', 'default'])]),
     iconTintColor: PropTypes.string,
     placeholder: PropTypes.string,
     placeholderTextColor: PropTypes.string,
@@ -33,11 +34,16 @@ export default class Select extends Component {
     ...TouchableOpacity.defaultProps,
     size: 'md',
     editable: true,
+    icon: 'default',
     pickerType: 'auto',
   };
 
   measureInWindow(callback) {
     this.refs.selectView && this.refs.selectView.measureInWindow(callback);
+  }
+
+  measure(callback) {
+    this.refs.selectView && this.refs.selectView.measure(callback);
   }
 
   get selectedIndex() {
@@ -80,10 +86,10 @@ export default class Select extends Component {
   }
 
   buildProps() {
-    let {style, size, value, valueStyle, disabled, iconTintColor, placeholder, placeholderTextColor, ...others} = this.props;
+    let {style, size, value, valueStyle, valueElement, disabled, iconTintColor, iconSize, placeholder, placeholderTextColor, ...others} = this.props;
 
     //style
-    let borderRadius, fontSize, paddingTop, paddingBottom, paddingLeft, paddingRight, height, iconSize;
+    let borderRadius, fontSize, paddingTop, paddingBottom, paddingLeft, paddingRight, height;
     switch (size) {
       case 'lg':
         borderRadius = Theme.selectBorderRadiusLG;
@@ -129,7 +135,6 @@ export default class Select extends Component {
     if (disabled) style = style.concat({opacity: Theme.btnDisabledOpacity});
 
     //value
-    let valueElement;
     if (!placeholderTextColor) placeholderTextColor = Theme.selectPlaceholderTextColor;
     valueStyle = [{
       color: Theme.selectTextColor,
@@ -151,6 +156,7 @@ export default class Select extends Component {
 
     //iconTintColor
     if (!iconTintColor) iconTintColor = Theme.selectIconTintColor;
+    
     this.props = {style, size, value, valueStyle, valueElement, disabled, iconTintColor, iconSize, placeholder, placeholderTextColor, ...others};
   }
 
@@ -166,10 +172,10 @@ export default class Select extends Component {
   }
 
   showPopoverPicker() {
-    this.measureInWindow((x, y, width, height) => {
+    this.measure((x, y, width, height, pageX, pageY) => {
       let {items, getItemText, onSelected} = this.props;
       PopoverPicker.show(
-        {x, y, width, height},
+        {x: pageX, y: pageY, width, height},
         items,
         this.selectedIndex,
         onSelected,
@@ -192,10 +198,28 @@ export default class Select extends Component {
     }
   }
 
+  renderIconElement() {
+    let {icon, iconTintColor, iconSize} = this.props;
+    let iconElement;
+    if (icon === null || icon === undefined || icon === 'none') {
+      iconElement = null;
+    } else if (React.isValidElement(icon)) {
+      iconElement = icon;
+    } else {
+      iconElement = (
+        <Image
+          style={{width: iconSize, height: iconSize, tintColor: iconTintColor}}
+          source={icon === 'default' ? require('../../icons/select.png') : icon}
+          />
+      );
+    }
+    return iconElement;
+  }
+
   render() {
     this.buildProps();
 
-    let {style, disabled, iconTintColor, editable, iconSize, valueElement, children, onPress, onLayout, ...others} = this.props;
+    let {style, disabled, icon, iconTintColor, editable, iconSize, valueElement, children, onPress, onLayout, ...others} = this.props;
     let ViewClass = disabled ? View : TouchableOpacity;
     return (
       <ViewClass
@@ -203,8 +227,8 @@ export default class Select extends Component {
         disabled={disabled || !editable}
         onPress={e => onPress ? onPress(e) : this.showPicker()}
         onLayout={e => {
-          this.measureInWindow((x, y, width, height) => {
-            this.popoverView && this.popoverView.updateFromBounds({x, y, width, height});
+          this.measure((x, y, width, height, pageX, pageY) => {
+            this.popoverView && this.popoverView.updateFromBounds({x: pageX, y: pageY, width, height});
           });
           onLayout && onLayout(e);
         }}
@@ -213,7 +237,7 @@ export default class Select extends Component {
       >
         {valueElement}
         <View style={{position: 'absolute', top: 0, bottom: 0, right: 0, justifyContent: 'center'}}>
-          <Image style={{width: iconSize, height: iconSize, tintColor: iconTintColor}} source={require('../../icons/select.png')} />
+          {this.renderIconElement()}
         </View>
       </ViewClass>
     );

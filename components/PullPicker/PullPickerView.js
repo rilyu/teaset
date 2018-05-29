@@ -51,8 +51,9 @@ export default class PullPickerView extends Overlay.PullView {
       backgroundColor: Theme.pupHeaderSeparatorColor,
       height: Theme.pupHeaderSeparatorHeight,
     }
+    let {left: leftInset, right: rightInset} = Theme.screenInset;
     children = (
-      <View style={{backgroundColor: Theme.pupColor, maxHeight: Theme.pupMaxHeight}}>
+      <View style={{backgroundColor: Theme.pupColor, maxHeight: Theme.pupMaxHeight, paddingLeft: leftInset, paddingRight: rightInset}}>
         {!title ? null :
           <View style={headerRowStyle}>
             <Label style={headerTextStyle} text={title} />
@@ -70,6 +71,7 @@ export default class PullPickerView extends Overlay.PullView {
               onPress={() => this.onItemPress(index)}
               />
           ))}
+          <View style={{height: Theme.screenInset.bottom}} />
         </ScrollView>
       </View>
     );

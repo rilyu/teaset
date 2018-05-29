@@ -73,18 +73,22 @@ export default class OverlayView extends Component {
   }
 
   get appearAnimates() {
+    let duration = 200;
     let animates = [
-      Animated.spring(this.state.overlayOpacity, {
+      Animated.timing(this.state.overlayOpacity, {
         toValue: this.overlayOpacity,
+        duration,
       })
     ];
     return animates;
   }
   
   get disappearAnimates() {
+    let duration = 200;
     let animates = [
-      Animated.spring(this.state.overlayOpacity, {
+      Animated.timing(this.state.overlayOpacity, {
         toValue: 0,
+        duration,
       })
     ];
     return animates;

@@ -16,13 +16,13 @@ export default class ActionPopoverExample extends NavigationPage {
   };
 
   show(view) {
-    view.measureInWindow((x, y, width, height) => {
+    view.measure((x, y, width, height, pageX, pageY) => {
       let items = [
         {title: 'Copy', onPress: () => alert('Copy')},
         {title: 'Remove', onPress: () => alert('Remove')},
         {title: 'Share', onPress: () => alert('Share')},
       ];
-      ActionPopover.show({x, y, width, height}, items);
+      ActionPopover.show({x: pageX, y: pageY, width, height}, items);
     });
   }
 
