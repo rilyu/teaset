@@ -14,9 +14,10 @@ export default class SegmentedBar extends Component {
   static propTypes = {
     ...ViewPropTypes,
     justifyItem: PropTypes.oneOf(['fixed', 'scrollable']),
-    indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth']),
+    indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth', 'customWidth']),
     indicatorPosition: PropTypes.oneOf(['top', 'bottom']),
     indicatorLineColor: PropTypes.string,
+    indicatorWidth: PropTypes.number,
     indicatorLineWidth: PropTypes.number,
     indicatorPositionPadding: PropTypes.number,
     animated: PropTypes.bool,
@@ -29,6 +30,7 @@ export default class SegmentedBar extends Component {
     ...View.defaultProps,
     justifyItem: 'fixed',
     indicatorType: 'itemWidth',
+    indicatorWidth: 20,
     indicatorPosition: 'bottom',
     animated: true,
     autoScroll: true,
@@ -83,6 +85,11 @@ export default class SegmentedBar extends Component {
         return this._buttonsLayout[this._activeIndex].x;
       case 'itemWidth':
         return this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x + this._itemsAddWidth[this._activeIndex] / 2;
+      case 'customWidth':
+        const isMoreThanDefault = this.props.indicatorWidth > this._itemsLayout[this.activeIndex].width;
+        return isMoreThanDefault ?
+          this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x
+          : this._buttonsLayout[this._activeIndex].x + (this._buttonsLayout[this._activeIndex].width - this.props.indicatorWidth) / 2;
     }
     return 0;
   }
@@ -93,6 +100,9 @@ export default class SegmentedBar extends Component {
         return this._buttonsLayout[this.activeIndex].width;
       case 'itemWidth':
         return this._itemsLayout[this.activeIndex].width - this._itemsAddWidth[this._activeIndex];
+      case 'customWidth':
+        const isMoreThanDefault = this.props.indicatorWidth > this._itemsLayout[this.activeIndex].width;
+        return isMoreThanDefault ? this._itemsLayout[this.activeIndex].width : this.props.indicatorWidth;
     }
     return 0;
   }
@@ -218,7 +228,7 @@ export default class SegmentedBar extends Component {
   }
 
   renderFixed() {
-    let {style, justifyItem, indicatorType, indicatorPosition, indicatorLineColor, indicatorLineWidth, indicatorPositionPadding, animated, activeIndex, onChange, children, ...others} = this.props;
+    let {style, justifyItem, indicatorType, indicatorPosition, indicatorLineColor, indicatorPositionPadding, animated, activeIndex, onChange, children, ...others} = this.props;
     style = [{
       backgroundColor: Theme.sbColor,
       flexDirection: 'row',
@@ -246,7 +256,7 @@ export default class SegmentedBar extends Component {
   }
 
   renderScrollable() {
-    let {style, justifyItem, indicatorType, indicatorPosition, indicatorLineColor, indicatorLineWidth, indicatorPositionPadding, animated, activeIndex, onChange, onLayout, children, ...others} = this.props;
+    let {style, justifyItem, indicatorType, indicatorPosition, indicatorLineColor, indicatorPositionPadding, animated, activeIndex, onChange, onLayout, children, ...others} = this.props;
     style = [{
       backgroundColor: Theme.sbColor,
     }].concat(style);

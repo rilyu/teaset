@@ -39,7 +39,7 @@ export default class SegmentedBarExample extends NavigationPage {
     this.barCustomItems = ['Home', 'Store', 'Me'];
 
     this.justifyItemItems = ['fixed', 'scrollable'];
-    this.indicatorTypeItems = ['none', 'boxWidth', 'itemWidth'];
+    this.indicatorTypeItems = ['none', 'boxWidth', 'itemWidth', 'customWidth'];
     this.indicatorPositionItems = ['top', 'bottom'];
 
     Object.assign(this.state, {
