@@ -39,7 +39,7 @@ export default class SegmentedBarExample extends NavigationPage {
     this.barCustomItems = ['Home', 'Store', 'Me'];
 
     this.justifyItemItems = ['fixed', 'scrollable'];
-    this.indicatorTypeItems = ['none', 'boxWidth', 'itemWidth'];
+    this.indicatorTypeItems = ['none', 'boxWidth', 'itemWidth', 'customWidth'];
     this.indicatorPositionItems = ['top', 'bottom'];
 
     Object.assign(this.state, {
@@ -104,7 +104,7 @@ export default class SegmentedBarExample extends NavigationPage {
           indicatorType={indicatorType}
           indicatorPosition={indicatorPosition}
           indicatorLineColor={custom ? '#5cb85c' : undefined}
-          indicatorLineWidth={custom ? 1 : undefined}
+          indicatorLineHeight={custom ? 1 : undefined}
           indicatorPositionPadding={custom ? 3 : undefined}
           animated={animated}
           autoScroll={autoScroll}

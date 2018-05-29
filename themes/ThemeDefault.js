@@ -250,7 +250,7 @@ export default {
   sbBtnActiveTitleColor: primaryColor,
   sbBtnActiveTextFontSize: 13,
   sbIndicatorLineColor: primaryColor,
-  sbIndicatorLineWidth: 2,
+  sbIndicatorLineHeight: 2,
   sbIndicatorPositionPadding: 0,
 
   //SegmentedView

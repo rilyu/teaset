@@ -6,10 +6,11 @@ SegmentedBar 组件定义一个分段工具条组件, 与 [`<Carousel />`](./Car
 |---|---|---|---|
 | [View props...](https://facebook.github.io/react-native/docs/view.html) |  |  | SegmentedBar 组件继承 View 组件的全部属性。
 | justifyItem | string | 'fixed' | Item 排列模式。<br/>- fixed: 固定位置等宽排列<br/>- scrollable: 可滚动，Item 数量较多一屏显示不下时使用这种模式
-| indicatorType | string | 'itemWidth' | 激活指示器类型。<br/>- none: 无<br/>- boxWidth: 等分区间宽度<br/>- itemWidth: Item 内容宽度
+| indicatorType | string | 'itemWidth' | 激活指示器类型。<br/>- none: 无<br/>- boxWidth: 等分区间宽度<br/>- itemWidth: Item 内容宽度<br/>- customWidth: 指定宽度
 | indicatorPosition | string | 'bottom' | 激活指示器位置。<br/>- top: 上方<br/>- bottom: 下方
 | indicatorLineColor | string |  | 激活指示器颜色，默认值在 Theme 中设置。
-| indicatorLineWidth | number |  | 激活指示器线宽度，默认值在 Theme 中设置。
+| indicatorLineHeight | number |  | 激活指示器线高度，默认值在 Theme 中设置。
+| indicatorLineWidth | number |  | 激活指示器线宽度，当 `indicatorType` 为 `customWidth` 时起作用
 | indicatorPositionPadding | number |  | 激活指示器与上边界或下边界的距离，默认值在 Theme 中设置。
 | animated | bool | true | 改变激活 Item 时是否有动画效果。
 | autoScroll | bool | true | 是否自动滚动激活 Item 到容器中间，仅 justifyItem 为 'scrollable' 时有效。
