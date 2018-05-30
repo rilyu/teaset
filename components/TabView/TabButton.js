@@ -62,18 +62,18 @@ export default class TabButton extends Component {
       let iconStyle = {
         width: Theme.tvBarBtnIconSize,
         height: Theme.tvBarBtnIconSize,
-        tintColor: Theme.tvBarBtnIconTintColor,
+        // tintColor: Theme.tvBarBtnIconTintColor,
       };
-      icon = <Image style={iconStyle} source={icon} />
+      icon = <Image style={iconStyle} source={icon} resizeMode="contain" />
     }
 
     if (!React.isValidElement(activeIcon) && (activeIcon || activeIcon === 0)) {
       let iconStyle = {
         width: Theme.tvBarBtnIconSize,
         height: Theme.tvBarBtnIconSize,
-        tintColor: Theme.tvBarBtnIconActiveTintColor,
+        // tintColor: Theme.tvBarBtnIconActiveTintColor,
       };
-      activeIcon = <Image style={iconStyle} source={activeIcon} />
+      activeIcon = <Image style={iconStyle} source={activeIcon} resizeMode="contain" />
     }
 
     if (!React.isValidElement(badge) && badge) {
