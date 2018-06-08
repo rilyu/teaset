@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Platform, View} from 'react-native';
+import {Platform, View, Dimensions} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import TeaNavigator from '../TeaNavigator/TeaNavigator';
@@ -29,16 +29,30 @@ export default class NavigationPage extends BasePage {
     navigationBarInsets: true,
   };
 
-  buildProps() {
-    super.buildProps();
+  constructor(props) {
+    super(props);
+    this.screenWidth = Dimensions.get('window').width;
+  }
 
-    let {navigationBarInsets, ...others} = this.props;
+  buildProps() {
+    let {navigationBarInsets, ...others} = super.buildProps();
+    let {left: paddingLeft, right: paddingRight} = Theme.screenInset;
     let pageContainerStyle = [{
       flex: 1,
-      padding: 0,
-      marginTop: navigationBarInsets ? (Platform.OS === 'ios' ? 64 : 44) : 0,
+      paddingLeft,
+      paddingRight,
+      marginTop: navigationBarInsets ? (Theme.navBarContentHeight + Theme.statusBarHeight) : 0,
     }];
-    this.props = {navigationBarInsets, pageContainerStyle, ...others};
+    return ({navigationBarInsets, pageContainerStyle, ...others});
+  }
+
+  onLayout(e) {
+    let {width} = Dimensions.get('window');
+    if (width != this.screenWidth) {
+      this.screenWidth = width;
+      this.forceUpdate();
+    }
+    this.props.onLayout && this.props.onLayout(e);
   }
 
   renderNavigationTitle() {
@@ -74,11 +88,9 @@ export default class NavigationPage extends BasePage {
   }
 
   render() {
-    this.buildProps();
-    
-    let {autoKeyboardInsets, keyboardTopInsets, pageContainerStyle, ...others} = this.props;
+    let {autoKeyboardInsets, keyboardTopInsets, pageContainerStyle, onLayout, ...others} = this.buildProps();
     return (
-      <View {...others}>
+      <View onLayout={e => this.onLayout(e)} {...others}>
         <View style={{flex: 1}} >
           <View style={pageContainerStyle}>
             {this.renderPage()}

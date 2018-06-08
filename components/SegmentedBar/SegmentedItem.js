@@ -29,8 +29,6 @@ export default class SegmentedItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      badgeRight: 0,
-      badgeTop: 0,
       badgeWidth: 0,
     };
   }
@@ -42,8 +40,8 @@ export default class SegmentedItem extends Component {
     style = [{
       paddingTop: Theme.sbBtnPaddingTop,
       paddingBottom: Theme.sbBtnPaddingBottom,
-      paddingLeft: Theme.sbBtnPaddingLeft,
-      paddingRight: Theme.sbBtnPaddingRight,
+      paddingLeft: Theme.sbBtnPaddingLeft + badgeWidth / 2,
+      paddingRight: Theme.sbBtnPaddingRight + badgeWidth / 2,
       overflow: 'visible',
       alignItems: 'center',
       justifyContent: 'center',
@@ -69,8 +67,8 @@ export default class SegmentedItem extends Component {
     } else if (!React.isValidElement(badge) && badge) {
       let badgeStyle = {
         position: 'absolute',
-        right: this.state.badgeRight,
-        top: this.state.badgeTop,
+        right: 0,
+        top: 0,
       };
       badge = (
         <Badge
@@ -79,10 +77,8 @@ export default class SegmentedItem extends Component {
           count={badge}
           onLayout={e => {
             let {width} = e.nativeEvent.layout;
-            let badgeRight = -width / 2;
-            let badgeTop = 0;
-            if (badgeRight != this.state.badgeRight || badgeTop != this.state.badgeTop || badgeWidth != this.state.badgeWidth) {
-              this.setState({badgeRight, badgeTop, badgeWidth: width});
+            if (width != this.state.badgeWidth) {
+              this.setState({badgeWidth: width});
               onAddWidth && onAddWidth(width);
             }
           }}/>

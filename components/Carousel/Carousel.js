@@ -132,9 +132,11 @@ export default class Carousel extends Component {
     let {width, height} = this.state;
     if (cardIndex < 0) cardIndex = 0;
     else if (cardIndex >= this.cardCount) cardIndex = this.cardCount - 1;
-    if (this.props.horizontal)
-      this.refs.scrollView.scrollTo({x: width * cardIndex, y: 0, animated: animated});
-    else this.refs.scrollView.scrollTo({x: 0, y: height * cardIndex, animated: animated});
+    if (this.refs.scrollView) {
+      if (this.props.horizontal)
+        this.refs.scrollView.scrollTo({x: width * cardIndex, y: 0, animated: animated});
+      else this.refs.scrollView.scrollTo({x: 0, y: height * cardIndex, animated: animated});      
+    }
   }
 
   //滚动到下一张卡片

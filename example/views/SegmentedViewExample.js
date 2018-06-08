@@ -73,6 +73,7 @@ export default class SegmentedViewExample extends NavigationPage {
           indicatorLineColor={custom ? '#5cb85c' : undefined}
           indicatorLineWidth={custom ? 1 : undefined}
           indicatorPositionPadding={custom ? 3 : undefined}
+          activeIndex={this.state.activeIndex}
           onChange={index => this.setState({activeIndex: index})}
         >
           <SegmentedView.Sheet title={this.renderTitle(0)}>
@@ -103,6 +104,7 @@ export default class SegmentedViewExample extends NavigationPage {
           detail={<Switch value={this.state.custom} onValueChange={value => this.setState({custom: value})} />}
           bottomSeparator='full'
           />
+        <View style={{height: Theme.screenInset.bottom}} />
       </View>
     );
   }

@@ -129,7 +129,7 @@ export default class Stepper extends Component {
   render() {
     this.buildProps();
 
-    let {style, subButton, addButton, value, valueStyle, valueFormat, max, min, showSeparator, disabled, editable, onLayout, ...others} = this.props;
+    let {style, subButton, addButton, value, valueStyle, valueFormat, max, min, showSeparator, disabled, editable, onLayout, onChange, ...others} = this.props; //disable View.onChange
 
     if (value === undefined) value = this.state.value;
 

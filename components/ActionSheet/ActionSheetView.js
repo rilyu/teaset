@@ -6,6 +6,7 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import {View} from 'react-native';
 
+import Theme from 'teaset/themes/Theme';
 import Overlay from '../Overlay/Overlay';
 import ActionSheetItem from './ActionSheetItem';
 
@@ -75,6 +76,15 @@ export default class ActionSheetView extends Overlay.PullView {
           />
       );
     }
+    children.push(
+      <View
+        style={{
+          backgroundColor: cancelItem ? Theme.asCancelItemColor : Theme.asItemColor,
+          height: Theme.screenInset.bottom
+        }}
+        key={'bottomSpace'}
+        />
+    );
 
     this.props = {items, cancelItem, children, ...others};
   }

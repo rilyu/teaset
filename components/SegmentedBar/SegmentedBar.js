@@ -17,8 +17,8 @@ export default class SegmentedBar extends Component {
     indicatorType: PropTypes.oneOf(['none', 'boxWidth', 'itemWidth', 'customWidth']),
     indicatorPosition: PropTypes.oneOf(['top', 'bottom']),
     indicatorLineColor: PropTypes.string,
+    indicatorWidth: PropTypes.number,
     indicatorLineWidth: PropTypes.number,
-    indicatorLineHeight: PropTypes.number,
     indicatorPositionPadding: PropTypes.number,
     animated: PropTypes.bool,
     autoScroll: PropTypes.bool,
@@ -30,7 +30,7 @@ export default class SegmentedBar extends Component {
     ...View.defaultProps,
     justifyItem: 'fixed',
     indicatorType: 'itemWidth',
-    indicatorLineWidth: 20,
+    indicatorWidth: 20,
     indicatorPosition: 'bottom',
     animated: true,
     autoScroll: true,
@@ -84,12 +84,12 @@ export default class SegmentedBar extends Component {
       case 'boxWidth':
         return this._buttonsLayout[this._activeIndex].x;
       case 'itemWidth':
-        return this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x;
+        return this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x + this._itemsAddWidth[this._activeIndex] / 2;
       case 'customWidth':
-        const isMoreThanDefault = this.props.indicatorLineWidth > this._itemsLayout[this.activeIndex].width;
+        const isMoreThanDefault = this.props.indicatorWidth > this._itemsLayout[this.activeIndex].width;
         return isMoreThanDefault ?
           this._buttonsLayout[this._activeIndex].x + this._itemsLayout[this._activeIndex].x
-          : this._buttonsLayout[this._activeIndex].x + (this._buttonsLayout[this._activeIndex].width - this.props.indicatorLineWidth) / 2;
+          : this._buttonsLayout[this._activeIndex].x + (this._buttonsLayout[this._activeIndex].width - this.props.indicatorWidth) / 2;
     }
     return 0;
   }
@@ -99,10 +99,10 @@ export default class SegmentedBar extends Component {
       case 'boxWidth':
         return this._buttonsLayout[this.activeIndex].width;
       case 'itemWidth':
-        return this._itemsLayout[this.activeIndex].width;
+        return this._itemsLayout[this.activeIndex].width - this._itemsAddWidth[this._activeIndex];
       case 'customWidth':
-        const isMoreThanDefault = this.props.indicatorLineWidth > this._itemsLayout[this.activeIndex].width;
-        return isMoreThanDefault ? this._itemsLayout[this.activeIndex].width : this.props.indicatorLineWidth;
+        const isMoreThanDefault = this.props.indicatorWidth > this._itemsLayout[this.activeIndex].width;
+        return isMoreThanDefault ? this._itemsLayout[this.activeIndex].width : this.props.indicatorWidth;
     }
     return 0;
   }
@@ -209,13 +209,13 @@ export default class SegmentedBar extends Component {
   }
 
   renderIndicator() {
-    let {indicatorLineColor, indicatorLineHeight, indicatorPositionPadding} = this.props;
+    let {indicatorLineColor, indicatorLineWidth, indicatorPositionPadding} = this.props;
     let style = {
       backgroundColor: indicatorLineColor ? indicatorLineColor : Theme.sbIndicatorLineColor,
       position: 'absolute',
       left: this._indicatorX,
       width: this._indicatorWidth,
-      height: indicatorLineHeight || indicatorLineHeight === 0 ? indicatorLineHeight : Theme.sbIndicatorLineHeight,
+      height: indicatorLineWidth || indicatorLineWidth === 0 ? indicatorLineWidth : Theme.sbIndicatorLineWidth,
     };
     if (this.props.indicatorPosition == 'top') {
       style.top = indicatorPositionPadding || indicatorPositionPadding === 0 ? indicatorPositionPadding : Theme.sbIndicatorPositionPadding;
@@ -243,7 +243,7 @@ export default class SegmentedBar extends Component {
         {children.map((item, index) => (
           <TouchableOpacity
             key={index}
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: this._itemsAddWidth[index] / 2}}
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
             onPress={() => this.onButtonPress(index)}
             onLayout={e => this.onButtonLayout(index, e)}
           >
@@ -279,8 +279,8 @@ export default class SegmentedBar extends Component {
         {children.map((item, index) => {
           return (
           <TouchableOpacity
+            style={{alignItems: 'center', justifyContent: 'center'}}
             key={index}
-            style={{paddingHorizontal: this._itemsAddWidth[index] / 2}}
             onPress={() => this.onButtonPress(index)}
             onLayout={e => this.onButtonLayout(index, e)}
           >

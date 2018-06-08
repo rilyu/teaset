@@ -41,4 +41,12 @@ export default class Overlay {
     TopView.remove(key);
   }
 
+  static transformRoot(transform, animated, animatesOnly = null) {
+    TopView.transform(transform, animated, animatesOnly);
+  }
+
+  static restoreRoot(animated, animatesOnly = null) {
+    TopView.restore(animated, animatesOnly);
+  }
+
 }

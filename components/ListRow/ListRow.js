@@ -51,12 +51,16 @@ export default class ListRow extends Component {
     this.refs.containerView && this.refs.containerView.measureInWindow(callback);
   }
 
+  measure(callback) {
+    this.refs.containerView && this.refs.containerView.measure(callback);
+  }
+
   closeSwipeActions() {
     this.refs.containerView && this.refs.containerView.timingClose();
   }
 
   buildProps() {
-    let {style, activeOpacity, onPress, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, ...others} = this.props;
+    let {style, activeOpacity, onPress, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, contentStyle, ...others} = this.props;
 
     //style
     style = [{
@@ -75,7 +79,7 @@ export default class ListRow extends Component {
     if (!activeOpacity && activeOpacity !== 0) activeOpacity = onPress ? 0.2 : 1;
 
     //contentStyle
-    let contentStyle = {
+    contentStyle = {
       flex: 1,
       overflow: 'hidden',
       flexDirection: titlePlace === 'top' ? 'column' : 'row',
@@ -236,14 +240,16 @@ export default class ListRow extends Component {
           ref='containerView'
         >
           {icon}
-          <View style={contentStyle}>
-            {title}
-            {detail}
-          </View>
+          {!title && !detail ? null :
+            <View style={contentStyle}>
+              {title}
+              {detail}
+            </View>
+          }
+          {!title && !detail ? children : null}
           {accessory}
         </SwipeTouchableOpacity>
         {bottomSeparator}
-        {children}
       </View>
     );
   }

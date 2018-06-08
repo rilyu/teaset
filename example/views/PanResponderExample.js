@@ -60,25 +60,6 @@ export default class PanResponderExample extends NavigationPage {
       onPanResponderRelease: (e, gestureState) => {
         console.log('onPanResponderRelease', e.nativeEvent, JSON.stringify(gestureState));
         this.handleTouches(e.nativeEvent.touches);
-
-if (this.layout) {
-  this.refs['view'].measure((x, y, width, height) => {
-    console.log('init layout', this.layout);
-    console.log('measure layout', x, y, width, height);
-    let {translateX, translateY, scale} = this.state;
-    let originX = this.layout.x + this.layout.width / 2;
-    let originY = this.layout.y + this.layout.height / 2;
-    let scaleOriginX = originX + translateX;
-    let scaleOriginY = originY + translateY;
-    let scaleWidth = this.layout.width * scale;
-    let scaleHeight = this.layout.height * scale;
-    let scaleX = scaleOriginX - scaleWidth / 2;
-    let scaleY = scaleOriginY - scaleHeight / 2;
-    console.log('transform layout', {x: scaleX, y: scaleY, width: scaleWidth, height: scaleHeight});
-  });
-}
-
-
       },
       onPanResponderTerminate: (e, gestureState) => {
         console.log('onPanResponderTerminate', e.nativeEvent, JSON.stringify(gestureState));
@@ -130,7 +111,7 @@ if (this.layout) {
       let scaleRate = distance1 / distance0;
       let scalePointX = (prevTouches[1].pageX + prevTouches[0].pageX) / 2;
       let scalePointY = (prevTouches[1].pageY + prevTouches[0].pageY) / 2;
-      this.refs['view'].measureInWindow((x, y, width, height) => {
+      this.refs['view'].measure((x, y, width, height, pageX, pageY) => {
         //view center point position
         let viewCenterX = x + width / 2;
         let viewCenterY = y + height / 2;

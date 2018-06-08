@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Image, Animated} from 'react-native';
+import {StyleSheet, View, Image, Animated, Easing} from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 import Theme from 'teaset/themes/Theme';
@@ -185,13 +185,15 @@ export default class AlbumSheet extends TransformView {
     } else {
       if (animated) {
         Animated.parallel([
-          Animated.spring(translateX, {
+          Animated.timing(translateX, {
             toValue: valueX,
-            friction: 9,
+            easing: Easing.elastic(0),
+            duration: 200,
           }),
-          Animated.spring(translateY, {
+          Animated.timing(translateY, {
             toValue: valueY,
-            friction: 9,
+            easing: Easing.elastic(0),
+            duration: 200,
           }),          
         ]).start();
       } else {
@@ -213,9 +215,10 @@ export default class AlbumSheet extends TransformView {
     toValue += x;
 
     if (animated) {
-      Animated.spring(translateX, {
+      Animated.timing(translateX, {
         toValue: toValue,
-        friction: 9,
+        easing: Easing.elastic(0),
+        duration: 200,
       }).start();
     } else {
       translateX.setValue(toValue);

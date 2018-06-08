@@ -24,6 +24,13 @@ react-native run-android
 ```
 **Tips: In the Android system, the animations is not smooth, switch to the release mode can be resolved.**
 
+## iPhoneX
+Add the following code to support iPhoneX
+```javascript
+Theme.set ({fitIPhoneX: true});
+```
+** Note: This option is false by default, don't open it if SafeAreaView is used. **
+
 # Documentation
 The document is being written, please refer to the example source code.
 

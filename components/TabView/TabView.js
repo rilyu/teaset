@@ -45,6 +45,7 @@ export default class TabView extends Component {
 
   buildProps() {
     let {style, barStyle, children, ...others} = this.props;
+    let {bottom: bottomInset} = Theme.screenInset;
 
     style = [{
       flexDirection: 'column',
@@ -56,9 +57,9 @@ export default class TabView extends Component {
       left: 0,
       bottom: 0,
       right: 0,
-      height: Theme.tvBarHeight,
+      height: Theme.tvBarHeight + bottomInset,
       paddingTop: Theme.tvBarPaddingTop,
-      paddingBottom: Theme.tvBarPaddingBottom,
+      paddingBottom: Theme.tvBarPaddingBottom + bottomInset,
       borderTopWidth: Theme.tvBarSeparatorWidth,
       borderColor: Theme.tvBarSeparatorColor,
     }].concat(barStyle);
@@ -85,12 +86,12 @@ export default class TabView extends Component {
     }
     children = children.filter(item => item); //remove empty item
 
-    this.props = {style, barStyle, buttonContainerStyle, buttonStyle, children, ...others};
+    return ({style, barStyle, buttonContainerStyle, buttonStyle, children, ...others});
   }
 
-  renderBar() {
+  renderBar(props) {
     //Overflow is not supported on Android, then use a higher container view to support "big icon button"
-    let {barStyle, buttonContainerStyle, buttonStyle, onChange, children} = this.props;
+    let {barStyle, buttonContainerStyle, buttonStyle, onChange, children} = props;
     let sheetCount = 0;
     return (
       <View pointerEvents='box-none'>
@@ -127,16 +128,16 @@ export default class TabView extends Component {
     );
   }
 
-  renderProjector() {
+  renderProjector(props) {
     return (
       <Projector style={{flex: 1}} index={this.activeIndex}>
-        {this.props.children.filter(item => item && item.props.type === 'sheet')}
+        {props.children.filter(item => item && item.props.type === 'sheet')}
       </Projector>
     );
   }
 
-  renderCarousel() {
-    let {children, onChange} = this.props;
+  renderCarousel(props) {
+    let {children, onChange} = props;
     return (
       <Carousel
         style={{flex: 1}}
@@ -155,14 +156,14 @@ export default class TabView extends Component {
   }
 
   render() {
-    this.buildProps();
+    let props = this.buildProps();
 
-    let {barStyle, type, children, ...others} = this.props;
+    let {barStyle, type, children, onChange, ...others} = props; //disable View.onChange
     return (
       <View {...others}>
-        {type === 'carousel' ? this.renderCarousel() : this.renderProjector()}
+        {type === 'carousel' ? this.renderCarousel(props) : this.renderProjector(props)}
         <View style={{height: barStyle.height, width: 1}} />
-        {this.renderBar()}
+        {this.renderBar(props)}
       </View>
     );
   }

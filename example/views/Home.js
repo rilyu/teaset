@@ -76,6 +76,7 @@ export default class Home extends NavigationPage {
         <ListRow title='Menu' detail='菜单' onPress={() => this.navigator.push({view: <MenuExample />})} />
         <ListRow title='Drawer' detail='抽屉' onPress={() => this.navigator.push({view: <DrawerExample />})} />
         <ListRow title='ModalIndicator' detail='模态指示器' onPress={() => this.navigator.push({view: <ModalIndicatorExample />})} bottomSeparator='full' />
+        <View style={{height: Theme.screenInset.bottom}} />
       </ScrollView>
     );
   }

@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Animated, PanResponder, ViewPropTypes} from 'react-native';
+import {StyleSheet, View, Animated, Easing, PanResponder, ViewPropTypes} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
@@ -15,11 +15,14 @@ export default class TransformView extends Component {
     containerStyle: ViewPropTypes.style,
     maxScale: PropTypes.number,
     minScale: PropTypes.number,
+    inertial: PropTypes.bool,
     magnetic: PropTypes.bool,
     tension: PropTypes.bool,
     onWillTransform: PropTypes.func, //(translateX, translateY, scale)
     onTransforming: PropTypes.func, //(translateX, translateY, scale)
     onDidTransform: PropTypes.func, //(translateX, translateY, scale)
+    onWillInertialMove: PropTypes.func, //(translateX, translateY, newX, newY), return ture or false
+    onDidInertialMove: PropTypes.func, //(translateX, translateY, newX, newY)
     onWillMagnetic: PropTypes.func, //(translateX, translateY, scale, newX, newY, newScale), return ture or false
     onDidMagnetic: PropTypes.func, //(translateX, translateY, scale)
     onPress: PropTypes.func, //(event)
@@ -28,6 +31,7 @@ export default class TransformView extends Component {
 
   static defaultProps = {
     ...View.defaultProps,
+    inertial: true,
     magnetic: true,
     tension: true,
   };
@@ -97,6 +101,8 @@ export default class TransformView extends Component {
     this.lockDirection = 'none';
     this.dxSum = 0;
     this.dySum = 0;
+    this.speedX = 0;
+    this.speedY = 0;
     this.touchTime = new Date();
     this.prevTouches = e.nativeEvent.touches;
     let {onWillTransform} = this.props;
@@ -105,7 +111,7 @@ export default class TransformView extends Component {
   }
 
   onPanResponderMove(e, gestureState) {
-    this.handleTouches(e.nativeEvent.touches, (dx, dy, scaleRate) => {
+    this.handleTouches(e.nativeEvent.touches, (dx, dy, speedX, speedY, scaleRate) => {
       let {tension, onTransforming} = this.props;
       let {translateX, translateY, scale} = this.state;
 
@@ -118,6 +124,8 @@ export default class TransformView extends Component {
       }
       this.dxSum += dx;
       this.dySum += dy;
+      this.speedX = speedX;
+      this.speedY = speedY;
       let adx = Math.abs(this.dxSum), ady = Math.abs(this.dySum), asr = Math.abs(scaleRate - 1);
       if (!this.touchMoved && adx < 6 && ady < 6 && asr < 0.01) {
         return;
@@ -191,6 +199,10 @@ export default class TransformView extends Component {
     let dx = t1.x - t0.x;
     let dy = t1.y - t0.y;
 
+    let t = touches[0].timestamp - prevTouches[0].timestamp;
+    let speedX = t ? (dx / t) : 0;
+    let speedY = t ? (dy / t) : 0;
+
     //scale
     let distance0 = 0, distance1 = 0;
     if (touches.length >= 2) {
@@ -227,13 +239,50 @@ export default class TransformView extends Component {
       // dx += spBeforScaleX - spAfterScaleX;
       // dy += spBeforScaleY - spAfterScaleY;
 
-      onHandleCompleted(dx, dy, scaleRate);
+      onHandleCompleted(dx, dy, speedX, speedY, scaleRate);
     } else {
-      onHandleCompleted(dx, dy, 1);
+      onHandleCompleted(dx, dy, speedX, speedY, 1);
     }
   }
 
   handleRelease() {
+    let {inertial, onWillInertialMove, onDidInertialMove} = this.props;
+    let {translateX, translateY} = this.state;
+    let inertiaX = this.speedX * 60;
+    let inertiaY = this.speedY * 60;
+    if (this.lockDirection === 'x' || Math.abs(inertiaX) < 10) inertiaX = 0;
+    if (this.lockDirection === 'y' || Math.abs(inertiaY) < 10) inertiaY = 0;
+    if (inertial && inertiaX || inertiaY) {
+      let newX = translateX._value + inertiaX;
+      let newY = translateY._value + inertiaY;
+      let animates = [];
+      inertiaX && animates.push(
+        Animated.timing(translateX, {
+          toValue: newX,
+          easing: Easing.elastic(0),
+          duration: 100,
+        })
+      );
+      inertiaY && animates.push(
+        Animated.timing(translateY, {
+          toValue: newY,
+          easing: Easing.elastic(0),
+          duration: 100,
+        })
+      );
+      let canInertialMove = !onWillInertialMove || onWillInertialMove(translateX._value, translateY._value, newX, newY);
+      canInertialMove && Animated.parallel(animates).start(e => {
+        translateX.setValue(newX);
+        translateY.setValue(newY);
+        onDidInertialMove && onDidInertialMove(translateX._value, translateY._value, newX, newY);
+        this.handleMagnetic();
+      });
+    } else {
+      this.handleMagnetic();
+    }
+  }
+
+  handleMagnetic() {
     let {magnetic, maxScale, minScale, onDidTransform, onWillMagnetic, onDidMagnetic} = this.props;
     let {translateX, translateY, scale} = this.state;
     let newX = null, newY = null, newScale = null;
@@ -268,21 +317,24 @@ export default class TransformView extends Component {
 
     let animates = [];
     newX !== null && animates.push(
-      Animated.spring(translateX, {
+      Animated.timing(translateX, {
         toValue: newX,
-        friction: 9,
+        easing: Easing.elastic(0),
+        duration: 200,
       })
     );
     newY !== null && animates.push(
-      Animated.spring(translateY, {
+      Animated.timing(translateY, {
         toValue: newY,
-        friction: 9,
+        easing: Easing.elastic(0),
+        duration: 200,
       })
     );
     newScale !== null && animates.push(
-      Animated.spring(scale, {
+      Animated.timing(scale, {
         toValue: newScale,
-        friction: 9,
+        easing: Easing.elastic(0),
+        duration: 200,
       })
     );
     if (animates.length > 0) {

@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
-import {View, Dimensions, Platform} from 'react-native';
+import {View, Dimensions, Platform, StatusBar} from 'react-native';
 
 import OverlayView from './OverlayView';
 import Popover from '../Popover/Popover';
@@ -63,8 +63,7 @@ export default class OverlayPopoverView extends OverlayView {
 
     let {fromBounds, popoverWidth, popoverHeight} = this.state;
     if (popoverWidth === null || popoverHeight === null) {
-      let {popoverStyle, direction, showArrow, ...others} = this.props;
-      let arrow;
+      let {popoverStyle, direction, showArrow, arrow, ...others} = this.props;
       if (!showArrow) arrow = 'none';
       else {
         switch (direction) {
@@ -79,10 +78,11 @@ export default class OverlayPopoverView extends OverlayView {
       return;
     }
 
-    let {popoverStyle, direction, autoDirection, directionInsets, align, alignInsets, showArrow, ...others} = this.props;
+    let {popoverStyle, direction, autoDirection, directionInsets, align, alignInsets, showArrow, arrow, ...others} = this.props;
     let screenWidth = Dimensions.get('window').width;
     let screenHeight = Dimensions.get('window').height;
     let {x, y, width, height} = fromBounds ? fromBounds : {};
+
     if (!x && x !== 0) x = screenWidth / 2;
     if (!y && y !== 0) y = screenHeight / 2;
     if (!width) width = 0;
@@ -109,7 +109,7 @@ export default class OverlayPopoverView extends OverlayView {
     }
 
     //calculate popover top-left position and arrow type
-    let px, py, arrow;
+    let px, py;
     switch (direction) {
       case 'right':
         px = x + width + directionInsets;

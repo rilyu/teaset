@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Platform, StatusBar, View, Text, Animated, ViewPropTypes} from 'react-native';
+import {StyleSheet, Platform, StatusBar, View, Text, Animated, ViewPropTypes, Dimensions} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import NavigationTitle from './NavigationTitle';
@@ -23,9 +23,10 @@ export default class NavigationBar extends Component {
     leftView: PropTypes.element,
     rightView: PropTypes.element,
     tintColor: PropTypes.string, //bar tint color, default tint color leftView and rightView
+    background: PropTypes.element,
     hidden: PropTypes.bool, //bar hidden
     animated: PropTypes.bool, //hide or show bar with animation
-    statusBarStyle: PropTypes.oneOf(['default', 'light-content']), //status bar style (iOS only)
+    statusBarStyle: PropTypes.oneOf(['default', 'light-content','dark-content',]), //status bar style (iOS only)
     statusBarColor: PropTypes.string, //status bar color, default: style.backgroundColor
     statusBarHidden: PropTypes.bool, //status bar hidden
     statusBarInsets: PropTypes.bool, //auto add space for iOS status bar
@@ -51,10 +52,11 @@ export default class NavigationBar extends Component {
 
   constructor(props) {
     super(props);
+    this.screenWidth = Dimensions.get('window').width;
     this.state = {
       leftViewWidth: 0,
       rightViewWidth: 0,
-      barTop: new Animated.Value(props.hidden ? -64 : 0),
+      barTop: new Animated.Value(props.hidden ? -(Theme.navBarContentHeight + Theme.statusBarHeight) : 0),
       barOpacity: new Animated.Value(props.hidden ? 0 : 1),
     };
   }
@@ -66,7 +68,7 @@ export default class NavigationBar extends Component {
   }
 
   getChildContext() {
-    return {tintColor: this.props.tintColor};
+    return {tintColor: this.props.tintColor ? this.props.tintColor : Theme.navTintColor};
   }
 
   buildProps() {
@@ -84,15 +86,16 @@ export default class NavigationBar extends Component {
         titleTextAlign = 'left';
         break;
     }
+    let {left: leftInset, right: rightInset} = Theme.screenInset;
     style = [{
       backgroundColor: Theme.navColor,
       position: 'absolute',
       left: 0,
       right: 0,
-      height: statusBarInsets && Platform.OS === 'ios' ? 64 : 44,
-      paddingTop: statusBarInsets && Platform.OS === 'ios' ? 20 : 0,
-      paddingLeft: 4,
-      paddingRight: 4,
+      height: Theme.navBarContentHeight + (statusBarInsets ? Theme.statusBarHeight : 0),
+      paddingTop: statusBarInsets ? Theme.statusBarHeight : 0,
+      paddingLeft: 4 + leftInset,
+      paddingRight: 4 + rightInset,
       borderBottomWidth: Theme.navSeparatorLineWidth,
       borderBottomColor: Theme.navSeparatorColor,
       flexDirection: 'row',
@@ -108,7 +111,7 @@ export default class NavigationBar extends Component {
     if (!tintColor) tintColor = Theme.navTintColor;
 
     //build statusBarColor and statusBarStyle
-    if (!statusBarColor) statusBarColor = fs.backgroundColor;
+    if (!statusBarColor) statusBarColor = statusBarInsets && (Platform.OS === 'ios' || Platform.Version > 20) ? 'rgba(0,0,0,0)' : fs.backgroundColor;
     if (!statusBarStyle) statusBarStyle = Theme.navStatusBarStyle ? Theme.navStatusBarStyle : 'default';
 
     //build titleViewStyle
@@ -128,11 +131,12 @@ export default class NavigationBar extends Component {
         break;
     }
     let titleViewStyle = {
+      backgroundColor: 'rgba(0, 0, 0, 0)',
       position: 'absolute',
-      top: statusBarInsets && Platform.OS === 'ios' ? 20 : 0,
+      top: statusBarInsets ? Theme.statusBarHeight : 0,
       left: 0,
       right: 0,
-      height: 44,
+      height: Theme.navBarContentHeight,
       paddingLeft: paddingLeft,
       paddingRight: paddingRight,
       opacity: this.state.barOpacity,
@@ -146,10 +150,21 @@ export default class NavigationBar extends Component {
 
     //convert string title to NavigationBar.Title
     if (typeof title === 'string') {
-      title = <this.constructor.Title style={{textAlign: titleTextAlign, color: Theme.navTitleColor}} text={title} />;
+      title = <this.constructor.Title style={[{textAlign: titleTextAlign, color: Theme.navTitleColor}].concat(titleStyle)} text={title} />;
     }
 
-    this.props = {style, type, title, titleStyle, tintColor, titleViewStyle, leftRightViewStyle, hidden, animated, statusBarColor, statusBarStyle, statusBarInsets, ...others};
+    //build backgroundView style
+    let backgroundViewStyle = {
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      opacity: this.state.barOpacity,
+    };
+
+    return ({style, type, title, titleStyle, tintColor, titleViewStyle, leftRightViewStyle, backgroundViewStyle, hidden, animated, statusBarColor, statusBarStyle, statusBarInsets, ...others});
   }
 
   checkBarHidden(hidden, animated) {
@@ -174,6 +189,11 @@ export default class NavigationBar extends Component {
       this.barHeight = e.nativeEvent.layout.height;
       this.checkBarHidden(this.props.hidden, this.props.animated);
     }
+    let {width} = Dimensions.get('window');
+    if (width != this.screenWidth) {
+      this.screenWidth = width;
+      this.forceUpdate();
+    }
     this.props.onLayout && this.props.onLayout(e);
   }
 
@@ -190,12 +210,11 @@ export default class NavigationBar extends Component {
   }
 
   render() {
-    this.buildProps();
-
-    let {style, animated, statusBarStyle, statusBarColor, statusBarHidden, title, titleViewStyle, leftRightViewStyle, leftView, rightView, ...others} = this.props;
+    let {style, animated, statusBarStyle, statusBarColor, statusBarHidden, title, titleViewStyle, leftRightViewStyle, leftView, rightView, background, backgroundViewStyle, ...others} = this.buildProps();
     return (
       <Animated.View style={style} {...others} onLayout={e => this.onLayout(e)}>
-        <StatusBar backgroundColor={statusBarColor} barStyle={statusBarStyle} animated={animated} hidden={statusBarHidden} />
+        <StatusBar backgroundColor={statusBarColor} translucent={true} barStyle={statusBarStyle} animated={animated} hidden={statusBarHidden} />
+        <Animated.View style={backgroundViewStyle}>{background}</Animated.View>
         <Animated.View style={titleViewStyle}>{title}</Animated.View>
         <Animated.View style={leftRightViewStyle} onLayout={e => this.onLeftViewLayout(e)}>{leftView}</Animated.View>
         <Animated.View style={leftRightViewStyle} onLayout={e => this.onRightViewLayout(e)}>{rightView}</Animated.View>
