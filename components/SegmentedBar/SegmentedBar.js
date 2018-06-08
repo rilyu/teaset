@@ -152,7 +152,7 @@ export default class SegmentedBar extends Component {
       let contextWidth = 0;
       this._buttonsLayout.map(item => contextWidth += item.width);
       let x = indicatorXValue + indicatorWidthValue / 2 - this._scrollViewWidth / 2;
-      if (x < 0) {
+      if (x < 0 || contextWidth < this._scrollViewWidth) {
         x = 0;
       } else if (x > contextWidth - this._scrollViewWidth) {
         x = contextWidth - this._scrollViewWidth;
