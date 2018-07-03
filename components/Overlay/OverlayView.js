@@ -21,6 +21,12 @@ export default class OverlayView extends Component {
     onAppearCompleted: PropTypes.func,
     onDisappearCompleted: PropTypes.func,
     onCloseRequest: PropTypes.func, //(overlayView)
+    screenPadding: PropTypes.shape({
+      top:PropTypes.number,
+      left:PropTypes.number,
+      bottom:PropTypes.number,
+      right:PropTypes.number
+    })
   };
 
   static defaultProps = {
@@ -28,6 +34,12 @@ export default class OverlayView extends Component {
     animated: false,
     overlayPointerEvents: 'auto',
     autoKeyboardInsets: false,
+    screenPadding:{
+      top:0,
+      left:0,
+      bottom:0,
+      right:0
+    }
   };
 
   constructor(props) {
@@ -159,9 +171,11 @@ export default class OverlayView extends Component {
   render() {
     this.buildProps();
 
-    let {style, overlayPointerEvents, autoKeyboardInsets, ...others} = this.props;
+    let {style, overlayPointerEvents, autoKeyboardInsets,screenPadding, ...others} = this.props;
+    const  {left=0,right=0,bottom=0,top=0} = screenPadding;
+    
     return (
-      <View style={styles.screen} pointerEvents={overlayPointerEvents}>
+      <View style={[styles.screen,{top, left, bottom, right}]} pointerEvents={overlayPointerEvents}>
         <Animated.View
           style={[styles.screen, {backgroundColor: '#000', opacity: this.state.overlayOpacity}]}
           {...this.panResponder.panHandlers}
