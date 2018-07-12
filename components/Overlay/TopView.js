@@ -2,7 +2,7 @@
 
 'use strict';
 
-import React, {Component} from "react";
+import React, {Component, PureComponent} from "react";
 import {StyleSheet, AppRegistry, DeviceEventEmitter, View, Animated} from 'react-native';
 //import {Symbol} from 'core-js';
 
@@ -162,7 +162,9 @@ export default class TopView extends Component {
     return (
       <View style={{backgroundColor: Theme.screenColor, flex: 1}}>
         <Animated.View style={{flex: 1, transform: transform}}>
-          {this.props.children}
+          <PureView>
+            {this.props.children}
+          </PureView>
         </Animated.View>
         {elements.map((item, index) => {
           return (
@@ -187,6 +189,16 @@ var styles = StyleSheet.create({
     bottom: 0,
   },
 });
+
+class PureView extends PureComponent {
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        {this.props.children}
+      </View>
+    );
+  }
+}
 
 if (!AppRegistry.registerComponentOld) {
   AppRegistry.registerComponentOld = AppRegistry.registerComponent;

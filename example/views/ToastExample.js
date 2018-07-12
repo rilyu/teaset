@@ -15,6 +15,17 @@ export default class ToastExample extends NavigationPage {
     showBackButton: true,
   };
 
+  showModal() {
+    Toast.show({
+      text: 'Toast modal',
+      icon: <ActivityIndicator size='large' color={Theme.toastIconTintColor} />,
+      position: 'center',
+      duration: 5000,
+      overlayOpacity: 0.4,
+      modal: true,
+    });
+  }
+
   static customKey = null;
 
   showCustom() {
@@ -45,6 +56,8 @@ export default class ToastExample extends NavigationPage {
         <ListRow title='Sad' onPress={() => Toast.sad('Toast sad')} />
         <ListRow title='Info' onPress={() => Toast.info('Toast info')} />
         <ListRow title='Stop' onPress={() => Toast.stop('Toast stop')} bottomSeparator='full' />
+        <View style={{height: 20}} />
+        <ListRow title='Modal' onPress={() => this.showModal()} topSeparator='full' bottomSeparator='full' />
         <View style={{height: 20}} />
         <ListRow title='Show custom' onPress={() => this.showCustom()} topSeparator='full' />
         <ListRow title='Hide custom' onPress={() => this.hideCustom()} bottomSeparator='full' />

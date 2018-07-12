@@ -15,8 +15,8 @@ export default class ModalIndicatorView extends Overlay.View {
     ...Overlay.View.propTypes,
     text: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
     position: PropTypes.oneOf(['top', 'bottom', 'center']),
-    size: ActivityIndicator.propTypes.size,
-    color: ActivityIndicator.propTypes.color,
+    size: PropTypes.oneOfType([PropTypes.oneOf(['small', 'large']), PropTypes.number]),
+    color: PropTypes.string,
   };
 
   static defaultProps = {

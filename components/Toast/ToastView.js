@@ -33,7 +33,7 @@ export default class ToastView extends Overlay.View {
   buildProps() {
     super.buildProps();
 
-    let {style, contentStyle, text, icon, position, ...others} = this.props;
+    let {style, contentStyle, text, icon, position, overlayPointerEvents, modal, ...others} = this.props;
 
     style = [{
       paddingLeft: Theme.toastScreenPaddingLeft,
@@ -93,7 +93,9 @@ export default class ToastView extends Overlay.View {
       );
     }
 
-    this.props = {style, contentStyle, text, icon, position, ...others};
+    if (modal) overlayPointerEvents = 'auto';
+
+    this.props = {style, contentStyle, text, icon, position, overlayPointerEvents, modal, ...others};
   }
 
   renderContent() {

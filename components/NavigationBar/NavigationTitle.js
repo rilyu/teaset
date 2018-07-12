@@ -8,7 +8,7 @@ import {Text} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
-export default class NavigationTitle extends Text {
+export default class NavigationTitle extends Component {
 
   static propTypes = {
     ...Text.propTypes,
@@ -40,12 +40,14 @@ export default class NavigationTitle extends Text {
 
     if (text || text === '' || text === 0) children = text;
 
-    this.props = {style, text, children, ...others};
+    return {style, text, children, ...others};
   }
 
   render() {
-    this.buildProps();
-    return super.render();
+    let props = this.buildProps();
+    return (
+      <Text {...props} />
+    );
   }
 
 }

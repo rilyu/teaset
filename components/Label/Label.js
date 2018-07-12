@@ -8,7 +8,7 @@ import {Text} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
-export default class Label extends Text {
+export default class Label extends Component {
 
   static propTypes = {
     ...Text.propTypes,
@@ -60,11 +60,13 @@ export default class Label extends Text {
 
     if (text || text === '' || text === 0) children = text;
 
-    this.props = {type, size, style, text, children, ...others};
+    return {type, size, style, text, children, ...others};
   }
 
   render() {
-    this.buildProps();
-    return super.render();
+    let props = this.buildProps();
+    return (
+      <Text {...props} />
+    );
   }
 }
