@@ -76,9 +76,7 @@ export default class OverlayView extends Component {
       this.setState({overlayOpacityStartedZero:true});
       return overlayOpacity;
     }
-    if (Theme.overlayOpacity){
-      return Theme.overlayOpacity;
-    }else if(Theme.overlayOpacity === 0){
+    if(Theme.overlayOpacity === 0){
       this.setState({overlayOpacityStartedZero:true});
       return Theme.overlayOpacity;
     }
