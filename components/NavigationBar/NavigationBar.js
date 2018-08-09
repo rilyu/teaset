@@ -106,6 +106,7 @@ export default class NavigationBar extends Component {
     });
 
     let fs = StyleSheet.flatten(style);
+    let titleFs = StyleSheet.flatten(titleStyle);
 
     //build tintColor
     if (!tintColor) tintColor = Theme.navTintColor;
@@ -122,8 +123,8 @@ export default class NavigationBar extends Component {
     switch (type === 'auto' ? Platform.OS : type) {
       case 'ios':
         let paddingLeftRight = Math.max(leftViewWidth + barPaddingLeft, rightViewWidth + barPaddingRight);
-        paddingLeft = paddingLeftRight;
-        paddingRight = paddingLeftRight;
+        paddingLeft = titleFs.textAlign === 'center' ? paddingLeftRight : (leftViewWidth + barPaddingLeft);
+        paddingRight = titleFs.textAlign === 'center' ? paddingLeftRight : (rightViewWidth + barPaddingRight);
         break;
       case 'android':
         paddingLeft = barPaddingLeft;
