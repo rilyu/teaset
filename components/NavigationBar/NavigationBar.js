@@ -123,8 +123,9 @@ export default class NavigationBar extends Component {
     switch (type === 'auto' ? Platform.OS : type) {
       case 'ios':
         let paddingLeftRight = Math.max(leftViewWidth + barPaddingLeft, rightViewWidth + barPaddingRight);
-        paddingLeft = titleFs.textAlign === 'center' ? paddingLeftRight : (leftViewWidth + barPaddingLeft);
-        paddingRight = titleFs.textAlign === 'center' ? paddingLeftRight : (rightViewWidth + barPaddingRight);
+        let isTitleAlignCenter = !titleFs.textAlign || titleFs.textAlign === 'center';
+        paddingLeft = isTitleAlignCenter ? paddingLeftRight : (leftViewWidth + barPaddingLeft);
+        paddingRight = isTitleAlignCenter ? paddingLeftRight : (rightViewWidth + barPaddingRight);
         break;
       case 'android':
         paddingLeft = barPaddingLeft;
