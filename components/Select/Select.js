@@ -4,7 +4,7 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, TouchableOpacity, Image, Text, ScrollView} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Image, Text, ScrollView, Keyboard} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 import PullPicker from '../PullPicker/PullPicker';
@@ -185,6 +185,7 @@ export default class Select extends Component {
   }
 
   showPicker() {
+    Keyboard.dismiss()
     switch (this.props.pickerType) {
       case 'pull':
         this.showPullPicker();
