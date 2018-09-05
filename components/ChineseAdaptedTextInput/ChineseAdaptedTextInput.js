@@ -7,7 +7,7 @@ class ChineseAdaptedTextInput extends Component {
   }
 
   render() {
-    return <TextInput {...this.props} />
+    return <TextInput {...this.props} ref={(input) => this.props.inputRef(input)} />
   }
 };
 

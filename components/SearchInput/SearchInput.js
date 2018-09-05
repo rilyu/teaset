@@ -164,7 +164,7 @@ export default class SearchInput extends Component {
             onChangeText={text => this.onChangeText(text)}
             selectionColor={this.state.selectionColor ? this.state.selectionColor : selectionColor}
             {...others}
-            ref='textInput'
+            inputRef={(input) => { this.textInput = input }}
             />
         </View>
       </View>
