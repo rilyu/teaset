@@ -5,6 +5,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, View, Text, TextInput, Image, LayoutAnimation, ViewPropTypes} from 'react-native';
+import ChineseAdaptedTextInput from '../ChineseAdaptedTextInput/ChineseAdaptedTextInput'
 
 import Theme from 'teaset/themes/Theme';
 
@@ -155,7 +156,7 @@ export default class SearchInput extends Component {
           </View>
         </View>
         <View style={{backgroundColor: 'rgba(0, 0, 0, 0)', paddingLeft: iconSize * 1.5}}>
-          <TextInput
+          <ChineseAdaptedTextInput
             style={inputStyle}
             value={value}
             onBlur={() => this.onInputBlur()}

@@ -40,6 +40,8 @@ import NavigationPage from './components/NavigationPage/NavigationPage';
 
 import KeyboardSpace from './components/KeyboardSpace/KeyboardSpace';
 
+import ChineseAdaptedTextInput from './components/ChineseAdaptedTextInput/ChineseAdaptedTextInput'
+
 var Teaset = {
   Theme,
 
@@ -79,6 +81,8 @@ var Teaset = {
   NavigationPage,
 
   KeyboardSpace,
+  
+  ChineseAdaptedTextInput,
 };
 
 module.exports = Teaset;
