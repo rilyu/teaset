@@ -162,6 +162,7 @@ export default class SearchInput extends Component {
             onBlur={() => this.onInputBlur()}
             onFocus={() => this.onInputFocus()}
             onChangeText={text => this.onChangeText(text)}
+            onSubmitEditing={() => this.props.onSubmitEditing && this.props.onSubmitEditing(value)}
             selectionColor={this.state.selectionColor ? this.state.selectionColor : selectionColor}
             {...others}
             inputRef={(input) => { this.textInput = input }}
