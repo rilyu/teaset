@@ -200,22 +200,24 @@ class PureView extends PureComponent {
   }
 }
 
-if (!AppRegistry.registerComponentOld) {
-  AppRegistry.registerComponentOld = AppRegistry.registerComponent;
-}
-
-AppRegistry.registerComponent = function(appKey, componentProvider) {
-
-  class RootElement extends Component {
-    render() {
-      let Component = componentProvider();
-      return (
-        <TopView>
-          <Component {...this.props} />
-        </TopView>
-      );
-    }
+export function replaceRegisterComponentFunction(){
+  if (!AppRegistry.registerComponentOld) {
+    AppRegistry.registerComponentOld = AppRegistry.registerComponent;
   }
 
-  return AppRegistry.registerComponentOld(appKey, () => RootElement);
+  AppRegistry.registerComponent = function(appKey, componentProvider) {
+
+    class RootElement extends Component {
+      render() {
+        let Component = componentProvider();
+        return (
+          <TopView>
+            <Component {...this.props} />
+          </TopView>
+        );
+      }
+    }
+
+    return AppRegistry.registerComponentOld(appKey, () => RootElement);
+  }
 }

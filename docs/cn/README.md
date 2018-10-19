@@ -20,6 +20,25 @@ Teaset 组件采用 React Native 原生组件同样的风格来编写, 可以与
 npm install --save teaset
 ```
 
+# 初始化
+
+```
+import { replaceRegisterComponentFunction } from 'teaset'
+
+replaceRegisterComponentFunction() // 在RN项目根组件注册代码前增加此行，用于给 Overlay 类型的组件提供容器。
+AppRegistry.registerComponent('YourRNAppName', () => App)
+```
+
+或者，在 Redux 项目中，自行在合适位置放置 TopView 容器：
+```
+import { TopView } from 'teaset'
+
+container => () => <Provider store={store}>
+    {/* 使用 <TopView> 包裹，用于给 Overlay 类型的组件提供容器。 */}
+    <TopView>{container}</TopView>
+</Provider>
+```
+
 ## Hello world
 从 teaset 包中 import 组件即可使用
 ```

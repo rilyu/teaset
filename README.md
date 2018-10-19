@@ -8,6 +8,23 @@ A UI library for react native, provides 20+ pure JS(ES6) components, focusing on
 npm install --save teaset
 ```
 
+# Initialize
+```
+import { replaceRegisterComponentFunction } from 'teaset'
+
+replaceRegisterComponentFunction() // Add this line before RN register, to deploy a container for overlay like components.
+AppRegistry.registerComponent('YourRNAppName', () => App)
+```
+or, put <TopView> in the right place by yourself.
+```
+import { TopView } from 'teaset'
+
+container => () => <Provider store={store}>
+    {/* Wrap by <TopView> as a container for overlay like components */}
+    <TopView>{container}</TopView>
+</Provider>
+```
+
 # Example
 In the Teaset package directory:
 ```
