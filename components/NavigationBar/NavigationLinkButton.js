@@ -16,21 +16,15 @@ export default class NavigationLinkButton extends NavigationButton {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
-  buildProps() {
-    super.buildProps();
-
-    let {title, children, ...others} = this.props;
-
-    if (title || title === '' || title === 0) {
-      let textStyle = {
-        color: this.context.tintColor,
-        fontSize: Theme.navButtonFontSize,
-        overflow: 'hidden',
-      };
-      children = <Text style={textStyle} numberOfLines={1} allowFontScaling={false}>{title}</Text>;
-    }
-
-    this.props = {title, children, ...others};
+  renderTitle() {
+    let {title} = this.props;
+    if (title === null || title === undefined) return super.renderTitle();
+    let textStyle = {
+      color: this.context.tintColor,
+      fontSize: Theme.navButtonFontSize,
+      overflow: 'hidden',
+    };
+    return <Text style={textStyle} numberOfLines={1} allowFontScaling={false}>{title}</Text>;
   }
 
 }

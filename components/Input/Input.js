@@ -23,8 +23,8 @@ export default class Input extends TextInput {
     underlineColorAndroid: 'rgba(0, 0, 0, 0)',
   };
 
-  buildProps() {
-    let {style, size, disabled, placeholderTextColor, pointerEvents, opacity, ...others} = this.props;
+  buildStyle() {
+    let {style, size} = this.props;
 
     let borderRadius, fontSize, paddingVertical, paddingHorizontal, height;
     switch (size) {
@@ -61,18 +61,20 @@ export default class Input extends TextInput {
       height: height,
     }].concat(style);
 
-    if (!placeholderTextColor) placeholderTextColor = Theme.inputPlaceholderTextColor;
-    if (disabled) {
-      pointerEvents = 'none';
-      opacity = Theme.inputDisabledOpacity;
-    }
-
-    this.props = {style, size, disabled, placeholderTextColor, pointerEvents, opacity, ...others};
+    return style;
   }
 
   render() {
-    this.buildProps();
-    return super.render();
+    let {style, size, disabled, placeholderTextColor, pointerEvents, opacity, ...others} = this.props;
+    return (
+      <TextInput
+        style={this.buildStyle()}
+        placeholderTextColor={placeholderTextColor ? placeholderTextColor : Theme.inputPlaceholderTextColor}
+        pointerEvents={disabled ? 'none' : pointerEvents}
+        opacity={disabled ? Theme.inputDisabledOpacity : opacity}
+        {...others}
+        />
+    );
   }
 
 }

@@ -7,6 +7,8 @@ import {StyleSheet, View, Image, ScrollView, Switch} from 'react-native';
 
 import {Theme, NavigationPage, ListRow, SegmentedView, Label, PullPicker} from 'teaset';
 
+import SelectRow from './SelectRow';
+
 export default class SegmentedViewExample extends NavigationPage {
 
   static defaultProps = {
@@ -23,15 +25,6 @@ export default class SegmentedViewExample extends NavigationPage {
       custom: false,
       activeIndex: 0,
     });
-  }
-
-  selectType() {
-    PullPicker.show(
-      'Type',
-      this.items,
-      this.items.indexOf(this.state.type),
-      (item, index) => this.setState({type: item})
-    );
   }
 
   renderTitle(index) {
@@ -93,10 +86,11 @@ export default class SegmentedViewExample extends NavigationPage {
           </SegmentedView.Sheet>
         </SegmentedView>
         <View style={{height: 20}} />
-        <ListRow
+        <SelectRow
           title='Type'
-          detail={this.state.type}
-          onPress={() => this.selectType()}
+          value={this.state.type}
+          items={this.items}
+          onSelected={(item, index) => this.setState({type: item})}
           topSeparator='full'
           />
         <ListRow

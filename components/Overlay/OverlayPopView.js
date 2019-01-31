@@ -156,10 +156,8 @@ export default class OverlayPopView extends OverlayView {
     }
   }
 
-  buildProps() {
-    super.buildProps();
-
-    let {containerStyle, ...others} = this.props;
+  renderContent(content = null) {
+    let {containerStyle, children} = this.props;
     let {opacity, translateX, translateY, scaleX, scaleY} = this.state;
 
     containerStyle = [{
@@ -171,14 +169,9 @@ export default class OverlayPopView extends OverlayView {
       transform: [{translateX}, {translateY}, {scaleX}, {scaleY}],
     });
 
-    this.props = {containerStyle, ...others};
-  }
-
-  renderContent() {
-    let {containerStyle, children} = this.props;
     return (
       <Animated.View style={containerStyle} pointerEvents='box-none' onLayout={(e) => this.onLayout(e)}>
-        {children}
+        {content ? content : children}
       </Animated.View>
     );
   }

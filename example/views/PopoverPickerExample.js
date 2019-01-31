@@ -18,15 +18,15 @@ export default class PopoverPickerExample extends NavigationPage {
   constructor(props) {
     super(props);
     this.items = [
-      'Apple',
-      'Banana',
-      'Cherry',
-      'Durian',
-      'Filbert',
-      'Grape',
-      'Hickory',
-      'Lemon',
-      'Mango',
+      'Aged Pu\'er',
+      'Bohea',
+      'Chrysanthemum',
+      'Hyson',
+      'Jasmine',
+      'Keemun',
+      'Loungjing',
+      'Pekoe',
+      'Tieguanyin',
     ];
     Object.assign(this.state, {
       selectedIndex: null,

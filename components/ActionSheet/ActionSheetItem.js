@@ -27,9 +27,8 @@ export default class ActionSheetItem extends Component {
     disabled: false,
   };
 
-  buildProps() {
-    let {style, type, title, topSeparator, bottomSeparator, disabled, activeOpacity, onPress, ...others} = this.props;
-
+  buildStyle() {
+    let {style, type} = this.props;
     style = [{
       backgroundColor: type === 'cancel' ? Theme.asCancelItemColor : Theme.asItemColor,
       paddingLeft: Theme.asItemPaddingLeft,
@@ -40,8 +39,40 @@ export default class ActionSheetItem extends Component {
       overflow: 'hidden',
       justifyContent: 'center',
     }].concat(style);
+    return style;
+  }
 
-    let textStyle, separatorStyle;
+  renderSeparator(separator) {
+    let {type} = this.props;
+
+    let indentViewStyle = {
+      backgroundColor: 'rgba(0,0,0,0)',
+      paddingLeft: Theme.asItemPaddingLeft,
+    }
+    let separatorStyle;
+    if (type === 'cancel') {
+      separatorStyle = {
+        backgroundColor: Theme.asCancelItemSeparatorColor,
+        height: Theme.asCancelItemSeparatorLineWidth,
+      }
+    } else {
+      separatorStyle = {
+        backgroundColor: Theme.asItemSeparatorColor,
+        height:Theme.asItemSeparatorLineWidth,
+      }
+    }
+    switch (separator) {
+      case 'full': return <View style={separatorStyle} />;
+      case 'indent': return <View style={indentViewStyle}><View style={separatorStyle} /></View>;
+      default: return null;
+    }
+  }
+
+  renderTitle() {
+    let {type, title, disabled} = this.props;
+    if (title === null || title === undefined || React.isValidElement(title)) return title;
+
+    let textStyle;
     if (type === 'cancel') {
       textStyle = {
         backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -51,10 +82,6 @@ export default class ActionSheetItem extends Component {
         opacity: disabled ? Theme.asItemDisabledOpacity : 1,
         overflow: 'hidden',
       };
-      separatorStyle = {
-        backgroundColor:Theme.asCancelItemSeparatorColor,
-        height: Theme.asCancelItemSeparatorLineWidth,
-      }
     } else {
       textStyle = {
         backgroundColor: 'rgba(0, 0, 0, 0)',
@@ -64,69 +91,22 @@ export default class ActionSheetItem extends Component {
         opacity: disabled ? Theme.asItemDisabledOpacity : 1,
         overflow: 'hidden',
       };
-      separatorStyle = {
-        backgroundColor: Theme.asItemSeparatorColor,
-        height:Theme.asItemSeparatorLineWidth,
-      }
     }
-
-    if ((title || title === '' || title === 0) && !React.isValidElement(title)) {
-      title = <Text style={textStyle} numberOfLines={1}>{title}</Text>;
-    }
-
-    let indentViewStyle = {
-      backgroundColor: StyleSheet.flatten(style).backgroundColor,
-      paddingLeft: Theme.asItemPaddingLeft,
-    }
-    switch (topSeparator) {
-      case 'none':
-        topSeparator = null;
-        break;
-      case 'full':
-        topSeparator = <View style={separatorStyle} />;
-        break;
-      case 'indent':
-        topSeparator = (
-          <View style={indentViewStyle}>
-            <View style={separatorStyle} />
-          </View>
-        );
-        break;        
-    }
-    switch (bottomSeparator) {
-      case 'none':
-        bottomSeparator = null;
-        break;
-      case 'full':
-        bottomSeparator = <View style={separatorStyle} />;
-        break;
-      case 'indent':
-        bottomSeparator = (
-          <View style={indentViewStyle}>
-            <View style={separatorStyle} />
-          </View>
-        );
-        break;        
-    }
-
-    if (disabled) activeOpacity = 1;
-
-    this.props = {style, type, title, topSeparator, bottomSeparator, disabled, activeOpacity, onPress, ...others};
+    return <Text style={textStyle} numberOfLines={1}>{title}</Text>;
   }
 
   render() {
-    this.buildProps();
-
-    let {style, title, topSeparator, bottomSeparator, ...others} = this.props;
+    let {style, children, type, title, topSeparator, bottomSeparator, disabled, activeOpacity, ...others} = this.props;
     return (
       <View style={{backgroundColor: 'rgba(0, 0, 0, 0)'}} >
-        {topSeparator}
-        <TouchableOpacity style={style} {...others}>
-          {title}
+        {this.renderSeparator(topSeparator)}
+        <TouchableOpacity style={this.buildStyle()} activeOpacity={disabled ? 1 : activeOpacity} {...others}>
+          {this.renderTitle()}
         </TouchableOpacity>
-        {bottomSeparator}
+        {this.renderSeparator(bottomSeparator)}
       </View>
     );
   }
 
 }
+

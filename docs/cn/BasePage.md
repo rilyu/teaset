@@ -14,11 +14,7 @@ BasePage 定义一个基础页面组件, 是 Page 的抽象封装, 需要派生�
 |---|---|---|
 | navigator | Navigator | 返回 TeaNavigator 封装的 navigator。<br/>这是一个只读属性变量。
 | didMount | bool | componentDidMount 是否已调用, 代替 React 废弃的 isMounted。
-
-## State
-| State | Type | Notes |
-|---|---|---|
-| isFocused | bool | 是否已聚焦到此页面, 如不想重写 onDidFocus 函数也可以使用此状态代替。
+| isFocused | bool | 是否已聚焦到此页面。
 
 ## Methods
 | Method | Params | Returns | Notes |

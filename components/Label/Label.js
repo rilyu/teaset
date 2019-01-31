@@ -24,8 +24,8 @@ export default class Label extends Component {
     numberOfLines: 1,
   };
 
-  buildProps() {
-    let {type, size, style, text, children, ...others} = this.props;
+  buildStyle() {
+    let {type, size, style} = this.props;
 
     let color, fontSize;
     switch (size) {
@@ -58,15 +58,15 @@ export default class Label extends Component {
       overflow: 'hidden',
     }].concat(style);
 
-    if (text || text === '' || text === 0) children = text;
-
-    return {type, size, style, text, children, ...others};
+    return style;
   }
 
   render() {
-    let props = this.buildProps();
+    let {style, type, size, text, children, ...others} = this.props;
     return (
-      <Text {...props} />
+      <Text style={this.buildStyle()} {...others}>
+        {(text || text === '' || text === 0) ? text : children}
+      </Text>
     );
   }
 }

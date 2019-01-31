@@ -34,18 +34,6 @@ export default class NavigationPage extends BasePage {
     this.screenWidth = Dimensions.get('window').width;
   }
 
-  buildProps() {
-    let {navigationBarInsets, ...others} = super.buildProps();
-    let {left: paddingLeft, right: paddingRight} = Theme.screenInset;
-    let pageContainerStyle = [{
-      flex: 1,
-      paddingLeft,
-      paddingRight,
-      marginTop: navigationBarInsets ? (Theme.navBarContentHeight + Theme.statusBarHeight) : 0,
-    }];
-    return ({navigationBarInsets, pageContainerStyle, ...others});
-  }
-
   onLayout(e) {
     let {width} = Dimensions.get('window');
     if (width != this.screenWidth) {
@@ -88,9 +76,18 @@ export default class NavigationPage extends BasePage {
   }
 
   render() {
-    let {autoKeyboardInsets, keyboardTopInsets, pageContainerStyle, onLayout, ...others} = this.buildProps();
+    let {style, children, scene, autoKeyboardInsets, keyboardTopInsets, title, showBackButton, navigationBarInsets, ...others} = this.props;
+
+    let {left: paddingLeft, right: paddingRight} = Theme.screenInset;
+    let pageContainerStyle = [{
+      flex: 1,
+      paddingLeft,
+      paddingRight,
+      marginTop: navigationBarInsets ? (Theme.navBarContentHeight + Theme.statusBarHeight) : 0,
+    }];
+
     return (
-      <View onLayout={e => this.onLayout(e)} {...others}>
+      <View style={this.buildStyle()} onLayout={e => this.onLayout(e)} {...others}>
         <View style={{flex: 1}} >
           <View style={pageContainerStyle}>
             {this.renderPage()}
@@ -104,3 +101,5 @@ export default class NavigationPage extends BasePage {
 
 
 }
+
+

@@ -26,9 +26,9 @@ export default class SelectRow extends ListRow {
     emptyTextColor: '#ff8f99',
   };
 
-  buildProps() {
-    let {title, detail, value, items, getItemValue, getItemText, emptyText, emptyTextColor, onSelected, ...others} = this.props;
-    detail = (
+  renderDetail() {
+    let {title, detail, value, items, getItemValue, getItemText, emptyText, emptyTextColor, onSelected} = this.props;
+    return (
       <Select
         style={{borderWidth: 0, flex: 1}}
         value={value}
@@ -43,10 +43,6 @@ export default class SelectRow extends ListRow {
         onSelected={(item, index) => onSelected && onSelected(items[index], index)}
         />
     );
-
-    this.props = {title, detail, value, items, getItemValue, getItemText, emptyText, emptyTextColor, onSelected, ...others};
-
-    super.buildProps();
   }
 
 }

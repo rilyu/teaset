@@ -33,10 +33,9 @@ export default class SegmentedItem extends Component {
     };
   }
 
-  buildProps() {
-    let {style, title, titleStyle, active, activeTitleStyle, badge, onAddWidth, children, ...others} = this.props;
+  buildStyle() {
+    let {style} = this.props;
     let {badgeWidth} = this.state;
-
     style = [{
       paddingTop: Theme.sbBtnPaddingTop,
       paddingBottom: Theme.sbBtnPaddingBottom,
@@ -46,53 +45,60 @@ export default class SegmentedItem extends Component {
       alignItems: 'center',
       justifyContent: 'center',
     }].concat(style);
+    return style;
+  }
 
-    if (!React.isValidElement(title) && (title || title === '' || title === 0)) {
-      let textStyle;
-      if (active) {
-        textStyle = [{
-          color: Theme.sbBtnActiveTitleColor,
-          fontSize: Theme.sbBtnActiveTextFontSize,
-        }].concat(activeTitleStyle);
-      } else {
-        textStyle = [{
-          color: Theme.sbBtnTitleColor,
-          fontSize: Theme.sbBtnTextFontSize,
-        }].concat(titleStyle);
-      }
-      title = <Text key='title' style={textStyle} numberOfLines={1}>{title}</Text>;
+  renderTitle() {
+    let {title, titleStyle, activeTitleStyle, active} = this.props;
+    if (title === null || title === undefined) return null;
+    else if (React.isValidElement(title)) return title;
+
+    let textStyle;
+    if (active) {
+      textStyle = [{
+        color: Theme.sbBtnActiveTitleColor,
+        fontSize: Theme.sbBtnActiveTextFontSize,
+      }].concat(activeTitleStyle);
+    } else {
+      textStyle = [{
+        color: Theme.sbBtnTitleColor,
+        fontSize: Theme.sbBtnTextFontSize,
+      }].concat(titleStyle);
     }
-    if (badge === 0) {
-      badge = null;
-    } else if (!React.isValidElement(badge) && badge) {
-      let badgeStyle = {
-        position: 'absolute',
-        right: 0,
-        top: 0,
-      };
-      badge = (
-        <Badge
-          key='badge'
-          style={badgeStyle}
-          count={badge}
-          onLayout={e => {
-            let {width} = e.nativeEvent.layout;
-            if (width != this.state.badgeWidth) {
-              this.setState({badgeWidth: width});
-              onAddWidth && onAddWidth(width);
-            }
-          }}/>
-      );
-    }
+    return <Text key='title' style={textStyle} numberOfLines={1}>{title}</Text>;
+  }
 
-    children = [title, badge];
+  renderBadge() {
+    let {badge, onAddWidth} = this.props;
+    if (!badge) return null;
+    else if (React.isValidElement(badge)) return badge;
 
-    this.props = {style, title, titleStyle, active, activeTitleStyle, badge, children, ...others};
+    let badgeStyle = {
+      position: 'absolute',
+      right: 0,
+      top: 0,
+    };
+    return (
+      <Badge
+        style={badgeStyle}
+        count={badge}
+        onLayout={e => {
+          let {width} = e.nativeEvent.layout;
+          if (width != this.state.badgeWidth) {
+            this.setState({badgeWidth: width});
+            onAddWidth && onAddWidth(width);
+          }
+        }}/>
+    );
   }
 
   render() {
-    this.buildProps();
-
-    return <View {...this.props} />;
+    let {style, children, title, titleStyle, activeTitleStyle, active, badge, onAddWidth, ...others} = this.props;
+    return (
+      <View style={this.buildStyle()} {...others}>
+        {this.renderTitle()}
+        {this.renderBadge()}
+      </View>
+    );
   }
 }

@@ -4,7 +4,7 @@
 
 import React, {Component, PureComponent} from "react";
 import {StyleSheet, AppRegistry, DeviceEventEmitter, View, Animated} from 'react-native';
-//import {Symbol} from 'core-js';
+import PropTypes from 'prop-types';
 
 import Theme from 'teaset/themes/Theme';
 
@@ -43,17 +43,63 @@ export default class TopView extends Component {
       scaleX: new Animated.Value(1),
       scaleY: new Animated.Value(1),
     };
+    this.handlers = [];
+  }
+
+  static contextTypes = {
+    registerTopViewHandler: PropTypes.func,
+    unregisterTopViewHandler: PropTypes.func,
+  };
+
+  static childContextTypes = {
+    registerTopViewHandler: PropTypes.func,
+    unregisterTopViewHandler: PropTypes.func,
+  };
+
+  getChildContext() {
+    let {registerTopViewHandler, unregisterTopViewHandler} = this.context;
+    if (!registerTopViewHandler) {
+      registerTopViewHandler = handler => {
+        this.handlers.push(handler);
+      };
+      unregisterTopViewHandler = handler => {
+        for (let i = this.handlers.length - 1; i >= 0; --i) {
+          if (this.handlers[i] === handler) {
+            this.handlers.splice(i, 1);
+            return true;
+          }
+        }
+        return false;
+      }
+    }
+    return {registerTopViewHandler, unregisterTopViewHandler};
+  }
+
+  get handler() {
+    return this.handlers.length > 0 ? this.handlers[this.handlers.length - 1] : this;
   }
 
   componentWillMount() {
-    DeviceEventEmitter.addListener("addOverlay", e => this.add(e));
-    DeviceEventEmitter.addListener("removeOverlay", e => this.remove(e));
-    DeviceEventEmitter.addListener("removeAllOverlay", e => this.removeAll(e));
-    DeviceEventEmitter.addListener("transformRoot", e => this.transform(e));
-    DeviceEventEmitter.addListener("restoreRoot", e => this.restore(e));
+    let {registerTopViewHandler} = this.context;
+    if (registerTopViewHandler) {
+      registerTopViewHandler(this);
+      return;
+    }
+
+    DeviceEventEmitter.addListener("addOverlay", e => this.handler.add(e));
+    DeviceEventEmitter.addListener("removeOverlay", e => this.handler.remove(e));
+    DeviceEventEmitter.addListener("removeAllOverlay", e => this.handler.removeAll(e));
+    DeviceEventEmitter.addListener("transformRoot", e => this.handler.transform(e));
+    DeviceEventEmitter.addListener("restoreRoot", e => this.handler.restore(e));
   }
 
   componentWillUnmount() {
+    let {unregisterTopViewHandler} = this.context;
+    if (unregisterTopViewHandler) {
+      unregisterTopViewHandler(this);
+      return;
+    }
+
     DeviceEventEmitter.removeAllListeners("addOverlay");
     DeviceEventEmitter.removeAllListeners("removeOverlay");
     DeviceEventEmitter.removeAllListeners("removeAllOverlay");

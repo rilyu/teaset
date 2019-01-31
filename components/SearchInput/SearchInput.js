@@ -68,37 +68,6 @@ export default class SearchInput extends Component {
     return this.refs.textInput && this.refs.textInput.clear();
   }
 
-  buildProps() {
-    let {style, inputStyle, iconSize, disabled, placeholderTextColor, pointerEvents, ...others} = this.props;
-
-    style = [{
-      backgroundColor: Theme.siColor,
-      borderColor: Theme.siBorderColor,
-      borderWidth: Theme.siBorderWidth,
-      borderRadius: Theme.siBorderRadius,
-    }].concat(style);
-    if (disabled) style = style.concat({opacity: Theme.siDisabledOpacity})
-
-    let height = StyleSheet.flatten(style).height;
-    inputStyle = [{
-      color: Theme.siTextColor,
-      fontSize: Theme.siFontSize,
-      height: height ? height : Theme.siHeight,
-      paddingVertical: Theme.siPaddingVertical,
-      paddingHorizontal: Theme.siPaddingHorizontal,
-    }].concat(inputStyle).concat({
-      backgroundColor: 'rgba(0, 0, 0, 0)',
-    });
-
-    if (!iconSize && iconSize !== 0) iconSize = Theme.siIconSize;
-
-    if (!placeholderTextColor) placeholderTextColor = Theme.siPlaceholderTextColor;
-
-    if (disabled) pointerEvents = 'none';
-
-    this.props = {style, inputStyle, iconSize, disabled, placeholderTextColor, pointerEvents, ...others};
-  }
-
   onContainerLayout(e) {
     this.setState({width: e.nativeEvent.layout.width});
   }
@@ -124,11 +93,26 @@ export default class SearchInput extends Component {
   }
 
   render() {
-    this.buildProps();
+    let {style, children, inputStyle, iconSize, disabled, value, placeholder, placeholderTextColor, selectionColor, pointerEvents, onBlur, onFocus, onChangeText, ...others} = this.props;
 
-    let {style, value, inputStyle, iconSize, placeholder, placeholderTextColor, selectionColor, pointerEvents, onBlur, onFocus, onChangeText, ...others} = this.props;
+    style = [{
+      backgroundColor: Theme.siColor,
+      borderColor: Theme.siBorderColor,
+      borderWidth: Theme.siBorderWidth,
+      borderRadius: Theme.siBorderRadius,
+    }].concat(style);
+    if (disabled) style = style.concat({opacity: Theme.siDisabledOpacity})
 
-    if (value === undefined) value = this.state.value;
+    let height = StyleSheet.flatten(style).height;
+    inputStyle = [{
+      color: Theme.siTextColor,
+      fontSize: Theme.siFontSize,
+      height: height ? height : Theme.siHeight,
+      paddingVertical: Theme.siPaddingVertical,
+      paddingHorizontal: Theme.siPaddingHorizontal,
+    }].concat(inputStyle).concat({
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+    });
 
     let paddingSize;
     let fs = StyleSheet.flatten(inputStyle);
@@ -136,6 +120,11 @@ export default class SearchInput extends Component {
     else if (fs.paddingHorizontal || fs.paddingHorizontal === 0) paddingSize = fs.paddingHorizontal;
     else if (fs.padding || fs.padding === 0) paddingSize = fs.padding;
     else paddingSize = 0;
+
+    if (value === undefined) value = this.state.value;
+    if (!iconSize && iconSize !== 0) iconSize = Theme.siIconSize;
+    if (!placeholderTextColor) placeholderTextColor = Theme.siPlaceholderTextColor;
+    if (disabled) pointerEvents = 'none';
 
     return (
       <View style={style} pointerEvents={pointerEvents}>

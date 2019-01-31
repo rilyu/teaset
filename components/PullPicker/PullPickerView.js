@@ -30,10 +30,8 @@ export default class PullPickerView extends Overlay.PullView {
     onSelected && onSelected(items[itemIndex], itemIndex);
   }
 
-  buildProps() {
-    super.buildProps();
-
-    let {title, items, selectedIndex, getItemText, children, ...others} = this.props;
+  renderContent() {
+    let {title, items, selectedIndex, getItemText} = this.props;
 
     let headerRowStyle = {
       backgroundColor: Theme.pupHeaderColor,
@@ -52,7 +50,8 @@ export default class PullPickerView extends Overlay.PullView {
       height: Theme.pupHeaderSeparatorHeight,
     }
     let {left: leftInset, right: rightInset} = Theme.screenInset;
-    children = (
+
+    return super.renderContent(
       <View style={{backgroundColor: Theme.pupColor, maxHeight: Theme.pupMaxHeight, paddingLeft: leftInset, paddingRight: rightInset}}>
         {!title ? null :
           <View style={headerRowStyle}>
@@ -75,8 +74,6 @@ export default class PullPickerView extends Overlay.PullView {
         </ScrollView>
       </View>
     );
-
-    this.props = {title, items, selectedIndex, getItemText, children, ...others};
   }
 
 }

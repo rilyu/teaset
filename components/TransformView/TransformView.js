@@ -359,48 +359,58 @@ export default class TransformView extends Component {
     }
   }
 
-  buildProps() {
+  buildStyle() {
     let {style, containerStyle, ...others} = this.props;
     let {translateX, translateY, scale} = this.state;
-
     style = StyleSheet.flatten([{
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
     }].concat(style));
+    return style;
+  };
+
+  buildContainerStyle() {
+    let {containerStyle} = this.props;
+    let {translateX, translateY, scale} = this.state;
     containerStyle = [].concat(containerStyle).concat({
       transform: [{translateX: translateX}, {translateY: translateY}, {scale: scale}],
     });
+    return containerStyle;
+  }
 
-    this.props = {style, containerStyle, ...others};
+  onLayout(e) {
+    this.viewLayout = e.nativeEvent.layout;
+    this.props.onLayout && this.props.onLayout(e);    
+  }
+
+  renderContent() {
+    return this.props.children;
   }
 
   render() {
-    this.buildProps();
-
-    let {containerStyle, children, onLayout, ...others} = this.props;
+    let {style, children, containerStyle, maxScale, minScale, inertial, magnetic, tension, onWillTransform, onTransforming, onDidTransform, onWillInertialMove, onDidInertialMove, onWillMagnetic, onDidMagnetic, onPress, onLongPress, onLayout, ...others} = this.props;
     return (
       <View
         {...others}
-        onLayout={e => {
-          this.viewLayout = e.nativeEvent.layout;
-          onLayout && onLayout(e);
-        }}
+        style={this.buildStyle()}
+        onLayout={e => this.onLayout(e)}
         ref='view'
         {...this.panResponder.panHandlers}
       >
         <Animated.View
-          style={containerStyle}
+          style={this.buildContainerStyle()}
           ref='containerView'
           onLayout={e => {
             this.initContentLayout = e.nativeEvent.layout;
           }}
         >
-          {children}
+          {this.renderContent()}
         </Animated.View>
       </View>
     );
   }
 
 }
+

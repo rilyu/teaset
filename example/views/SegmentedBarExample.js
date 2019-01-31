@@ -20,21 +20,21 @@ export default class SegmentedBarExample extends NavigationPage {
     super(props);
 
     this.barItems = [
-      'Apple',
-      'Banana',
-      'Cherry',
-      'Durian',
+      'Aged Pu\'er',
+      'Bohea',
+      'Chrysanthemum',
+      'Hyson',
     ];
     this.barScrollItems = [
-      'Apple',
-      'Banana',
-      'Cherry',
-      'Durian',
-      'Filbert',
-      'Grape',
-      'Hickory',
-      'Lemon',
-      'Mango',
+      'Aged Pu\'er',
+      'Bohea',
+      'Chrysanthemum',
+      'Hyson',
+      'Jasmine',
+      'Keemun',
+      'Loungjing',
+      'Pekoe',
+      'Tieguanyin',
     ];
     this.barCustomItems = ['Home', 'Store', 'Me'];
 

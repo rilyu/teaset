@@ -45,6 +45,7 @@ export default class OverlayPopoverView extends OverlayView {
       popoverWidth: null,
       popoverHeight: null,
     });
+    this.defaultDirectionInsets = 0;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,12 +59,22 @@ export default class OverlayPopoverView extends OverlayView {
     this.setState({fromBounds: bounds});
   }
 
-  buildProps() {
-    super.buildProps();
+  onPopoverLayout(e) {
+    if (Platform.OS === 'android' && (this.state.popoverWidth !== null || this.state.popoverHeight != null)) {
+      //android calls many times...
+      return;
+    }
+    let {width, height} = e.nativeEvent.layout;
+    if (width !== this.state.popoverWidth || height !== this.state.popoverHeight) {
+      this.setState({popoverWidth: width, popoverHeight: height});
+    }
+  }
 
+  buildPopoverStyle() {
     let {fromBounds, popoverWidth, popoverHeight} = this.state;
+    let {popoverStyle, direction, autoDirection, directionInsets, align, alignInsets, showArrow, arrow} = this.props;
     if (popoverWidth === null || popoverHeight === null) {
-      let {popoverStyle, direction, showArrow, arrow, ...others} = this.props;
+      popoverStyle = [].concat(popoverStyle).concat({position: 'absolute', left: 0, top: 0, opacity: 0});
       if (!showArrow) arrow = 'none';
       else {
         switch (direction) {
@@ -73,12 +84,9 @@ export default class OverlayPopoverView extends OverlayView {
           default: arrow = 'top'; break;
         }
       }
-      popoverStyle = [].concat(popoverStyle).concat({position: 'absolute', left: 0, top: 0});
-      this.props = {popoverStyle, direction, showArrow, arrow, ...others};
-      return;
+      return {popoverStyle, arrow};
     }
 
-    let {popoverStyle, direction, autoDirection, directionInsets, align, alignInsets, showArrow, arrow, ...others} = this.props;
     let screenWidth = Dimensions.get('window').width;
     let screenHeight = Dimensions.get('window').height;
     let {x, y, width, height} = fromBounds ? fromBounds : {};
@@ -87,7 +95,7 @@ export default class OverlayPopoverView extends OverlayView {
     if (!y && y !== 0) y = screenHeight / 2;
     if (!width) width = 0;
     if (!height) height = 0;
-    if (!directionInsets) directionInsets = 0;
+    if (!directionInsets && directionInsets !== 0) directionInsets = this.defaultDirectionInsets;
     if (!alignInsets) alignInsets = 0;
 
     //auto direction
@@ -166,37 +174,15 @@ export default class OverlayPopoverView extends OverlayView {
     });
     if (!showArrow) arrow = 'none';
 
-    this.props = {popoverStyle, direction, autoDirection, directionInsets, align, alignInsets, showArrow, arrow, ...others};
+    return {popoverStyle, arrow};
   }
 
-  onPopoverLayout(e) {
-    if (Platform.OS === 'android' && (this.state.popoverWidth !== null || this.state.popoverHeight != null)) {
-      //android calls many times...
-      return;
-    }
-    let {width, height} = e.nativeEvent.layout;
-    if (width !== this.state.popoverWidth || height !== this.state.popoverHeight) {
-      this.setState({popoverWidth: width, popoverHeight: height});
-    }
-  }
-
-  renderContent() {
-    let {popoverStyle, arrow, paddingCorner, children} = this.props;
-
-    //in react native 0.49, this.props will not reset at rerender, then move opacity=0 to here
-    let {popoverWidth, popoverHeight} = this.state;
-    if (popoverWidth === null || popoverHeight === null) {
-      popoverStyle = popoverStyle.concat({opacity: 0});
-    }
-
+  renderContent(content = null) {
+    let {paddingCorner, children} = this.props;
+    let {popoverStyle, arrow} = this.buildPopoverStyle();
     return (
-      <Popover
-        style={popoverStyle}
-        arrow={arrow}
-        paddingCorner={paddingCorner}
-        onLayout={(e) => this.onPopoverLayout(e)}
-      >
-        {children}
+      <Popover style={popoverStyle} arrow={arrow} paddingCorner={paddingCorner} onLayout={(e) => this.onPopoverLayout(e)}>
+        {content ? content : children}
       </Popover>
     );
   }

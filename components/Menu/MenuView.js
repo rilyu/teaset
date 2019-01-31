@@ -37,13 +37,13 @@ export default class MenuView extends Overlay.PopoverView {
     item.onPress && item.onPress();
   }
 
-  buildProps() {
-    let {popoverStyle, directionInsets, shadow, items, children, ...others} = this.props;
-
+  buildPopoverStyle() {
+    this.defaultDirectionInsets = Theme.menuDirectionInsets;
+    let {popoverStyle, arrow} = super.buildPopoverStyle();
     let menuStyle = {
       backgroundColor: Theme.menuColor,
     };
-    if (shadow) {
+    if (this.props.shadow) {
       Object.assign(menuStyle, {
         shadowColor: Theme.menuShadowColor,
         shadowOffset: {width: 1, height: 1},
@@ -52,11 +52,11 @@ export default class MenuView extends Overlay.PopoverView {
       });
     }
     popoverStyle = [menuStyle].concat(popoverStyle);
+    return {popoverStyle, arrow};
+  }
 
-    if (!directionInsets && directionInsets !== 0) {
-      directionInsets = Theme.menuDirectionInsets;
-    }
-
+  renderContent() {
+    let {items} = this.props;
     let iconDefault = 'none';
     for (let item of items) {
       if (item.icon) {
@@ -64,12 +64,12 @@ export default class MenuView extends Overlay.PopoverView {
         break;
       }
     }
-    children = [];
+    let list = [];
     for (let i = 0; items && i < items.length; ++i) {
       let item = items[i];
       let {title, icon} = item;
       let style = i === 0 ? {borderTopWidth: 0} : null;
-      children.push(
+      list.push(
         <this.constructor.Item
           key={'item' + i}
           style={style}
@@ -79,10 +79,7 @@ export default class MenuView extends Overlay.PopoverView {
           />
       );
     }
-
-    this.props = {popoverStyle, directionInsets, shadow, items, children, ...others};
-
-    super.buildProps();
+    return super.renderContent(list);
   }
 
 }

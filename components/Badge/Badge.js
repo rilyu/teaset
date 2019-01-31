@@ -24,8 +24,8 @@ export default class Badge extends Component {
     maxCount: 99,
   };
 
-  buildProps() {
-    let {style, type, count, countStyle, maxCount, children, ...others} = this.props;
+  buildStyle() {
+    let {style, type, count} = this.props;
 
     let width, height, minWidth, borderRadius, borderWidth, padding;
     switch (type) {
@@ -68,25 +68,35 @@ export default class Badge extends Component {
       flexDirection: 'row',
     }].concat(style);
 
-    if (type === 'dot') children = null;
+    return style;
+  }
+
+  renderInner() {
+    let {type, count, countStyle, maxCount, children} = this.props;
+
+    if (type === 'dot') return null;
     else if (count || count === 0) {
       countStyle = [{
         color: Theme.badgeTextColor,
         fontSize: Theme.badgeFontSize,
       }].concat(countStyle);
-      children = (
+      return (
         <Text style={countStyle} allowFontScaling={false} numberOfLines={1}>
           {count > maxCount ? maxCount + '+' : count}
         </Text>
       );
+    } else {
+      return children;
     }
-
-    this.props = {style, type, count, countStyle, maxCount, children, ...others};
   }
 
   render() {
-    this.buildProps();
-    return <View {...this.props} />;
+    let {style, children, type, count, countStyle, maxCount, ...others} = this.props;
+    return (
+      <View style={this.buildStyle()} {...others}>
+        {this.renderInner()}
+      </View>
+    );
   }
 
 }

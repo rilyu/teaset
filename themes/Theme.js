@@ -66,7 +66,7 @@ const Theme = {
 
   isIPhoneX: isIPhoneX,
 
-  fitIPhoneX: false,
+  fitIPhoneX: true,
 
   get isLandscape() {
     return Dimensions.get('window').width > Dimensions.get('window').height;

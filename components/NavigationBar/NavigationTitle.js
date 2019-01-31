@@ -25,7 +25,7 @@ export default class NavigationTitle extends Component {
     tintColor: PropTypes.string,
   };
 
-  buildProps() {
+  render() {
     let {style, text, children, ...others} = this.props;
 
     style = [{
@@ -38,15 +38,10 @@ export default class NavigationTitle extends Component {
       fontSize: Theme.navTitleFontSize,
     }].concat(style);
 
-    if (text || text === '' || text === 0) children = text;
-
-    return {style, text, children, ...others};
-  }
-
-  render() {
-    let props = this.buildProps();
     return (
-      <Text {...props} />
+      <Text style={style} {...others}>
+        {(text === null || text === undefined) ? children : text}
+      </Text>
     );
   }
 

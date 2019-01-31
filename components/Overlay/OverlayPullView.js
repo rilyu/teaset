@@ -126,44 +126,51 @@ export default class OverlayPullView extends OverlayView {
     }
   }
 
-  buildProps() {
-    super.buildProps();
-
-    let {side, style, containerStyle, ...others} = this.props;
-
-    let sideStyle, contentStyle;
+  buildStyle() {
+    let {side} = this.props;
+    let sideStyle;
     //Set flexDirection so that the content view will fill the side
     switch (side) {
       case 'top':
         sideStyle = {flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'stretch'};
-        contentStyle = {marginTop: this.state.marginValue};
         break;
       case 'left':
         sideStyle = {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'stretch'};
-        contentStyle = {marginLeft: this.state.marginValue};
         break;
       case 'right':
         sideStyle = {flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'stretch'};
-        contentStyle = {marginRight: this.state.marginValue};
         break;
       default:
         sideStyle = {flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'stretch'};
-        contentStyle = {marginBottom: this.state.marginValue};
     }
-    style = [].concat(style).concat(sideStyle);
-    contentStyle.opacity = this.state.showed ? 1 : 0;
-    containerStyle = [{
-      backgroundColor: Theme.defaultColor,//rgba(0, 0, 0, 0)',
-    }].concat(containerStyle).concat(contentStyle);
-
-    this.props = {side, style, containerStyle, ...others};
+    return super.buildStyle().concat(sideStyle);
   }
 
-  renderContent() {
-    let {containerStyle, children} = this.props;
+  renderContent(content = null) {
+    let {side, containerStyle, children} = this.props;
+
+    let contentStyle;
+    switch (side) {
+      case 'top':
+        contentStyle = {marginTop: this.state.marginValue};
+        break;
+      case 'left':
+        contentStyle = {marginLeft: this.state.marginValue};
+        break;
+      case 'right':
+        contentStyle = {marginRight: this.state.marginValue};
+        break;
+      default:
+        contentStyle = {marginBottom: this.state.marginValue};
+    }
+    contentStyle.opacity = this.state.showed ? 1 : 0;
+    containerStyle = [{
+      backgroundColor: Theme.defaultColor,
+    }].concat(containerStyle).concat(contentStyle);
+
     return (
       <Animated.View style={containerStyle} onLayout={(e) => this.onLayout(e)}>
-        {children}
+        {content ? content : children}
       </Animated.View>
     );
   }

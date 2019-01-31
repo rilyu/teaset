@@ -21,16 +21,8 @@ export default class ActionPopoverItem extends Component {
     ...TouchableOpacity.defaultProps,
   };
 
-  buildProps() {
-    let {style, title, leftSeparator, rightSeparator, ...others} = this.props;
-
-    style = [{
-      paddingVertical: Theme.apItemPaddingVertical,
-      paddingHorizontal: Theme.apItemPaddingHorizontal,
-      borderColor: Theme.apSeparatorColor,
-      borderLeftWidth: leftSeparator ? Theme.apSeparatorWidth : 0,
-      borderRightWidth: rightSeparator ? Theme.apSeparatorWidth : 0,
-    }].concat(style);
+  renderTitle() {
+    let {title} = this.props;
 
     if ((title || title === '' || title === 0) && !React.isValidElement(title)) {
       let textStyle = {
@@ -41,16 +33,23 @@ export default class ActionPopoverItem extends Component {
       title = <Text style={textStyle} numberOfLines={1}>{title}</Text>;
     }
 
-    this.props = {style, title, leftSeparator, rightSeparator, ...others};
+    return title;
   }
 
   render() {
-    this.buildProps();
+    let {style, title, leftSeparator, rightSeparator, ...others} = this.props;
 
-    let {title, ...others} = this.props;
+    style = [{
+      paddingVertical: Theme.apItemPaddingVertical,
+      paddingHorizontal: Theme.apItemPaddingHorizontal,
+      borderColor: Theme.apSeparatorColor,
+      borderLeftWidth: leftSeparator ? Theme.apSeparatorWidth : 0,
+      borderRightWidth: rightSeparator ? Theme.apSeparatorWidth : 0,
+    }].concat(style);
+
     return (
-      <TouchableOpacity {...others}>
-        {title}
+      <TouchableOpacity style={style} {...others}>
+        {this.renderTitle()}
       </TouchableOpacity>
     );
   }

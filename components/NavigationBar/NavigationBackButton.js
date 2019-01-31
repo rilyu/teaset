@@ -24,12 +24,13 @@ export default class NavigationBackButton extends NavigationButton {
     icon: {uri: backIcon},
   };
 
-  buildProps() {
-    super.buildProps();
+  buildStyle() {
+    return super.buildStyle().concat({paddingLeft: 0, paddingTop: 8, paddingBottom: 8});
+  }
 
-    let {style, title, icon, children, ...others} = this.props;
+  renderTitle() {
+    let {title, icon} = this.props;
 
-    style = style.concat({paddingLeft: 0, paddingTop: 8, paddingBottom: 8});
     let textStyle = {
       color: this.context.tintColor,
       fontSize: Theme.navButtonFontSize,
@@ -40,13 +41,12 @@ export default class NavigationBackButton extends NavigationButton {
       width: 20,
       height: 20,
     };
-
-    children = [
+    let elements = [
       <Image key={'icon'} style={iconStyle} source={icon} />,
       <Text key={'title'} style={textStyle} numberOfLines={1} allowFontScaling={false}>{title}</Text>,
     ];
 
-    this.props = {style, title, icon, children, ...others};
+    return elements;
   }
 
 }

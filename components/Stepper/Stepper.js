@@ -46,57 +46,8 @@ export default class Stepper extends Component {
     };
   }
 
-  buildProps() {
-    let {style, valueStyle, subButton, addButton, disabled, editable, pointerEvents, opacity, ...others} = this.props;
-
-    style = [{
-      backgroundColor: Theme.stepperColor,
-      borderColor: Theme.stepperBorderColor,
-      borderWidth: Theme.stepperBorderWidth,
-      borderRadius: Theme.stepperBorderRadius,
-      flexDirection: 'row',
-      alignItems: 'center',
-      overflow: 'hidden',
-    }].concat(style);
-    valueStyle = [{
-      color: Theme.stepperTextColor,
-      fontSize: Theme.stepperFontSize,
-      textAlign: 'center',
-      minWidth: Theme.stepperValueMinWidth,
-      paddingHorizontal: Theme.stepperValuePaddingHorizontal,
-    }].concat(valueStyle);
-
-    let btnStyle = {
-      width: Theme.stepperButtonWidth,
-      height: Theme.stepperButtonHeight,
-      alignItems: 'center',
-      justifyContent: 'center',
-    };
-    let btnTextStyle = {
-      color: Theme.stepperBtnTextColor,
-      fontSize: Theme.stepperBtnFontSize,
-    };
-    if (!React.isValidElement(subButton)) {
-      subButton = (
-        <View style={btnStyle}>
-          <Text style={btnTextStyle}>{subButton}</Text>
-        </View>
-      );
-    }
-    if (!React.isValidElement(addButton)) {
-      addButton = (
-        <View style={btnStyle}>
-          <Text style={btnTextStyle}>{addButton}</Text>
-        </View>
-      );
-    }
-
-    if (disabled) {
-      pointerEvents = 'none';
-      opacity = Theme.stepperDisabledOpacity;
-    }
-
-    this.props = {style, valueStyle, subButton, addButton, disabled, editable, pointerEvents, opacity, ...others};
+  get value() {
+    return (this.props.value === undefined ? this.state.value : this.props.value);
   }
 
   onLayout(e) {
@@ -109,8 +60,8 @@ export default class Stepper extends Component {
   }
 
   onSubButtonPress() {
-    let {value, step, min, onChange} = this.props;
-    if (value === undefined) value = this.state.value;
+    let {step, min, onChange} = this.props;
+    let value = this.value;
     value -= step;
     if (value < min) value = min;
     this.setState({value});
@@ -118,20 +69,116 @@ export default class Stepper extends Component {
   }
 
   onAddButtonPress() {
-    let {value, step, max, onChange} = this.props;
-    if (value === undefined) value = this.state.value;
+    let {step, max, onChange} = this.props;
+    let value = this.value;
     value += step;
     if (value > max) value = max;
     this.setState({value});
     onChange && onChange(value);
   }
 
+  buildStyle() {
+    let {style} = this.props;
+    style = [{
+      backgroundColor: Theme.stepperColor,
+      borderColor: Theme.stepperBorderColor,
+      borderWidth: Theme.stepperBorderWidth,
+      borderRadius: Theme.stepperBorderRadius,
+      flexDirection: 'row',
+      alignItems: 'center',
+      overflow: 'hidden',
+    }].concat(style);
+    return style;
+  }
+
+  renderSubButton() {
+    let {subButton, disabled, editable, min} = this.props;
+
+    let subDisabled = !editable || this.value <= min;
+    let subOpacity = !disabled && subDisabled ? Theme.stepperDisabledOpacity : 1;
+
+    if (!React.isValidElement(subButton)) {
+      let btnStyle = {
+        width: Theme.stepperButtonWidth,
+        height: Theme.stepperButtonHeight,
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
+      let btnTextStyle = {
+        color: Theme.stepperBtnTextColor,
+        fontSize: Theme.stepperBtnFontSize,
+      };
+      subButton = (
+        <View style={btnStyle}>
+          <Text style={btnTextStyle}>{subButton}</Text>
+        </View>
+      );
+    }
+
+    return (
+      <TouchableOpacity disabled={subDisabled} onPress={() => this.onSubButtonPress()}>
+        <View style={{opacity: subOpacity}}>
+          {subButton}
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  renderAddButton() {
+    let {addButton, disabled, editable, max} = this.props;
+
+    let addDisabled = !editable || this.value >= max;
+    let addOpacity = !disabled && addDisabled ? Theme.stepperDisabledOpacity : 1;
+
+    let btnStyle = {
+      width: Theme.stepperButtonWidth,
+      height: Theme.stepperButtonHeight,
+      alignItems: 'center',
+      justifyContent: 'center',
+    };
+    let btnTextStyle = {
+      color: Theme.stepperBtnTextColor,
+      fontSize: Theme.stepperBtnFontSize,
+    };
+    if (!React.isValidElement(addButton)) {
+      addButton = (
+        <View style={btnStyle}>
+          <Text style={btnTextStyle}>{addButton}</Text>
+        </View>
+      );
+    }
+
+    return (
+      <TouchableOpacity disabled={addDisabled} onPress={() => this.onAddButtonPress()}>
+        <View style={{opacity: addOpacity}}>
+          {addButton}
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  renderValue() {
+    let {valueStyle, valueFormat} = this.props;
+
+    valueStyle = [{
+      color: Theme.stepperTextColor,
+      fontSize: Theme.stepperFontSize,
+      textAlign: 'center',
+      minWidth: Theme.stepperValueMinWidth,
+      paddingHorizontal: Theme.stepperValuePaddingHorizontal,
+    }].concat(valueStyle);
+
+    return (
+      <Text style={valueStyle} numberOfLines={1}>
+        {valueFormat ? valueFormat(this.value) : this.value}
+      </Text>
+    );
+  }
+
   render() {
-    this.buildProps();
+    let {style, children, pointerEvents, opacity, defaultValue, value, step, max, min, valueStyle, valueFormat, subButton, addButton, showSeparator, disabled, editable, onLayout, onChange, ...others} = this.props; //disable View.onChange
 
-    let {style, subButton, addButton, value, valueStyle, valueFormat, max, min, showSeparator, disabled, editable, onLayout, onChange, ...others} = this.props; //disable View.onChange
-
-    if (value === undefined) value = this.state.value;
+    style = this.buildStyle();
 
     let separator;
     if (showSeparator) {
@@ -139,29 +186,21 @@ export default class Stepper extends Component {
       separator = <View style={{backgroundColor: fs.borderColor, width: fs.borderWidth, height: this.state.height}} />;
     }
 
-    let subDisabled = !editable || value <= min;
-    let addDisabled = !editable || value >= max;
-    let subOpacity = !disabled && subDisabled ? Theme.stepperDisabledOpacity : 1;
-    let addOpacity = !disabled && addDisabled ? Theme.stepperDisabledOpacity : 1;
-
     return (
-      <View style={style} onLayout={e => this.onLayout(e)} {...others}>
-        <TouchableOpacity disabled={subDisabled} onPress={() => this.onSubButtonPress()}>
-          <View style={{opacity: subOpacity}}>
-            {subButton}
-          </View>
-        </TouchableOpacity>
+      <View
+        style={style}
+        pointerEvents={disabled ? 'none' : pointerEvents}
+        opacity={disabled ? Theme.stepperDisabledOpacity : opacity}
+        onLayout={e => this.onLayout(e)}
+        {...others}
+      >
+        {this.renderSubButton()}
         {separator}
-        <Text style={valueStyle} numberOfLines={1}>{valueFormat ? valueFormat(value) : value}</Text>
+        {this.renderValue()}
         {separator}
-        <TouchableOpacity disabled={addDisabled} onPress={() => this.onAddButtonPress()}>
-          <View style={{opacity: addOpacity}}>
-            {addButton}
-          </View>
-        </TouchableOpacity>
+        {this.renderAddButton()}
       </View>
     );
   }
 
 }
-

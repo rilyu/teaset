@@ -37,8 +37,8 @@ export default class PopoverPickerView extends Overlay.PopoverView {
     onSelected && onSelected(items[itemIndex], itemIndex);
   }
 
-  buildProps() {
-    let {popoverStyle, directionInsets, shadow, items, selectedIndex, getItemText, children, ...others} = this.props;
+  buildPopoverStyle() {
+    let {shadow, items, selectedIndex, getItemText} = this.props;
 
     let pickerStyle = {
       backgroundColor: Theme.poppColor,
@@ -55,13 +55,16 @@ export default class PopoverPickerView extends Overlay.PopoverView {
         shadowRadius: 2,
       });
     }
+
+    this.defaultDirectionInsets = Theme.poppDirectionInsets;
+    let {popoverStyle, arrow} = super.buildPopoverStyle();
     popoverStyle = [pickerStyle].concat(popoverStyle);
+    return {popoverStyle, arrow};
+  }
 
-    if (!directionInsets && directionInsets !== 0) {
-      directionInsets = Theme.poppDirectionInsets;
-    }
-
-    children = (
+  renderContent() {
+    let {items, selectedIndex, getItemText} = this.props;
+    return super.renderContent(
       <ScrollView>
         {items && items.map((item, index) => (
           <this.constructor.Item
@@ -73,10 +76,6 @@ export default class PopoverPickerView extends Overlay.PopoverView {
         ))}
       </ScrollView>
     );
-
-    this.props = {popoverStyle, directionInsets, shadow, items, selectedIndex, getItemText, children, ...others};
-
-    super.buildProps();
   }
 
 }

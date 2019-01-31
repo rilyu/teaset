@@ -7,6 +7,8 @@ import {StyleSheet, View, ScrollView, Image, Switch, Platform} from 'react-nativ
 
 import {Theme, TeaNavigator, NavigationPage, BasePage, ListRow, TabView, Label, PullPicker} from 'teaset';
 
+import SelectRow from './SelectRow';
+
 export default class TabViewExample extends BasePage {
 
   static defaultProps = {
@@ -98,23 +100,12 @@ class HomePage extends NavigationPage {
     showBackButton: true,
   };
 
-  selectType() {
-    let {type, onChangeType} = this.props;
-    let items = ['projector', 'carousel'];
-    PullPicker.show(
-      'Type',
-      items,
-      items.indexOf(this.props.type),
-      (item, index) => onChangeType && onChangeType(item)
-    );
-  }
-
   renderPage() {
-    let {type, custom, onChangeCustom} = this.props;
+    let {type, custom, onChangeCustom, onChangeType} = this.props;
     return (
       <ScrollView style={{flex: 1}}>
         <View style={{height: 20}} />
-        <ListRow title='Type' detail={type} onPress={() => this.selectType()} topSeparator='full' bottomSeparator='full' />
+        <SelectRow title='Type' value={type} items={['projector', 'carousel']} onSelected={(item, index) => onChangeType && onChangeType(item)} topSeparator='full' bottomSeparator='full' />
         <View style={{height: 20}} />
         <ListRow title='Custom' detail={<Switch value={custom} onValueChange={value => onChangeCustom(value)} />} topSeparator='full' bottomSeparator='full' />
       </ScrollView>

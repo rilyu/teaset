@@ -24,7 +24,7 @@ export default class NavigationBarExample extends NavigationPage {
     this.leftViewItems = ['None', 'Back button', 'Link button', 'Icon button', 'Two icon button'];
     this.rightViewItems = ['None', 'Link button', 'Icon button', 'Two icon button'];
     this.bgColorItems = ['Default', 'Custom'];
-    this.tintColorItems = ['Default', 'Custom'];
+    this.tintColorItems = ['Default', 'Custom', 'None'];
     this.statusBarStyleItems = ['Default', 'Light Content', 'Dark Content'];
 
     Object.assign(this.state, {
@@ -58,8 +58,9 @@ export default class NavigationBarExample extends NavigationPage {
 
   get tintColor() {
     switch(this.state.tintColor) {
-      case 'Default': return null;
+      case 'Default': return undefined;
       case 'Custom': return '#3af455';
+      case 'None': return null;
     }
   }
 

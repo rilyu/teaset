@@ -59,10 +59,9 @@ export default class ListRow extends Component {
     this.refs.containerView && this.refs.containerView.timingClose();
   }
 
-  buildProps() {
-    let {style, activeOpacity, onPress, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, contentStyle, ...others} = this.props;
+  buildStyle() {
+    let {style} = this.props;
 
-    //style
     style = [{
       backgroundColor: Theme.rowColor,
       paddingLeft: Theme.rowPaddingLeft,
@@ -75,121 +74,23 @@ export default class ListRow extends Component {
       alignItems: 'center',
     }].concat(style);
 
-    //activeOpacity
-    if (!activeOpacity && activeOpacity !== 0) activeOpacity = onPress ? 0.2 : 1;
+    return style;
+  }
 
-    //contentStyle
-    contentStyle = {
-      flex: 1,
-      overflow: 'hidden',
-      flexDirection: titlePlace === 'top' ? 'column' : 'row',
-      alignItems: titlePlace === 'top' ? 'stretch' : 'center',
-      justifyContent: 'space-between',
-    }
-
-    //title
-    if (titlePlace === 'none') {
-      title = null;
-    }
-    if (typeof title === 'string' || typeof title === 'number') {
-      let textStyle = (!detail && titlePlace === 'left') ? {flexGrow: 1, flexShrink: 1} : null;
-      title = <Label style={[textStyle, titleStyle]} type='title' text={title} />
-    }
-
-    //detail
-    if (typeof detail === 'string' || typeof detail === 'number') {
-      let textStyle = titlePlace === 'top' ? {lineHeight: Theme.rowDetailLineHeight, color: Theme.labelTextColor} : {flexGrow: 1, flexShrink: 1, textAlign: 'right'};
-      if (title) {
-        if (titlePlace === 'left') textStyle.paddingLeft = Theme.rowPaddingTitleDetail;
-        else textStyle.paddingTop = Theme.rowPaddingTitleDetail;
-      }
-      if (!detailMultiLine && detailMultiLine !== false) {
-        detailMultiLine = titlePlace === 'top';
-      }
-      detail = <Label style={[textStyle, detailStyle]} type='detail' text={detail} numberOfLines={detailMultiLine ? 0 : 1} />
-    }
-
-    //icon
-    if ((icon || icon === 0) && !React.isValidElement(icon)) {
-      icon = (
-        <View style={{paddingRight: Theme.rowIconPaddingRight}}>
-          <Image style={{width: Theme.rowIconWidth, height: Theme.rowIconHeight}} source={icon} />
-        </View>
-      );
-    }
-
-    //accessory
-    if (accessory === 'none') accessory = null;
-    else if (accessory === 'auto') accessory = onPress ? 'indicator' : null;
-    if (accessory && !React.isValidElement(accessory)) {
-      let imageSource, tintColor;
-      switch (accessory) {
-        case 'empty':
-          imageSource = null;
-          break;
-        case 'check':
-          imageSource = require('teaset/icons/check.png');
-          tintColor = Theme.rowAccessoryCheckColor;
-          break;
-        case 'indicator':
-          imageSource = require('teaset/icons/indicator.png');
-          tintColor = Theme.rowAccessoryIndicatorColor;
-          break;
-        default: imageSource = accessory;
-      }
-      let imageStyle = {
-        width: Theme.rowAccessoryWidth,
-        height: Theme.rowAccessoryHeight,
-        tintColor: tintColor,
-      };
-      accessory = (
-        <View style={{paddingLeft: Theme.rowAccessoryPaddingLeft}}>
-          <Image style={imageStyle} source={imageSource} />
-        </View>
-      );
-    }
-
-    //topSeparator and bottomSeparator
+  renderSeparator(type) {
     let separatorStyle = {
       backgroundColor: Theme.rowSeparatorColor,
       height: Theme.rowSeparatorLineWidth,
     };
     let indentViewStyle = {
-      backgroundColor: StyleSheet.flatten(style).backgroundColor,
+      backgroundColor: 'rgba(0,0,0,0)',
       paddingLeft: Theme.rowPaddingLeft,
     }
-    switch (topSeparator) {
-      case 'none':
-        topSeparator = null;
-        break;
-      case 'full':
-        topSeparator = <View style={separatorStyle} />;
-        break;
-      case 'indent':
-        topSeparator = (
-          <View style={indentViewStyle}>
-            <View style={separatorStyle} />
-          </View>
-        );
-        break;
+    switch (type) {
+      case 'full': return <View style={separatorStyle} />;
+      case 'indent': return <View style={indentViewStyle}><View style={separatorStyle} /></View>;
+      default: return null;
     }
-    switch (bottomSeparator) {
-      case 'none':
-        bottomSeparator = null;
-        break;
-      case 'full':
-        bottomSeparator = <View style={separatorStyle} />;
-        break;
-      case 'indent':
-        bottomSeparator = (
-          <View style={indentViewStyle}>
-            <View style={separatorStyle} />
-          </View>
-        );
-        break;        
-    }
-
-    this.props = {style, activeOpacity, onPress, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, contentStyle, ...others};
   }
 
   renderSwipeActionView() {
@@ -223,33 +124,117 @@ export default class ListRow extends Component {
     );
   }
 
-  render() {
-    this.buildProps();
+  renderIcon() {
+    let {icon} = this.props;
+    if (icon === null || icon === undefined || React.isValidElement(icon)) return icon;
+    return (
+      <View style={{paddingRight: Theme.rowIconPaddingRight}}>
+        <Image style={{width: Theme.rowIconWidth, height: Theme.rowIconHeight}} source={icon} />
+      </View>
+    );
+  }
 
-    let {title, detail, icon, accessory, topSeparator, bottomSeparator, swipeActions, contentStyle, onLayout, children, ...others} = this.props;
-    let {swipeSts} = this.state;
+  renderAccessory(accessory = null) {
+    if (!accessory) accessory = this.props.accessory;
+    if (React.isValidElement(accessory)) return accessory;
+    if (accessory === 'none' || (accessory === 'auto' && !this.props.onPress)) return null;
+
+    let imageSource, tintColor;
+    switch (accessory) {
+      case 'empty':
+        imageSource = require('teaset/icons/empty.png');
+        break;
+      case 'check':
+        imageSource = require('teaset/icons/check.png');
+        tintColor = Theme.rowAccessoryCheckColor;
+        break;
+      case 'indicator':
+      case 'auto':
+        imageSource = require('teaset/icons/indicator.png');
+        tintColor = Theme.rowAccessoryIndicatorColor;
+        break;
+      default: imageSource = accessory;
+    }
+    let imageStyle = {
+      width: Theme.rowAccessoryWidth,
+      height: Theme.rowAccessoryHeight,
+      tintColor,
+    };
+    return (
+      <View style={{paddingLeft: Theme.rowAccessoryPaddingLeft}}>
+        <Image style={imageStyle} source={imageSource} />
+      </View>
+    );
+  }
+
+  renderTitle() {
+    let {title, detail, titleStyle, titlePlace} = this.props;
+    if (titlePlace === 'none') return null;
+    if (typeof title === 'string' || typeof title === 'number') {
+      let textStyle = (!detail && titlePlace === 'left') ? {flexGrow: 1, flexShrink: 1} : null;
+      return <Label style={[textStyle, titleStyle]} type='title' text={title} />;
+    }
+    return title;
+  }
+
+  renderDetail() {
+    let {title, detail, detailStyle, detailMultiLine, titlePlace} = this.props;
+    if (typeof detail === 'string' || typeof detail === 'number') {
+      let textStyle = titlePlace === 'top' ? {lineHeight: Theme.rowDetailLineHeight, color: Theme.labelTextColor} : {flexGrow: 1, flexShrink: 1, textAlign: 'right'};
+      if (title) {
+        if (titlePlace === 'left') textStyle.paddingLeft = Theme.rowPaddingTitleDetail;
+        else textStyle.paddingTop = Theme.rowPaddingTitleDetail;
+      }
+      if (!detailMultiLine && detailMultiLine !== false) {
+        detailMultiLine = titlePlace === 'top';
+      }
+      return <Label style={[textStyle, detailStyle]} type='detail' text={detail} numberOfLines={detailMultiLine ? 0 : 1} />;
+    }
+    return detail;
+  }
+
+  renderContent() {
+    let {titlePlace, children} = this.props;
+    let title = this.renderTitle();
+    let detail = this.renderDetail();
+    if (!title && !detail) return children;
+
+    let contentStyle = {
+      flex: 1,
+      overflow: 'hidden',
+      flexDirection: titlePlace === 'top' ? 'column' : 'row',
+      alignItems: titlePlace === 'top' ? 'stretch' : 'center',
+      justifyContent: 'space-between',
+    };
+    return (
+      <View style={contentStyle}>
+        {title}
+        {detail}
+      </View>
+    );
+  }
+
+  render() {
+    let {style, children, title, detail, titleStyle, detailStyle, detailMultiLine, icon, accessory, topSeparator, bottomSeparator, titlePlace, swipeActions, activeOpacity, onLayout, onPress, ...others} = this.props;
     return (
       <View onLayout={onLayout}>
-        {topSeparator}
+        {this.renderSeparator(topSeparator)}
         {this.renderSwipeActionView()}
         <SwipeTouchableOpacity
           {...others}
+          style={this.buildStyle()}
+          activeOpacity={(!activeOpacity && activeOpacity !== 0) ? (onPress ? 0.2 : 1) : activeOpacity}
           swipeable={swipeActions instanceof Array && swipeActions.length > 0}
           swipeWidth={this.state.swipeWidth}
+          onPress={onPress}
           onSwipeStsChange={swipeSts => this.setState({swipeSts})}
           ref='containerView'
         >
-          {icon}
-          {!title && !detail ? null :
-            <View style={contentStyle}>
-              {title}
-              {detail}
-            </View>
-          }
-          {!title && !detail ? children : null}
-          {accessory}
+          {this.renderIcon()}
+          {this.renderContent()}
+          {this.renderAccessory()}
         </SwipeTouchableOpacity>
-        {bottomSeparator}
+        {this.renderSeparator(bottomSeparator)}
       </View>
     );
   }

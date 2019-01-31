@@ -16,7 +16,7 @@ const defaultTextColor = '#333';
 //pixel size
 const pixelSize = (function() {
   let pixelRatio = PixelRatio.get();
-  if (pixelRatio >= 3) return 0.333;
+  if (pixelRatio >= 3) return 0.3333333333333333;
   else if (pixelRatio >= 2) return 0.5;
   else return 1;
 })();
