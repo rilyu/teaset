@@ -56,7 +56,7 @@ export default class PopoverPickerItem extends Component {
     };
     return (
       <View style={{paddingLeft: Theme.poppAccessoryPaddingLeft}}>
-        <Image style={imageStyle} source={selected ? require('teaset/icons/check.png') : require('teaset/icons/empty.png')} />
+        <Image style={imageStyle} source={selected ? require('../../icons/check.png') : require('../../icons/empty.png')} />
       </View>
     );
   }

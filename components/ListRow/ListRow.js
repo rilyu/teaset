@@ -142,15 +142,15 @@ export default class ListRow extends Component {
     let imageSource, tintColor;
     switch (accessory) {
       case 'empty':
-        imageSource = require('teaset/icons/empty.png');
+        imageSource = require('../../icons/empty.png');
         break;
       case 'check':
-        imageSource = require('teaset/icons/check.png');
+        imageSource = require('../../icons/check.png');
         tintColor = Theme.rowAccessoryCheckColor;
         break;
       case 'indicator':
       case 'auto':
-        imageSource = require('teaset/icons/indicator.png');
+        imageSource = require('../../icons/indicator.png');
         tintColor = Theme.rowAccessoryIndicatorColor;
         break;
       default: imageSource = accessory;
