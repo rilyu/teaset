@@ -59,7 +59,7 @@ export default class PopoverExample extends NavigationPage {
               <Label style={{color: '#000'}} text='right' />
             </Popover>
           </View>
-          <Image style={{height: 32, width: 32, borderRadius: 16, tintColor: '#337ab7'}} source={require('teaset/icons/smile.png')}/>
+          <Image style={{height: 32, width: 32, borderRadius: 16, tintColor: '#337ab7'}} source={require('../icons/smile.png')}/>
           <View style={{flex: 1, paddingLeft: 40, alignItems: 'flex-start'}}>
             <Popover style={styles.popoverStyle} arrow='left'>
               <Label style={{color: '#000'}} text='left' />
