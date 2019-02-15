@@ -15,12 +15,12 @@ export default class ActionSheetView extends Overlay.PullView {
   static propTypes = {
     ...Overlay.PullView.propTypes,
     items: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
+      title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]).isRequired,
       onPress: PropTypes.func,
       disabled: PropTypes.bool,
     })),
     cancelItem: PropTypes.shape({
-      title: PropTypes.string.isRequired,
+      title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]).isRequired,
       onPress: PropTypes.func,
       disabled: PropTypes.bool,
     }),
