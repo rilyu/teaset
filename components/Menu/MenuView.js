@@ -16,7 +16,7 @@ export default class MenuView extends Overlay.PopoverView {
     ...Overlay.PopoverView.propTypes,
     items: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
-      icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.shape({uri: PropTypes.string}), PropTypes.number, PropTypes.oneOf(['none', 'empty'])]),
+      icon: PropTypes.oneOfType([PropTypes.element, PropTypes.shape({uri: PropTypes.string}), PropTypes.number, PropTypes.oneOf(['none', 'empty'])]),
       onPress: PropTypes.func,
     })).isRequired,
     shadow: PropTypes.bool,
