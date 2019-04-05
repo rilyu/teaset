@@ -14,6 +14,7 @@ export default class OverlayView extends Component {
   static propTypes = {
     style: ViewPropTypes.style,
     modal: PropTypes.bool,
+    blockTouch: PropTypes.bool,
     animated: PropTypes.bool,
     overlayOpacity: PropTypes.number,
     overlayPointerEvents: ViewPropTypes.pointerEvents,
@@ -26,8 +27,9 @@ export default class OverlayView extends Component {
 
   static defaultProps = {
     modal: false,
+    blockTouch: true,
     animated: false,
-    overlayPointerEvents: 'auto',
+    overlayPointerEvents: 'box-none',
     autoKeyboardInsets: false,
     closeOnHardwareBackPress: true,
   };
@@ -173,6 +175,7 @@ export default class OverlayView extends Component {
         <Animated.View
           style={[styles.screen, {backgroundColor: '#000', opacity: this.state.overlayOpacity}]}
           {...this.panResponder.panHandlers}
+          pointerEvents={this.props.blockTouch ? 'auto' : 'none'}
           />
         <View style={this.buildStyle()} pointerEvents='box-none'>
           {this.renderContent()}
