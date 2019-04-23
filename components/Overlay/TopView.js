@@ -79,6 +79,12 @@ export default class TopView extends Component {
     return this.handlers.length > 0 ? this.handlers[this.handlers.length - 1] : this;
   }
 
+  addOverlayListener = e => this.handler.add(e);
+  removeOverlayListener = e => this.handler.remove(e);
+  removeAllOverlayListener = e => this.handler.removeAll(e);
+  transformRootListener = e => this.handler.transform(e);
+  restoreRootListener = e => this.handler.restore(e);
+
   componentWillMount() {
     let {registerTopViewHandler} = this.context;
     if (registerTopViewHandler) {
@@ -86,11 +92,11 @@ export default class TopView extends Component {
       return;
     }
 
-    DeviceEventEmitter.addListener("addOverlay", e => this.handler.add(e));
-    DeviceEventEmitter.addListener("removeOverlay", e => this.handler.remove(e));
-    DeviceEventEmitter.addListener("removeAllOverlay", e => this.handler.removeAll(e));
-    DeviceEventEmitter.addListener("transformRoot", e => this.handler.transform(e));
-    DeviceEventEmitter.addListener("restoreRoot", e => this.handler.restore(e));
+    DeviceEventEmitter.addListener("addOverlay", this.addOverlayListener);
+    DeviceEventEmitter.addListener("removeOverlay", this.removeOverlayListener);
+    DeviceEventEmitter.addListener("removeAllOverlay", this.removeAllOverlayListener);
+    DeviceEventEmitter.addListener("transformRoot", this.transformRootListener);
+    DeviceEventEmitter.addListener("restoreRoot", this.restoreRootListener);
   }
 
   componentWillUnmount() {
@@ -100,11 +106,11 @@ export default class TopView extends Component {
       return;
     }
 
-    DeviceEventEmitter.removeAllListeners("addOverlay");
-    DeviceEventEmitter.removeAllListeners("removeOverlay");
-    DeviceEventEmitter.removeAllListeners("removeAllOverlay");
-    DeviceEventEmitter.removeAllListeners("transformRoot");
-    DeviceEventEmitter.removeAllListeners("restoreRoot");
+    DeviceEventEmitter.removeListener("addOverlay", this.addOverlayListener);
+    DeviceEventEmitter.removeListener("removeOverlay", this.removeOverlayListener);
+    DeviceEventEmitter.removeListener("removeAllOverlay", this.removeAllOverlayListener);
+    DeviceEventEmitter.removeListener("transformRoot", this.transformRootListener);
+    DeviceEventEmitter.removeListener("restoreRoot", this.restoreRootListener);
   }
 
   add(e) {
