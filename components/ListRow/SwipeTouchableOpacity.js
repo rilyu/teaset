@@ -127,7 +127,7 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
   }
 
   springClose() {
-    if(this.swipeSts!=='opened'){
+    if(this.swipeSts==='none'){
       return;
     }
     this.swipeSts = 'closing';
@@ -142,7 +142,7 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
   }
 
   timingClose() {
-    if(this.swipeSts!=='opened'){
+    if(this.swipeSts==='none'){
       return;
     }
     this.swipeSts = 'closing';
@@ -157,7 +157,7 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
   }
 
   timingOpen() {
-    if(this.swipeSts!=='none'){
+    if(this.swipeSts==='opened'){
       return;
     }
     this.swipeSts = 'opening';
