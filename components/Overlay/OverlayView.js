@@ -44,7 +44,8 @@ export default class OverlayView extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.appearAfterMount && this.appear();
     if (Platform.OS === 'android') {
       let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
       this.backListener = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -56,10 +57,6 @@ export default class OverlayView extends Component {
         }
       });
     }
-  }
-
-  componentDidMount() {
-    this.appearAfterMount && this.appear();
   }
 
   componentWillUnmount() {

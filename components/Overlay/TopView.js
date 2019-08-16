@@ -79,7 +79,7 @@ export default class TopView extends Component {
     return this.handlers.length > 0 ? this.handlers[this.handlers.length - 1] : this;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let {registerTopViewHandler} = this.context;
     if (registerTopViewHandler) {
       registerTopViewHandler(this);

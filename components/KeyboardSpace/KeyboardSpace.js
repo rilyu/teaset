@@ -48,8 +48,8 @@ export default class KeyboardSpace extends Component {
     }
   }
 
-  componentWillUpdate(props, state) {
-    if (state.keyboardHeight !== this.state.keyboardHeight) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.keyboardHeight !== this.state.keyboardHeight) {
       LayoutAnimation.configureNext({
         duration: 500,
         create: {

@@ -16,6 +16,7 @@ npm install
 ```
 To run example on iOS:
 ```
+cd ios && pod install && cd ..
 react-native run-ios
 ```
 To run example on Android:

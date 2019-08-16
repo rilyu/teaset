@@ -54,6 +54,7 @@ npm install
 ```
 在 iOS 下运行:
 ```
+cd ios && pod install && cd ..
 react-native run-ios
 ```
 在 Android 下运行:

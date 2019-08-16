@@ -52,9 +52,9 @@ export default class AlbumView extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if ((nextProps.index || nextProps.index === 0) && nextProps.index != this.props.index) {
-      this.changeIndex(nextProps.index);
+  componentDidUpdate(prevProps) {
+    if ((this.props.index || this.props.index === 0) && prevProps.index != this.props.index) {
+      this.changeIndex(this.props.index);
     }
   }
 

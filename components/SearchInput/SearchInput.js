@@ -35,8 +35,8 @@ export default class SearchInput extends Component {
     };
   }
 
-  componentWillUpdate(props, state) {
-    if (state.editing !== this.state.editing) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.editing !== this.state.editing) {
       LayoutAnimation.configureNext({
         duration: 500,
         create: {
