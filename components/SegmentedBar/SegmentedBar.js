@@ -139,8 +139,8 @@ export default class SegmentedBar extends Component {
     this._saveIndicatorWidthValue = indicatorWidthValue;
     if (this.props.animated) {
       Animated.parallel([
-        Animated.spring(this._indicatorX, {toValue: indicatorXValue, friction: 9}),
-        Animated.spring(this._indicatorWidth, {toValue: indicatorWidthValue, friction: 9}),
+        Animated.spring(this._indicatorX, {toValue: indicatorXValue, friction: 9, useNativeDriver: false}),
+        Animated.spring(this._indicatorWidth, {toValue: indicatorWidthValue, friction: 9, useNativeDriver: false}),
       ]).start();
     } else {
       this._indicatorX.setValue(indicatorXValue);

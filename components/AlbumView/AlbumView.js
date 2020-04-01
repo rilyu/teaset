@@ -83,7 +83,7 @@ export default class AlbumView extends Component {
     if (this.animateActions.length === 0) return;
 
     Animated.parallel(this.animateActions.map((item, index) =>
-      Animated.spring(item.variable, {toValue: item.toValue, friction: 9})
+      Animated.spring(item.variable, {toValue: item.toValue, friction: 9, useNativeDriver: false})
     )).start(e => {
       this.props.onChange && this.props.onChange(newIndex, index);
     });

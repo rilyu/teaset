@@ -148,19 +148,19 @@ export default class TopView extends Component {
     });
     if (animated) {
       let animates = [
-        Animated.spring(translateX, {toValue: tx, friction: 9}),
-        Animated.spring(translateY, {toValue: ty, friction: 9}),
-        Animated.spring(scaleX, {toValue: sx, friction: 9}),
-        Animated.spring(scaleY, {toValue: sy, friction: 9}),
+        Animated.spring(translateX, {toValue: tx, friction: 9, useNativeDriver: false}),
+        Animated.spring(translateY, {toValue: ty, friction: 9, useNativeDriver: false}),
+        Animated.spring(scaleX, {toValue: sx, friction: 9, useNativeDriver: false}),
+        Animated.spring(scaleY, {toValue: sy, friction: 9, useNativeDriver: false}),
       ];
       animatesOnly ? animatesOnly(animates) : Animated.parallel(animates).start();
     } else {
       if (animatesOnly) {
         let animates = [
-          Animated.timing(translateX, {toValue: tx, duration: 1}),
-          Animated.timing(translateY, {toValue: ty, duration: 1}),
-          Animated.timing(scaleX, {toValue: sx, duration: 1}),
-          Animated.timing(scaleY, {toValue: sy, duration: 1}),
+          Animated.timing(translateX, {toValue: tx, duration: 1, useNativeDriver: false}),
+          Animated.timing(translateY, {toValue: ty, duration: 1, useNativeDriver: false}),
+          Animated.timing(scaleX, {toValue: sx, duration: 1, useNativeDriver: false}),
+          Animated.timing(scaleY, {toValue: sy, duration: 1, useNativeDriver: false}),
         ];
         animatesOnly(animates);
       } else {
@@ -178,19 +178,19 @@ export default class TopView extends Component {
     let {animated, animatesOnly} = e;
     if (animated) {
       let animates = [
-        Animated.spring(translateX, {toValue: 0, friction: 9}),
-        Animated.spring(translateY, {toValue: 0, friction: 9}),
-        Animated.spring(scaleX, {toValue: 1, friction: 9}),
-        Animated.spring(scaleY, {toValue: 1, friction: 9}),
+        Animated.spring(translateX, {toValue: 0, friction: 9, useNativeDriver: false}),
+        Animated.spring(translateY, {toValue: 0, friction: 9, useNativeDriver: false}),
+        Animated.spring(scaleX, {toValue: 1, friction: 9, useNativeDriver: false}),
+        Animated.spring(scaleY, {toValue: 1, friction: 9, useNativeDriver: false}),
       ];
       animatesOnly ? animatesOnly(animates) : Animated.parallel(animates).start();
     } else {
       if (animatesOnly) {
         let animates = [
-          Animated.timing(translateX, {toValue: 0, duration: 1}),
-          Animated.timing(translateY, {toValue: 0, duration: 1}),
-          Animated.timing(scaleX, {toValue: 1, duration: 1}),
-          Animated.timing(scaleY, {toValue: 1, duration: 1}),
+          Animated.timing(translateX, {toValue: 0, duration: 1, useNativeDriver: false}),
+          Animated.timing(translateY, {toValue: 0, duration: 1, useNativeDriver: false}),
+          Animated.timing(scaleX, {toValue: 1, duration: 1, useNativeDriver: false}),
+          Animated.timing(scaleY, {toValue: 1, duration: 1, useNativeDriver: false}),
         ];
         animatesOnly(animates);
       } else {

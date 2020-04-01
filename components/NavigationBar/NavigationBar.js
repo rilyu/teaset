@@ -109,8 +109,8 @@ export default class NavigationBar extends Component {
     if (barTop._value != barTopValue || barOpacity._value != barOpacityValue) {
       if (animated) {
         Animated.parallel([
-          Animated.spring(barTop, {toValue: barTopValue, friction: 9}),
-          Animated.spring(barOpacity, {toValue: barOpacityValue, friction: 9}),
+          Animated.spring(barTop, {toValue: barTopValue, friction: 9, useNativeDriver: false,}),
+          Animated.spring(barOpacity, {toValue: barOpacityValue, friction: 9, useNativeDriver: false,}),
         ]).start();
       } else {
         barTop.setValue(barTopValue);

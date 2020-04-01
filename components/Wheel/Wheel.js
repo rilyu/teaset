@@ -58,11 +58,10 @@ export default class Wheel extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.index || nextProps.index === 0) {
-      this.index = nextProps.index;
-      this.currentPosition.setValue(nextProps.index * this.holeHeight);
-    }
+  componentDidUpdate(prevProps) {
+    if (this.props.index || this.props.index === 0) {
+      this.currentPosition.setValue(this.props.index * this.holeHeight);
+    }    
   }
 
   createPanResponder() {
@@ -139,6 +138,7 @@ export default class Wheel extends Component {
     Animated.spring(this.currentPosition, {
       toValue: toValue,
       friction: 9,
+      useNativeDriver: false,
     }).start(() => {
       this.currentPosition.setValue(toValue);
       this.props.onChange && this.props.onChange(newIndex);
@@ -151,6 +151,7 @@ export default class Wheel extends Component {
     Animated.spring(this.currentPosition, {
       toValue: toValue,
       friction: 9,
+      useNativeDriver: false,
     }).start(() => {
       this.currentPosition.setValue(toValue);
       this.props.onChange && this.props.onChange(this.index);
@@ -248,6 +249,7 @@ export default class Wheel extends Component {
   render() {
     let {style, children, items, itemStyle, holeStyle, maskStyle, holeLine, index, defaultIndex, onChange, onLayout, ...others} = this.props;
 
+    if (index || index === 0) this.index = index;
     this.lastRenderIndex = this.index;
     return (
       <View

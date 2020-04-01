@@ -49,6 +49,7 @@ export default class OverlayPullView extends OverlayView {
       Animated.spring(this.state.marginValue, {
         toValue: 0,
         friction: 9,
+        useNativeDriver: false,
       })
     );
     return animates;
@@ -60,6 +61,7 @@ export default class OverlayPullView extends OverlayView {
       Animated.spring(this.state.marginValue, {
         toValue: this.marginSize,
         friction: 9,
+        useNativeDriver: false,
       })
     );
     return animates;

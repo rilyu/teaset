@@ -189,11 +189,13 @@ export default class AlbumSheet extends TransformView {
             toValue: valueX,
             easing: Easing.elastic(0),
             duration: 200,
+            useNativeDriver: false,
           }),
           Animated.timing(translateY, {
             toValue: valueY,
             easing: Easing.elastic(0),
             duration: 200,
+            useNativeDriver: false,
           }),          
         ]).start();
       } else {
@@ -219,6 +221,7 @@ export default class AlbumSheet extends TransformView {
         toValue: toValue,
         easing: Easing.elastic(0),
         duration: 200,
+        useNativeDriver: false,
       }).start();
     } else {
       translateX.setValue(toValue);

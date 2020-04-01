@@ -4,21 +4,21 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, TouchableOpacity, Animated} from 'react-native';
+import {StyleSheet, View, Text, Animated} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
+
+import TouchableOpacity from './TouchableOpacity';
 
 export default class SwipeTouchableOpacity extends TouchableOpacity {
   
   static propTypes = {
-    ...TouchableOpacity.propTypes,
     swipeable: PropTypes.bool,
     swipeWidth: PropTypes.number,
     onSwipeStsChange: PropTypes.func, //(swipeSts), - none, - moving, - closing, - opening, - opened
   };
 
   static defaultProps = {
-    ...TouchableOpacity.defaultProps,
     swipeable: true,
     swipeWidth: 100,
   };
@@ -29,9 +29,10 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
     this.translateX = 0;
     this.prevTouches = [];
     this.replaceSuperFunction();
-    Object.assign(this.state, {
+    this.state = {
+      ...this.state,
       translateX: new Animated.Value(0),
-    });
+    };
   }
 
   get swipeSts() {
@@ -46,24 +47,24 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
   replaceSuperFunction() {
     let touchableHandleResponderMove = this.touchableHandleResponderMove;
     this.touchableHandleResponderMove = (e) => {
-      touchableHandleResponderMove(e);
+      touchableHandleResponderMove.call(this, e);
       this.swiping(e);
     }
 
     let touchableHandleActivePressOut = this.touchableHandleActivePressOut;
     this.touchableHandleActivePressOut = (e) => {
       this.swipeOver();
-      touchableHandleActivePressOut(e);
+      touchableHandleActivePressOut.call(this, e);
     }
 
     let touchableHandlePress = this.touchableHandlePress;
     this.touchableHandlePress = (e) => {
-      if (!this.checkPress()) touchableHandlePress(e);
+      if (!this.checkPress()) touchableHandlePress.call(this, e);
     }
 
     let touchableHandleLongPress = this.touchableHandleLongPress;
     this.touchableHandleLongPress = (e) => {
-      if (!this.checkPress()) touchableHandleLongPress(e);
+      if (!this.checkPress()) touchableHandleLongPress.call(this, e);
     }
 
   }
