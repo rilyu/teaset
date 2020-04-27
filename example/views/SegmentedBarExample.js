@@ -51,6 +51,7 @@ export default class SegmentedBarExample extends NavigationPage {
       activeIndex: 0,
       custom: false,
     });
+    this.segmentedBar = null;
   }
 
   onSegmentedBarChange(index) {
@@ -63,7 +64,12 @@ export default class SegmentedBarExample extends NavigationPage {
   }
 
   onCarouselChange(index) {
-    index != this.state.activeIndex && this.setState({activeIndex: index});
+    if (index != this.state.activeIndex) {
+      this.setState({activeIndex: index});
+      if (this.segmentedBar) {
+        this.segmentedBar.activeIndex = index;
+      }
+    }
   }
 
   renderCustomItems() {
@@ -100,6 +106,7 @@ export default class SegmentedBarExample extends NavigationPage {
       <ScrollView style={{flex: 1}} stickyHeaderIndices={[1]}>
         <View style={{height: 20}} />
         <SegmentedBar
+          ref={segmentedBar => (this.segmentedBar = segmentedBar)}
           justifyItem={justifyItem}
           indicatorType={indicatorType}
           indicatorPosition={indicatorPosition}
