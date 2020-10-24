@@ -41,6 +41,7 @@ export default class OverlayView extends Component {
     });
     this.state = {
       overlayOpacity: new Animated.Value(0),
+      overlayOpacityStartedZero: false,
     }
   }
 
@@ -72,7 +73,17 @@ export default class OverlayView extends Component {
 
   get overlayOpacity() {
     let {overlayOpacity} = this.props;
-    return (overlayOpacity || overlayOpacity === 0) ? overlayOpacity : Theme.overlayOpacity;
+    if (overlayOpacity){
+      return overlayOpacity;
+    }else if(overlayOpacity === 0){
+      this.setState({overlayOpacityStartedZero:true});
+      return overlayOpacity;
+    }
+    if(Theme.overlayOpacity === 0){
+      this.setState({overlayOpacityStartedZero:true});
+      return Theme.overlayOpacity;
+    }
+    return Theme.overlayOpacity;
   }
 
   get appearAnimates() {
@@ -120,12 +131,14 @@ export default class OverlayView extends Component {
   disappear(animated = this.props.animated, additionAnimates = null) {
     if (animated) {
       Animated.parallel(this.disappearAnimates.concat(additionAnimates)).start(e => this.disappearCompleted());
-      this.state.overlayOpacity.addListener(e => {
-        if (e.value < 0.01) {
-          this.state.overlayOpacity.stopAnimation();
-          this.state.overlayOpacity.removeAllListeners();
-        }
-      });
+      if(!this.state.overlayOpacityStartedZero){
+        this.state.overlayOpacity.addListener(e => {
+          if (e.value < 0.01) {
+            this.state.overlayOpacity.stopAnimation();
+            this.state.overlayOpacity.removeAllListeners();
+          }
+  });
+      }
     } else {
       this.disappearCompleted();
     }
