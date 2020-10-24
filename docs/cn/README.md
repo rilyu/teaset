@@ -46,6 +46,34 @@ AppRegistry.registerComponent('HelloWorldApp', () => HelloWorldApp);
 import Label from 'teaset/components/Label/Label';
 ```
 
+使用 babel-plugin-import 按需加载
+- yarn add -D babel-plugin-import
+- babel 新增 plugins
+
+```
+    [
+      'import',
+      {
+        libraryDirectory: 'components',
+        libraryName: 'teaset',
+        camel2DashComponentName: false,
+        customName: (name) => {
+          if (name === 'TopView') {
+            return 'teaset/components/Overlay/TopView';
+          } else if (name === 'Theme') {
+            return 'teaset/themes/Theme';
+          } else {
+            return `teaset/components/${name}/${name}`;
+          }
+        },
+      },
+    ]
+```
+
+```
+import { Label } from 'teaset';
+```
+
 ## 运行示例程序
 从 github clone teaset 工程(或者下载 zip 文件):
 ```
