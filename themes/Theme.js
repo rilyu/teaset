@@ -17,24 +17,31 @@ const PAD_WIDTH = 768;
 const PAD_HEIGHT = 1024;
 const IPHONE12_WIDTH = 390;
 const IPHONE12_HEIGHT = 844;
+const IPHONE12PRO_WIDTH = 428;
+const IPHONE12PRO_HEIGHT = 926;
+
+const IPHONEX_PARAMS = [X_WIDTH, X_HEIGHT, XSMAX_WIDTH, XSMAX_HEIGHT, IPHONE12_WIDTH, IPHONE12_HEIGHT, IPHONE12PRO_WIDTH, IPHONE12PRO_HEIGHT]
 
 const {width: D_WIDTH, height: D_HEIGHT} = Dimensions.get('window');
 
 const { PlatformConstants = {} } = NativeModules;
 const { minor = 0 } = PlatformConstants.reactNativeVersion || {};
 
-const isIPhoneX = (() => {
-  if (Platform.OS === 'web') return false;
 
-  return (
-    Platform.OS === 'ios' &&
-    ((D_HEIGHT === X_HEIGHT && D_WIDTH === X_WIDTH) ||
-      (D_HEIGHT === X_WIDTH && D_WIDTH === X_HEIGHT)) ||
-    ((D_HEIGHT === XSMAX_HEIGHT && D_WIDTH === XSMAX_WIDTH) ||
-      (D_HEIGHT === XSMAX_WIDTH && D_WIDTH === XSMAX_HEIGHT)) ||
-      ((D_HEIGHT === IPHONE12_HEIGHT && D_WIDTH === IPHONE12_WIDTH) ||
-        (D_HEIGHT === IPHONE12_WIDTH && D_WIDTH === IPHONE12_HEIGHT))
-  );
+const isIPhoneX = (() => {
+  if (Platform.OS === 'ios' && IPHONEX_PARAMS.includes(D_WIDTH) && IPHONEX_PARAMS.includes(D_HEIGHT)) {
+    return true
+  }
+  return false
+  // if (Platform.OS === 'web') return false;
+
+  // return (
+  //   Platform.OS === 'ios' &&
+  //   ((D_HEIGHT === X_HEIGHT && D_WIDTH === X_WIDTH) || (D_HEIGHT === X_WIDTH && D_WIDTH === X_HEIGHT))
+  //   || ((D_HEIGHT === XSMAX_HEIGHT && D_WIDTH === XSMAX_WIDTH) || (D_HEIGHT === XSMAX_WIDTH && D_WIDTH === XSMAX_HEIGHT))
+  //   || ((D_HEIGHT === IPHONE12_HEIGHT && D_WIDTH === IPHONE12_WIDTH) || (D_HEIGHT === IPHONE12_WIDTH && D_WIDTH === IPHONE12_HEIGHT)) 
+  //   || ((D_HEIGHT === IPHONE12PRO_HEIGHT && D_WIDTH === IPHONE12PRO_WIDTH) || (D_HEIGHT === IPHONE12PRO_WIDTH && D_WIDTH === IPHONE12PRO_HEIGHT))
+  // );
 })();
 
 const isIPad = (() => {
