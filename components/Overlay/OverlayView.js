@@ -50,10 +50,10 @@ export default class OverlayView extends Component {
     if (Platform.OS === 'android') {
       let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
       this.backListener = BackHandler.addEventListener('hardwareBackPress', () => {
-        let {closeOnHardwareBackPress, onListenerBackAndroid} = this.props
+        let {closeOnHardwareBackPress, onHardwareBackPress} = this.props
         if (closeOnHardwareBackPress) {
-          if (onListenerBackAndroid) {
-            onListenerBackAndroid()
+          if (onHardwareBackPress) {
+            onHardwareBackPress()
           } else {
             this.closeRequest();
           }
