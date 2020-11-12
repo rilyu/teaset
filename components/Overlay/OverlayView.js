@@ -22,6 +22,7 @@ export default class OverlayView extends Component {
     onAppearCompleted: PropTypes.func,
     onDisappearCompleted: PropTypes.func,
     onCloseRequest: PropTypes.func, //(overlayView)
+    onHardwareBackPress: PropTypes.func, // android only
   };
 
   static defaultProps = {
@@ -49,12 +50,15 @@ export default class OverlayView extends Component {
     if (Platform.OS === 'android') {
       let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
       this.backListener = BackHandler.addEventListener('hardwareBackPress', () => {
-        if (this.props.closeOnHardwareBackPress) {
-          this.closeRequest();
-          return true;          
-        } else {
-          return false;
+        let {closeOnHardwareBackPress, onListenerBackAndroid} = this.props
+        if (closeOnHardwareBackPress) {
+          if (onListenerBackAndroid) {
+            onListenerBackAndroid()
+          } else {
+            this.closeRequest();
+          }
         }
+        return closeOnHardwareBackPress
       });
     }
   }
