@@ -48,7 +48,8 @@ export default class OverlayPullView extends OverlayView {
     animates.push(
       Animated.spring(this.state.marginValue, {
         toValue: 0,
-        friction: 9,
+        friction: 10,
+        tension: 50,
         useNativeDriver: false,
       })
     );
