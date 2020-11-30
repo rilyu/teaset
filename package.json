@@ -1,6 +1,6 @@
 {
-  "name": "teaset",
-  "version": "0.7.5",
+  "name": "teaset-ts",
+  "version": "0.7.6",
   "description": "A UI library for react native.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rilyu/teaset.git"
+    "url": "git+https://github.com/JedShiMing/teaset.git"
   },
   "keywords": [
     "teaset",
@@ -23,9 +23,14 @@
   "bugs": {
     "url": "https://github.com/rilyu/teaset/issues"
   },
-  "homepage": "https://github.com/rilyu/teaset#readme",
+  "homepage": "https://github.com/JedShiMing/teaset#readme",
   "dependencies": {
     "prop-types": "^15.7.2",
     "react-native-legacy-components": "^0.1.3"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "example"
+  },
+  "devDependencies": {}
 }
