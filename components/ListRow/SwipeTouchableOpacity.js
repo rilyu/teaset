@@ -4,11 +4,11 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, View, Text, Animated} from 'react-native';
+import {StyleSheet, View, Text, Animated, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
-import TouchableOpacity from './TouchableOpacity';
+// import TouchableOpacity from './TouchableOpacity';
 
 export default class SwipeTouchableOpacity extends TouchableOpacity {
   
