@@ -171,6 +171,7 @@ export default class NavigationBar extends Component {
   renderTitle(fs) {
     let {type, title, titleStyle, statusBarInsets} = this.props;
     let {leftViewWidth, rightViewWidth} = this.state;
+    let titleFs = StyleSheet.flatten(titleStyle)
 
     let barPaddingLeft = fs.paddingLeft ? fs.paddingLeft : (fs.padding ? fs.padding : 0);
     let barPaddingRight = fs.paddingRight ? fs.paddingRight : (fs.padding ? fs.padding : 0);
@@ -178,8 +179,14 @@ export default class NavigationBar extends Component {
     switch (type === 'auto' ? Platform.OS : type) {
       case 'ios':
         let paddingLeftRight = Math.max(leftViewWidth + barPaddingLeft, rightViewWidth + barPaddingRight);
-        paddingLeft = paddingLeftRight;
-        paddingRight = paddingLeftRight;
+        if (titleFs.textAlign !== 'center') {
+          paddingLeft = leftViewWidth + barPaddingLeft;
+          paddingRight = rightViewWidth + barPaddingRight;
+        }
+        else {
+          paddingLeft = paddingLeftRight;
+          paddingRight = paddingLeftRight;
+        }
         break;
       case 'android':
         paddingLeft = barPaddingLeft;
