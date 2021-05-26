@@ -1,6 +1,6 @@
 {
   "name": "teaset",
-  "version": "0.6.3",
+  "version": "0.7.5",
   "description": "A UI library for react native.",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/rilyu/teaset#readme",
   "dependencies": {
-    "prop-types": "^15.5.10",
-    "react-native-deprecated-custom-components": "github:facebookarchive/react-native-custom-components"
+    "prop-types": "^15.7.2",
+    "react-native-legacy-components": "^0.1.3"
   }
 }

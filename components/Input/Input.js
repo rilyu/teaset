@@ -8,16 +8,14 @@ import {StyleSheet, TextInput} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
-export default class Input extends TextInput {
+export default class Input extends Component {
 
   static propTypes = {
-    ...TextInput.propTypes,
     size: PropTypes.oneOf(['lg', 'md', 'sm']),
     disabled: PropTypes.bool,
   };
 
   static defaultProps = {
-    ...TextInput.defaultProps,
     size: 'md',
     disabled: false,
     underlineColorAndroid: 'rgba(0, 0, 0, 0)',

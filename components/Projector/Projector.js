@@ -21,29 +21,14 @@ export default class Projector extends Component {
     index: 0,
   };
 
-  constructor(props) {
-    super(props);
-    this.slideShowns = this.initSlideShowns(props.children);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let nextSlideShowns = this.initSlideShowns(nextProps.children);
-    if (nextSlideShowns.length != this.slideShowns.length) {
-      this.slideShowns = nextSlideShowns;
-    }
-  }
-
-  initSlideShowns(children) {
-    if (children instanceof Array) return children.map(item => false);
-    else if (children) return [false];
-    return [];
-  }
-
   render() {
     let {index, slideStyle, children, ...others} = this.props;
     if (!(children instanceof Array)) {
       if (children) children = [children];
       else children = [];
+    }
+    if (!this.slideShowns || this.slideShowns.length !== children.length) {
+      this.slideShowns = children.map(item => false);
     }
     return (
       <View {...others}>

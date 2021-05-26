@@ -45,7 +45,7 @@ export default class Wheel extends Component {
     this.targetPositionValue = null;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (!this.positionListenerId) {
       this.positionListenerId = this.currentPosition.addListener(e => this.handlePositionChange(e.value));
     }
@@ -58,11 +58,10 @@ export default class Wheel extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.index || nextProps.index === 0) {
-      this.index = nextProps.index;
-      this.currentPosition.setValue(nextProps.index * this.holeHeight);
-    }
+  componentDidUpdate(prevProps) {
+    if (this.props.index || this.props.index === 0) {
+      this.currentPosition.setValue(this.props.index * this.holeHeight);
+    }    
   }
 
   createPanResponder() {
@@ -139,6 +138,7 @@ export default class Wheel extends Component {
     Animated.spring(this.currentPosition, {
       toValue: toValue,
       friction: 9,
+      useNativeDriver: false,
     }).start(() => {
       this.currentPosition.setValue(toValue);
       this.props.onChange && this.props.onChange(newIndex);
@@ -151,6 +151,7 @@ export default class Wheel extends Component {
     Animated.spring(this.currentPosition, {
       toValue: toValue,
       friction: 9,
+      useNativeDriver: false,
     }).start(() => {
       this.currentPosition.setValue(toValue);
       this.props.onChange && this.props.onChange(this.index);
@@ -164,7 +165,9 @@ export default class Wheel extends Component {
       let maskHeight = (height - holeHeight) / 2;
       this.hiddenOffset = Math.ceil(maskHeight / holeHeight) + this.constructor.preRenderCount;
     }
-    this.forceUpdate(() => this.currentPosition.setValue(this.index * holeHeight));
+    this.forceUpdate(() => {
+      this.currentPosition.setValue(this.index * holeHeight);
+    });
   }
 
   onLayout(e) {
@@ -198,7 +201,7 @@ export default class Wheel extends Component {
     if (typeof item === 'string' || typeof item === 'number') {
       item = <Text style={itemStyle}>{item}</Text>;
     }
-    
+
     return (
       <this.constructor.Item
         itemHeight={this.holeHeight}
@@ -246,6 +249,7 @@ export default class Wheel extends Component {
   render() {
     let {style, children, items, itemStyle, holeStyle, maskStyle, holeLine, index, defaultIndex, onChange, onLayout, ...others} = this.props;
 
+    if (index || index === 0) this.index = index;
     this.lastRenderIndex = this.index;
     return (
       <View

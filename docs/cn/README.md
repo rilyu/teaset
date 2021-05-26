@@ -47,13 +47,15 @@ import Label from 'teaset/components/Label/Label';
 ```
 
 ## 运行示例程序
-在 Teaset 包目录下执行以下命令:
+从 github clone teaset 工程(或者下载 zip 文件):
 ```
-cd example
+git clone https://github.com/rilyu/teaset.git
+cd teaset/example
 npm install
 ```
 在 iOS 下运行:
 ```
+cd ios && pod install && cd ..
 react-native run-ios
 ```
 在 Android 下运行:

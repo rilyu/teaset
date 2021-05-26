@@ -8,10 +8,9 @@ import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
-export default class Checkbox extends TouchableOpacity {
+export default class Checkbox extends Component {
   
   static propTypes = {
-    ...TouchableOpacity.propTypes,
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
     size: PropTypes.oneOf(['lg', 'md', 'sm']),
@@ -25,7 +24,6 @@ export default class Checkbox extends TouchableOpacity {
   };
 
   static defaultProps = {
-    ...TouchableOpacity.defaultProps,
     defaultChecked: false,
     size: 'md',
     checkedIcon: require('../../icons/checked.png'),
@@ -35,24 +33,18 @@ export default class Checkbox extends TouchableOpacity {
 
   constructor(props) {
     super(props);
-    this.state = Object.assign(this.state, {
+    this.state = {
+      ...this.state,
       checked: props.checked === true || props.checked === false ? props.checked : props.defaultChecked,
-    });
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.checked === true || nextProps.checked === false) {
-      if (nextProps.checked != this.state.checked) {
-        this.setState({checked: nextProps.checked});
+  componentDidUpdate(prevProps) {
+    let {checked, disabled} = this.props;
+    if (checked === true || checked === false) {
+      if (checked !== this.state.checked) {
+        this.setState({checked});
       }
-    }
-    if (nextProps.disabled != this.props.disabled) {
-      let opacity = Theme.cbDisabledOpacity;
-      if (!nextProps.disabled) {
-        let fs = StyleSheet.flatten(nextProps.style);
-        opacity = fs && (fs.opacity || fs.opacity === 0) ? fs.opacity : 1;
-      }
-      this.state.anim.setValue(opacity);
     }
   }
 
@@ -69,7 +61,6 @@ export default class Checkbox extends TouchableOpacity {
     if (disabled) {
       style.opacity = Theme.cbDisabledOpacity;
     }
-    this.state.anim._value = style.opacity === undefined ? 1 : style.opacity;
 
     return style;
   }
@@ -138,11 +129,14 @@ export default class Checkbox extends TouchableOpacity {
   }
 
   render() {
-    let {style, children, checked, defaultChecked, size, title, titleStyle, checkedIcon, checkedIconStyle, uncheckedIcon, uncheckedIconStyle, onChange, onPress, ...others} = this.props;
-
+    let {style, children, checked, defaultChecked, size, title, titleStyle, checkedIcon, checkedIconStyle, uncheckedIcon, uncheckedIconStyle, disabled, activeOpacity, onChange, onPress, ...others} = this.props;
+    style = this.buildStyle();
+    if (disabled) activeOpacity = style.opacity;
     return (
       <TouchableOpacity
-        style={this.buildStyle()}
+        style={style}
+        disabled={disabled}
+        activeOpacity={activeOpacity}
         onPress={e => {
           this.setState({checked: !checked});
           onChange && onChange(!checked);

@@ -261,6 +261,7 @@ export default class TransformView extends Component {
           toValue: newX,
           easing: Easing.elastic(0),
           duration: 100,
+          useNativeDriver: false,
         })
       );
       inertiaY && animates.push(
@@ -268,6 +269,7 @@ export default class TransformView extends Component {
           toValue: newY,
           easing: Easing.elastic(0),
           duration: 100,
+          useNativeDriver: false,
         })
       );
       let canInertialMove = !onWillInertialMove || onWillInertialMove(translateX._value, translateY._value, newX, newY);
@@ -321,6 +323,7 @@ export default class TransformView extends Component {
         toValue: newX,
         easing: Easing.elastic(0),
         duration: 200,
+        useNativeDriver: false,
       })
     );
     newY !== null && animates.push(
@@ -328,6 +331,7 @@ export default class TransformView extends Component {
         toValue: newY,
         easing: Easing.elastic(0),
         duration: 200,
+        useNativeDriver: false,
       })
     );
     newScale !== null && animates.push(
@@ -335,6 +339,7 @@ export default class TransformView extends Component {
         toValue: newScale,
         easing: Easing.elastic(0),
         duration: 200,
+        useNativeDriver: false,
       })
     );
     if (animates.length > 0) {

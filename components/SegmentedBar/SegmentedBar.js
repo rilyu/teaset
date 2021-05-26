@@ -49,21 +49,20 @@ export default class SegmentedBar extends Component {
     this._scrollViewWidth = 0;
   }
 
-  componentWillReceiveProps(nextProps) {
-    let nextItemsLayout = this.makeArray(this._itemsLayout, nextProps.children);
+  componentDidUpdate(prevProps) {
+    let nextItemsLayout = this.makeArray(this._itemsLayout, this.props.children);
     if (nextItemsLayout.length != this._itemsLayout.length) {
-      this._buttonsLayout = this.makeArray(this._buttonsLayout, nextProps.children);
+      this._buttonsLayout = this.makeArray(this._buttonsLayout, this.props.children);
       this._itemsLayout = nextItemsLayout;
-      this._itemsAddWidth = this.makeArray(this._itemsAddWidth, nextProps.children, 0);
+      this._itemsAddWidth = this.makeArray(this._itemsAddWidth, this.props.children, 0);
     }
-    if (nextProps.activeIndex || nextProps.activeIndex === 0) {
-      this._activeIndex = nextProps.activeIndex;
+    if (this.props.activeIndex || this.props.activeIndex === 0) {
+      this._activeIndex = this.props.activeIndex;
     }
     if (this._activeIndex >= nextItemsLayout.length) {
       this._activeIndex = nextItemsLayout.length - 1;
     }
-   this.props = nextProps;
-   this.updateIndicator();
+    this.updateIndicator();
   }
 
   get activeIndex() {
@@ -140,8 +139,8 @@ export default class SegmentedBar extends Component {
     this._saveIndicatorWidthValue = indicatorWidthValue;
     if (this.props.animated) {
       Animated.parallel([
-        Animated.spring(this._indicatorX, {toValue: indicatorXValue, friction: 9}),
-        Animated.spring(this._indicatorWidth, {toValue: indicatorWidthValue, friction: 9}),
+        Animated.spring(this._indicatorX, {toValue: indicatorXValue, friction: 9, useNativeDriver: false}),
+        Animated.spring(this._indicatorWidth, {toValue: indicatorWidthValue, friction: 9, useNativeDriver: false}),
       ]).start();
     } else {
       this._indicatorX.setValue(indicatorXValue);

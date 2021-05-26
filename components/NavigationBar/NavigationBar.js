@@ -61,9 +61,9 @@ export default class NavigationBar extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.hidden != this.props.hidden) {
-      this.checkBarHidden(nextProps.hidden, nextProps.animated);
+  componentDidUpdate(prevProps) {
+    if (prevProps.hidden != this.props.hidden) {
+      this.checkBarHidden();
     }
   }
 
@@ -101,15 +101,16 @@ export default class NavigationBar extends Component {
     return style;
   }
 
-  checkBarHidden(hidden, animated) {
+  checkBarHidden() {
+    let {hidden, animated} = this.props;
     let {barTop, barOpacity} = this.state;
     let barTopValue = hidden ? -this.barHeight : 0;
     let barOpacityValue = hidden ? 0 : 1;
     if (barTop._value != barTopValue || barOpacity._value != barOpacityValue) {
       if (animated) {
         Animated.parallel([
-          Animated.spring(barTop, {toValue: barTopValue, friction: 9}),
-          Animated.spring(barOpacity, {toValue: barOpacityValue, friction: 9}),
+          Animated.spring(barTop, {toValue: barTopValue, friction: 9, useNativeDriver: false,}),
+          Animated.spring(barOpacity, {toValue: barOpacityValue, friction: 9, useNativeDriver: false,}),
         ]).start();
       } else {
         barTop.setValue(barTopValue);
@@ -121,7 +122,7 @@ export default class NavigationBar extends Component {
   onLayout(e) {
     if (e.nativeEvent.layout.height != this.barHeight) {
       this.barHeight = e.nativeEvent.layout.height;
-      this.checkBarHidden(this.props.hidden, this.props.animated);
+      this.checkBarHidden();
     }
     let {width} = Dimensions.get('window');
     if (width != this.screenWidth) {

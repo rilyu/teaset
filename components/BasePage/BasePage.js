@@ -38,15 +38,12 @@ export default class BasePage extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    this.didMount = true;
     if (!this.backListener && Platform.OS === 'android') {
       let BackHandler = ReactNative.BackHandler ? ReactNative.BackHandler : ReactNative.BackAndroid;
       this.backListener = BackHandler.addEventListener('hardwareBackPress', () => this.onHardwareBackPress());
     }
-  }
-
-  componentDidMount() {
-    this.didMount = true;
   }
 
   componentWillUnmount() {

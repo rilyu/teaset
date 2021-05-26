@@ -21,7 +21,7 @@ export default class NavigationBackButton extends NavigationButton {
 
   static defaultProps = {
     ...NavigationButton.defaultProps,
-    icon: {uri: backIcon},
+    icon: require('../../icons/back.png'), //{uri: backIcon}, rn 0.62 bug, see https://github.com/facebook/react-native/issues/28454#issuecomment-606298713
   };
 
   buildStyle() {

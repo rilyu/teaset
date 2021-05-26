@@ -52,9 +52,9 @@ export default class AlbumView extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if ((nextProps.index || nextProps.index === 0) && nextProps.index != this.props.index) {
-      this.changeIndex(nextProps.index);
+  componentDidUpdate(prevProps) {
+    if ((this.props.index || this.props.index === 0) && prevProps.index != this.props.index) {
+      this.changeIndex(this.props.index);
     }
   }
 
@@ -83,7 +83,7 @@ export default class AlbumView extends Component {
     if (this.animateActions.length === 0) return;
 
     Animated.parallel(this.animateActions.map((item, index) =>
-      Animated.spring(item.variable, {toValue: item.toValue, friction: 9})
+      Animated.spring(item.variable, {toValue: item.toValue, friction: 9, useNativeDriver: false})
     )).start(e => {
       this.props.onChange && this.props.onChange(newIndex, index);
     });

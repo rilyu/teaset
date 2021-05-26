@@ -48,10 +48,10 @@ export default class OverlayPopoverView extends OverlayView {
     this.defaultDirectionInsets = 0;
   }
 
-  componentWillReceiveProps(nextProps) {
-    super.componentWillReceiveProps && super.componentWillReceiveProps(nextProps);
-    if (JSON.stringify(nextProps.fromBounds) != JSON.stringify(this.state.fromBounds)) {
-      this.setState({fromBounds: nextProps.fromBounds});
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    super.componentDidUpdate && super.componentDidUpdate(prevProps, prevState, snapshot);
+    if (JSON.stringify(this.props.fromBounds) !== JSON.stringify(this.state.fromBounds)) {
+      this.setState({fromBounds: this.props.fromBounds});
     }
   }
 

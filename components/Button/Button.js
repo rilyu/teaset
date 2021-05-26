@@ -8,10 +8,9 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 import Theme from 'teaset/themes/Theme';
 
-export default class Button extends TouchableOpacity {
+export default class Button extends Component {
   
   static propTypes = {
-    ...TouchableOpacity.propTypes,
     type: PropTypes.oneOf(['default', 'primary', 'secondary', 'danger', 'link']),
     size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm', 'xs']),
     title: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.number]),
@@ -19,20 +18,16 @@ export default class Button extends TouchableOpacity {
   };
 
   static defaultProps = {
-    ...TouchableOpacity.defaultProps,
     type: 'default',
     size: 'md',
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.disabled != this.props.disabled) {
-      let opacity = Theme.btnDisabledOpacity;
-      if (!nextProps.disabled) {
-        let fs = StyleSheet.flatten(nextProps.style);
-        opacity = fs && (fs.opacity || fs.opacity === 0) ? fs.opacity : 1;
-      }
-      this.state.anim.setValue(opacity);
-    }
+  measureInWindow(callback) {
+    this.refs.touchableOpacity && this.refs.touchableOpacity.measureInWindow(callback);
+  }
+
+  measure(callback) {
+    this.refs.touchableOpacity && this.refs.touchableOpacity.measure(callback);
   }
 
   buildStyle() {
@@ -104,7 +99,6 @@ export default class Button extends TouchableOpacity {
     if (disabled) {
       style.opacity = Theme.btnDisabledOpacity;
     }
-    this.state.anim._value = style.opacity === undefined ? 1 : style.opacity;
 
     return style;
   }
@@ -140,9 +134,11 @@ export default class Button extends TouchableOpacity {
   }
 
   render() {
-    let {style, type, size, title, titleStyle, children, ...others} = this.props;
+    let {style, type, size, title, titleStyle, disabled, activeOpacity, children, ...others} = this.props;
+    style = this.buildStyle();
+    if (disabled) activeOpacity = style.opacity;
     return (
-      <TouchableOpacity style={this.buildStyle()} {...others}>
+      <TouchableOpacity style={style} disabled={disabled} activeOpacity={activeOpacity} {...others} ref='touchableOpacity'>
         {this.renderTitle()}
       </TouchableOpacity>
     );

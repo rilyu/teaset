@@ -49,23 +49,23 @@ export default class AlbumSheet extends TransformView {
   }
 
   componentDidMount() {
-    this.loadImage(this.props);
+    this.loadImage();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.image != this.props.image || nextProps.load != this.props.load) {
-      this.loadImage(nextProps);
+  componentDidUpdate(prevProps) {
+    if (prevProps.image != this.props.image || prevProps.load != this.props.load) {
+      this.loadImage();
     }
   }
 
-  loadImage(props) {
-    let {image, thumb, load, onWillLoadImage, onLoadImageSuccess, onLoadImageFailure} = props;
+  loadImage() {
+    let {image, thumb, load, onWillLoadImage, onLoadImageSuccess, onLoadImageFailure} = this.props;
     let {imageLoaded, thumbLoaded} = this.state;
 
     if (!load) return;
 
     if (React.isValidElement(image)) {
-      let {width, height} = this.getElementSize(props.image);
+      let {width, height} = this.getElementSize(image);
       this.imageSizeChange(width, height);
       this.setState({imageLoaded: true});
     } else {
@@ -189,11 +189,13 @@ export default class AlbumSheet extends TransformView {
             toValue: valueX,
             easing: Easing.elastic(0),
             duration: 200,
+            useNativeDriver: false,
           }),
           Animated.timing(translateY, {
             toValue: valueY,
             easing: Easing.elastic(0),
             duration: 200,
+            useNativeDriver: false,
           }),          
         ]).start();
       } else {
@@ -219,6 +221,7 @@ export default class AlbumSheet extends TransformView {
         toValue: toValue,
         easing: Easing.elastic(0),
         duration: 200,
+        useNativeDriver: false,
       }).start();
     } else {
       translateX.setValue(toValue);
