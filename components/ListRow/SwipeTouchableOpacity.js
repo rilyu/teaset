@@ -128,6 +128,9 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
   }
 
   springClose() {
+    if(this.swipeSts==='none'){
+      return;
+    }
     this.swipeSts = 'closing';
     this.translateX = 0;
     Animated.spring(this.state.translateX, {
@@ -140,6 +143,9 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
   }
 
   timingClose() {
+    if(this.swipeSts==='none'){
+      return;
+    }
     this.swipeSts = 'closing';
     this.translateX = 0;
     Animated.timing(this.state.translateX, {
@@ -152,6 +158,9 @@ export default class SwipeTouchableOpacity extends TouchableOpacity {
   }
 
   timingOpen() {
+    if(this.swipeSts==='opened'){
+      return;
+    }
     this.swipeSts = 'opening';
     this.translateX = -this.props.swipeWidth;
     Animated.timing(this.state.translateX, {
