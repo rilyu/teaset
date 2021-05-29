@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {Platform, TouchableWithoutFeedback, Animated, ViewPropTypes} from 'react-native';
-import Easing from 'react-native/Libraries/Animated/src/Easing';
+import Easing from 'react-native/Libraries/Animated/Easing';
 import flattenStyle from 'react-native/Libraries/StyleSheet/flattenStyle';
 
 if (Platform.constants.reactNativeVersion.major === 0 && Platform.constants.reactNativeVersion.minor < 62) {
